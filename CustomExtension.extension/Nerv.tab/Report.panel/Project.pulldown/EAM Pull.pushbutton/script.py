@@ -138,7 +138,7 @@ if len(collectorFiles) > 0:
         #idFilter =
         if pickedProcess == "Other Models":
             collectorEAMElements = [['Model Name', 'Category', 'ElementID', 'Family', 'Type', 'X', 'Y', 'Z', 'EAM_11_UAID', 'EAM_EID', 'UAID_Required']]
-            elements = FilteredElementCollector(openedDoc, view.Id).WhereElementIsNotElementType().ToElements()#.WherePasses(catFilter).WherePasses(idFilter)
+            elements = FilteredElementCollector(openedDoc).WhereElementIsNotElementType().ToElements()#.WherePasses(catFilter).WherePasses(idFilter)
             for ele in elements:
                 # Get Category
                 try:

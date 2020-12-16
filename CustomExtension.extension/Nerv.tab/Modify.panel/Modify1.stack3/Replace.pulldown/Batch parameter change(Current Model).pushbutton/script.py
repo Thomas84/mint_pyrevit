@@ -87,8 +87,8 @@ t = Transaction(doc, "Apply Parameters")
 t.Start()
 print(str(doc.Title) + ' Opened')
 workshareOp = WorksharingSaveAsOptions()
-rawTitle = re.split('detached', doc.Title)[0]
-title = rawTitle[0:len(rawTitle) - 1]
+title = doc.Title
+
 # Define the name and location of excel file
 for line in Importcsv(collectorCSVFile):
     modelName = line[0]
@@ -97,7 +97,7 @@ for line in Importcsv(collectorCSVFile):
     parameterValue = line[3]
     v1 = ()
 
-    if modelName == title:
+    if modelName in title:
         element = ()
         try:
             element = doc.GetElement(ElementId(int(id)))

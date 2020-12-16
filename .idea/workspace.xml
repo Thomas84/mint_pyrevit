@@ -2,20 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3ff88f0c-6970-49b2-8ac2-e286445fca0d" name="Default Changelist" comment="Fixed bug 1">
-      <change afterPath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Experiment.panel/Potions.pulldown/Get parameter from models.pushbutton/EAMQcUtils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Experiment.panel/Potions.pulldown/Get parameter from models.pushbutton/Thumbs.db" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Experiment.panel/Potions.pulldown/Get parameter from models.pushbutton/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Experiment.panel/Potions.pulldown/Get parameter from models.pushbutton/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Experiment.panel/Potions.pulldown/Get parameter from models.pushbutton/script.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Experiment.panel/Potions.pulldown/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Experiment.panel/Test.pulldown/Report Coodinates.pushbutton/Thumbs.db" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Experiment.panel/Test.pulldown/Report Coodinates.pushbutton/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Experiment.panel/Test.pulldown/Report Coodinates.pushbutton/script.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Experiment.panel/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Reset.panel/decom.smartbutton/icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Reset.panel/decom.smartbutton/script.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Report.panel/Parameters.pulldown/Parameter Pull.pushbutton/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Report.panel/Parameters.pulldown/Parameter Pull.pushbutton/script.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Experiment.panel/Potions.pulldown/ATest.pushbutton/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Experiment.panel/Potions.pulldown/ATest.pushbutton/script.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Modify.panel/Modify1.stack3/Replace.pulldown/Batch parameter change(Current Model).pushbutton/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Modify.panel/Modify1.stack3/Replace.pulldown/Batch parameter change(Current Model).pushbutton/script.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Report.panel/Project.pulldown/EAM Pull.pushbutton/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Report.panel/Project.pulldown/EAM Pull.pushbutton/script.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Report.panel/Project.pulldown/_layout" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Report.panel/Project.pulldown/_layout" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Reset.panel/_layout" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Reset.panel/_layout" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Reset.panel/smart.smartbutton/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Reset.panel/smart.smartbutton/script.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,21 +41,21 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Report.panel/Parameters.pulldown" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/CustomExtension.extension/Nerv.tab/Reset.panel" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\loum\Documents\Repo\python-sharepoint\nerv_pyrevit\CustomExtension.extension\Nerv.tab\Experiment.panel\Potions.pulldown\Get parameter from models.pushbutton" />
-      <recent name="W:\Tools\Repo\pyRevit_custom_STV\docs\nerv\General" />
-      <recent name="W:\Tools\Repo\pyRevit_custom_STV\CustomExtension.extension\Nerv.tab\General Utilities.panel\Selection.pulldown" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\loum\Documents\Repo\python-sharepoint\nerv_pyrevit\CustomExtension.extension\Nerv.tab\Reset.panel" />
       <recent name="C:\Users\loum\Documents\Repo\python-sharepoint\nerv_pyrevit\CustomExtension.extension\Nerv.tab\Report.panel\Parameters.pulldown" />
       <recent name="C:\Users\loum\Documents\Repo\python-sharepoint\nerv_pyrevit\CustomExtension.extension\Nerv.tab\Experiment.panel\Potions.pulldown\Get parameters of elements.pushbutton" />
       <recent name="C:\Users\loum\Documents\Repo\python-sharepoint\nerv_pyrevit\CustomExtension.extension\Nerv.tab\Experiment.panel\Potions.pulldown" />
       <recent name="C:\Users\loum\Documents\Repo\python-sharepoint\nerv_pyrevit\CustomExtension.extension\Nerv.tab\Experiment.panel\Test.pulldown" />
-      <recent name="W:\Tools\Repo\pyRevit_custom_STV\CustomExtension.extension\Nerv.tab\Experiment.panel\Test.pulldown" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\loum\Documents\Repo\python-sharepoint\nerv_pyrevit\CustomExtension.extension\Nerv.tab\Experiment.panel\Potions.pulldown\Get parameter from models.pushbutton" />
+      <recent name="W:\Tools\Repo\pyRevit_custom_STV\docs\nerv\General" />
+      <recent name="W:\Tools\Repo\pyRevit_custom_STV\CustomExtension.extension\Nerv.tab\General Utilities.panel\Selection.pulldown" />
     </key>
   </component>
   <component name="RunManager">
@@ -292,6 +286,26 @@
       <workItem from="1605210884026" duration="599000" />
       <workItem from="1605223691402" duration="6621000" />
       <workItem from="1605294823216" duration="1195000" />
+      <workItem from="1605533539999" duration="2866000" />
+      <workItem from="1605556610310" duration="2332000" />
+      <workItem from="1605563291656" duration="529000" />
+      <workItem from="1605618880071" duration="924000" />
+      <workItem from="1605620611588" duration="602000" />
+      <workItem from="1605623274188" duration="744000" />
+      <workItem from="1605625020457" duration="1839000" />
+      <workItem from="1605711947490" duration="599000" />
+      <workItem from="1606242233744" duration="610000" />
+      <workItem from="1606250023965" duration="576000" />
+      <workItem from="1606333369635" duration="691000" />
+      <workItem from="1606741389707" duration="597000" />
+      <workItem from="1606921873842" duration="1798000" />
+      <workItem from="1606943019347" duration="599000" />
+      <workItem from="1607014425390" duration="644000" />
+      <workItem from="1607347083291" duration="2367000" />
+      <workItem from="1607457192058" duration="599000" />
+      <workItem from="1607634331341" duration="1804000" />
+      <workItem from="1607951967264" duration="1079000" />
+      <workItem from="1608037673077" duration="7776000" />
     </task>
     <task id="LOCAL-00001" summary="Fix workspace bug">
       <created>1580332278272</created>
@@ -311,30 +325,29 @@
     <option name="LAST_COMMIT_MESSAGE" value="Fix workspace bug" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="416" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1598041347527">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="416" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1598041347527" />
     <state x="712" y="323" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602604931684">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="712" y="323" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1602604931684" />
+    <state x="458" y="114" key="CommitChangelistDialog2" timestamp="1608044785791">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="458" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1608044785791" />
     <state x="594" y="219" key="FileChooserDialogImpl" timestamp="1602685425936">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="594" y="219" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1602685425936" />
     <state x="594" y="219" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1602451248498" />
-    <state x="742" y="276" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1598041324421" />
     <state x="462" y="162" key="SettingsEditor" timestamp="1602603663934">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="462" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1602603663934" />
-    <state x="581" y="297" key="com.intellij.ide.util.TipDialog" timestamp="1605295966614">
+    <state x="205" y="318" key="com.intellij.ide.util.TipDialog" timestamp="1608038329335">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="465" y="235" key="com.intellij.ide.util.TipDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1602681038731" />
     <state x="465" y="235" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1602445725667" />
-    <state x="581" y="297" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1605295966614" />
+    <state x="205" y="318" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1608038329335" />
     <state x="690" y="136" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1602602291009">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

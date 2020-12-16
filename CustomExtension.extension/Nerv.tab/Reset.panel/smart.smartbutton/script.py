@@ -22,7 +22,8 @@ from Autodesk.Revit.DB.Events import DocumentChangedEventArgs
 __title__ = 'Reset'
 __context__ = 'zero'
 
-
+import os
+print(os.getenv('APPDATA') + "\\pyRevit\\pyRevit_config.ini")
 def event_handler_function(sender, args):
    print("View activating")
 
