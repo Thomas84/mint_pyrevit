@@ -1,4 +1,4 @@
-def FeettoInch(number):
+odef FeettoInch(number):
     feet = int(number)
     inch = int((number - feet) * 12)
 
