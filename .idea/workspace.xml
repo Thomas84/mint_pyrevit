@@ -3,6 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="3ff88f0c-6970-49b2-8ac2-e286445fca0d" name="Default Changelist" comment="Fixed bug 1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomExtension.extension/packages/QuestionableMath.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/packages/QuestionableMath.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/_config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerv_logo.ico" beforeDir="false" afterPath="$PROJECT_DIR$/mint_logo.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nerv_logo_01.ico" beforeDir="false" afterPath="$PROJECT_DIR$/mint_logo_01.ico" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -304,6 +308,7 @@
       <workItem from="1609766086931" duration="1279000" />
       <workItem from="1609852091991" duration="907000" />
       <workItem from="1609940155444" duration="1196000" />
+      <workItem from="1609949211243" duration="165000" />
     </task>
     <task id="LOCAL-00001" summary="Fix workspace bug">
       <created>1580332278272</created>
