@@ -4,9 +4,9 @@ import ConfigParser
 from os.path import expanduser
 # Set system path
 home = expanduser("~")
-cfgfile = open(home + "\\STVTools.ini", 'r')
+cfgfile = open(home + "\\MintTools.ini", 'r')
 config = ConfigParser.ConfigParser()
-config.read(home + "\\STVTools.ini")
+config.read(home + "\\MintTools.ini")
 # Master Path
 syspath1 = config.get('SysDir','MasterPackage')
 sys.path.append(syspath1)
@@ -42,7 +42,7 @@ from pyrevit import forms
 import logging
 import datetime
 userName = application.Username
-logFile = '\\\\Uspadgv1dcl01\\NY BIM GROUP\\Tools\\Repo\\pyRevit_custom_STV\\logs\\' + str(datetime.date.today()) + "_" + userName + '_applog.log'
+logFile = '\\\\Uspadgv1dcl01\\NY BIM GROUP\\Tools\\Repo\\pyRevit_custom_Mint\\logs\\' + str(datetime.date.today()) + "_" + userName + '_applog.log'
 logging.basicConfig(filename=logFile, filemode='w', format='%(asctime)s - %(message)s', datefmt='%d-%b-%y %H:%M:%S')
 
 

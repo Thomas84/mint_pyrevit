@@ -33,7 +33,7 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
     # add the settings to the structure of the file, and lets write it out...
 
     Config.set('core', 'userextensions',
-                   ['\\USPAPHL1FS05.stvgroup.stvinc.com\Vol1\CAD\Standards\STV Inc\CAD_BIM Dev\pyRevit\STVTools'])
+                   ['\\USPAPHL1FS05.stvgroup.stvinc.com\Vol1\CAD\Standards\Mint Inc\CAD_BIM Dev\pyRevit\MintTools'])
 
     cfgfile = open(prConfig, "w")
     Config.write(cfgfile)

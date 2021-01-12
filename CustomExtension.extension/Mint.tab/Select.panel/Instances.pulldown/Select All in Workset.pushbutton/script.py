@@ -3,9 +3,9 @@ import ConfigParser
 from os.path import expanduser
 # Set system path
 home = expanduser("~")
-cfgfile = open(home + "\\STVTools.ini", 'r')
+cfgfile = open(home + "\\MintTools.ini", 'r')
 config = ConfigParser.ConfigParser()
-config.read(home + "\\STVTools.ini")
+config.read(home + "\\MintTools.ini")
 # Master Path
 syspath1 = config.get('SysDir', 'MasterPackage')
 sys.path.append(syspath1)

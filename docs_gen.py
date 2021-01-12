@@ -6,8 +6,8 @@ def GetDescription(path):
     truePath = path + "\\script.py"
 
 
-path = 'W:\Tools\Repo\pyRevit_custom_STV\CustomExtension.extension\\Nerv.tab'
-docPath = 'W:\\Tools\\Repo\pyRevit_custom_STV\\docs\\nerv'
+path = 'W:\Tools\Repo\pyRevit_custom_Mint\CustomExtension.extension\\Nerv.tab'
+docPath = 'W:\\Tools\\Repo\pyRevit_custom_Mint\\docs\\nerv'
 
 index = "\n\
 ===========================\n\
@@ -26,8 +26,8 @@ buttonTemplate = "\n\
 \n\
    "
 
-masterFileAdd = open("W:\Tools\Repo\pyRevit_custom_STV\docs\index.rst", "a+")
-masterFileRead = open("W:\Tools\Repo\pyRevit_custom_STV\docs\index.rst", "r").read()
+masterFileAdd = open("W:\Tools\Repo\pyRevit_custom_Mint\docs\index.rst", "a+")
+masterFileRead = open("W:\Tools\Repo\pyRevit_custom_Mint\docs\index.rst", "r").read()
 # print(masterFileRead)
 for i, j, y in os.walk(path):
     if i[-5:] == 'panel':

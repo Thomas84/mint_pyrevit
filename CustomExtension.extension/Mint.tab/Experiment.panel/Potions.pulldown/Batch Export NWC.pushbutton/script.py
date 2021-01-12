@@ -3,9 +3,9 @@ import ConfigParser
 from os.path import expanduser
 # Set system path
 home = expanduser("~")
-cfgfile = open(home + "\\STVTools.ini", 'r')
+cfgfile = open(home + "\\MintTools.ini", 'r')
 config = ConfigParser.ConfigParser()
-config.read(home + "\\STVTools.ini")
+config.read(home + "\\MintTools.ini")
 # Master Path
 syspath1 = config.get('SysDir','MasterPackage')
 sys.path.append(syspath1)
@@ -61,9 +61,9 @@ for f in collectorFiles:
     currentDoc2 = FileUtilities.OpenFile(destinationFolder + '\\' + title, application, False)
     try:
         try:
-            view = FileUtilities.GetViewByName(currentDoc2, "3D-NWC EXPORT STV").Id
+            view = FileUtilities.GetViewByName(currentDoc2, "3D-NWC EXPORT Mint").Id
         except:
-            view = FileUtilities.GetViewByName(currentDoc2, "NWC EXPORT STV").Id
+            view = FileUtilities.GetViewByName(currentDoc2, "NWC EXPORT Mint").Id
         element = FilteredElementCollector(currentDoc2, view).ToElementIds()
         nwcOptions = NavisworksExportOptions()
         nwcOptions.SetSelectedElementIds(element)

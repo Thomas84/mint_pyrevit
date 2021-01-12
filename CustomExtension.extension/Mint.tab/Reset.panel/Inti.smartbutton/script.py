@@ -77,9 +77,9 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
         framework.EventHandler[
             UI.Events.RibbonItemEventArgs](SetbuttonStatus)
             '''
-    # cfgfile = open(home + "\\STVTools.ini",'w')
+    # cfgfile = open(home + "\\MintTools.ini",'w')
     Config = ConfigParser.ConfigParser()
-    Config.read(home + "\\STVTools.ini")
+    Config.read(home + "\\MintTools.ini")
     # add the settings to the structure of the file, and lets write it out...
     try:
         Config.add_section('NavisFilePath')
@@ -87,13 +87,13 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
 
         # Add master new system folder setting
         Config.add_section('SysDir')
-        Config.set('SysDir', 'MasterPackage', r'\\Uspadgv1dcl01\NY BIM GROUP\Tools\Repo\pyRevit_custom_STV\CustomExtension.extension\packages\\')
-        Config.set('SysDir', 'SecondaryPackage', r'\\Uspadgv1dcl01\BIM - B&F\00 - BIM Resources\06_BIM Tools\04-pyRevit\STVTools\CustomExtension.extension\packages\\')
+        Config.set('SysDir', 'MasterPackage', r'\\Uspadgv1dcl01\NY BIM GROUP\Tools\Repo\pyRevit_custom_Mint\CustomExtension.extension\packages\\')
+        Config.set('SysDir', 'SecondaryPackage', r'\\Uspadgv1dcl01\BIM - B&F\00 - BIM Resources\06_BIM Tools\04-pyRevit\MintTools\CustomExtension.extension\packages\\')
     except:
         pass
-    cfgfile = open(home + "\\STVTools.ini", 'w')
+    cfgfile = open(home + "\\MintTools.ini", 'w')
     Config.write(cfgfile)
-    sys.path.append(r'\\Uspadgv1dcl01\NY BIM GROUP\Tools\Repo\pyRevit_custom_STV\CustomExtension.extension\packages\\')
+    sys.path.append(r'\\Uspadgv1dcl01\NY BIM GROUP\Tools\Repo\pyRevit_custom_Mint\CustomExtension.extension\packages\\')
 
     modelsDic = dict(Config.items('Cloud'))
 
@@ -128,7 +128,7 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
             n += 1
 
     cfgfile.close()
-    ribbons = __rvt__.GetRibbonPanels("STVTools")
+    ribbons = __rvt__.GetRibbonPanels("MintTools")
     for i in ribbons:
         if i.Name == "Navis Data Import":
             buttons = i.GetItems()

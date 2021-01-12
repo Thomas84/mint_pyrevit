@@ -31,7 +31,7 @@ home = expanduser("~")
 
 
 
-cfgfile = open(home + "\\STVTools.ini",'w')
+cfgfile = open(home + "\\MintTools.ini",'w')
 Config = ConfigParser.ConfigParser()
 # add the settings to the structure of the file, and lets write it out...
 Config.add_section('NavisFilePath')
@@ -40,7 +40,7 @@ Config.write(cfgfile)
 cfgfile.close()
 print("Data File Set to: " + filePath)
 
-ribbons = uidoc.Application.GetRibbonPanels("STVTools")
+ribbons = uidoc.Application.GetRibbonPanels("MintTools")
 for i in ribbons:
     if i.Name == "Navis Data Import":
         buttons = i.GetItems()

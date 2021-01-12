@@ -1,12 +1,13 @@
 
-import sys, clr
+import sys, clr, os
 import ConfigParser
 from os.path import expanduser
 # Set system path
 home = expanduser("~")
-cfgfile = open(home + "\\STVTools.ini", 'r')
+print(os.path.dirname(os.path.realpath(__file__).split(".extension")[0] + ".extension\\packages\\"))
+cfgfile = open(home + "\\MintTools.ini", 'r')
 config = ConfigParser.ConfigParser()
-config.read(home + "\\STVTools.ini")
+config.read(home + "\\MintTools.ini")
 # Master Path
 syspath1 = config.get('SysDir','MasterPackage')
 sys.path.append(syspath1)
@@ -43,7 +44,7 @@ for a in selection:
     print(location.Point)
 t.Commit()
 '''
-print(str(datetime.date.today()))
+print(expanduser("~"))
 
 class Logger:
     # File location for logging

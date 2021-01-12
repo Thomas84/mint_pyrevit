@@ -1,4 +1,4 @@
-#!Y:\Tools\Repo\pyRevit_custom_STV\venv\Scripts\python.exe
+#!Y:\Tools\Repo\pyRevit_custom_Mint\venv\Scripts\python.exe
 # EASY-INSTALL-ENTRY-SCRIPT: 'pip==19.0.3','console_scripts','pip3.8'
 __requires__ = 'pip==19.0.3'
 import re

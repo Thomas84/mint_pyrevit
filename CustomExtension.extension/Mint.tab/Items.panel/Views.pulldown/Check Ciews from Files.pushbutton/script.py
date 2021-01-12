@@ -30,7 +30,7 @@ for file in os.listdir(models):
 counter = 0
 worksetList = []
 outLst = []
-checkName = 'NWC EXPORT STV'
+checkName = 'NWC EXPORT Mint'
 # Open Files
 for oFile in files:
     viewNames = []

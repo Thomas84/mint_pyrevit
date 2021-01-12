@@ -9,7 +9,7 @@ from Autodesk.Revit.UI.Events import DialogBoxShowingEventArgs
 from System import Guid
 from os.path import expanduser
 import ConfigParser
-import clr,sys, datetime
+import clr,sys, datetime, os
 import os.path
 from os import path
 from pyrevit import HOST_APP, framework
@@ -70,8 +70,8 @@ def SaveCloudModelandChangeName(document, filePath, Name):
     saveOpt.Compact = True
     document.SaveAs(filePath + Name + ".rvt", saveOpt)
     document.Close()
-
-class Logger:
+'''
+class Logger(logFile):
     # File location for logging
     fileLocation = ""
     # Constructor
@@ -107,7 +107,7 @@ def log_function(sender, args):
               " ;_Deleted:" + separator.join(args.GetDeletedElementIds()) + \
               " ;_Modified:" + separator.join(args.GetModifiedElementIds())
     logger.Log(message, sender.ActiveUIDocument.Document.Application.Username)
-
+'''
 def test_function(sender, args):
     print("test")
 
@@ -120,7 +120,7 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
     #__rvt__.Application.DocumentChanged += (Logger.test_function)
     #__rvt__.ViewActivating += EventHandler[ViewActivatingEventArgs](event_handler_function)
     #__rvt__.Application.DocumentChanged += framework.EventHandler[DB.Events.DocumentChangedEventArgs](log_function)
-    HOST_APP.app.DocumentChanged += framework.EventHandler[DB.Events.DocumentChangedEventArgs](log_function)
+    #HOST_APP.app.DocumentChanged += framework.EventHandler[DB.Events.DocumentChangedEventArgs](log_function)
     #except:
         #print("Logging Disabled.")
     #message =
@@ -136,50 +136,50 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
         framework.EventHandler[
             UI.Events.RibbonItemEventArgs](SetbuttonStatus)
             '''
-    # cfgfile = open(home + "\\STVTools.ini",'w')
+    # cfgfile = open(home + "\\MintTools.ini",'w')
     Config = ConfigParser.ConfigParser()
-    Config.read(home + "\\STVTools.ini")
+    Config.read(home + "\\MintTools.ini")
     # add the settings to the structure of the file, and lets write it out...
     try:
-        Config.add_section('NavisFilePath')
-        Config.set('NavisFilePath', 'DataPath', ' ')
-
+        #Config.add_section('NavisFilePath')
+        #Config.set('NavisFilePath', 'DataPath', ' ')
         # Add master new system folder setting
         Config.add_section('SysDir')
         Config.set('SysDir', 'MasterPackage',
-                   r'\\Uspadgv1dcl01\NY BIM GROUP\Tools\Repo\pyRevit_custom_STV\CustomExtension.extension\packages\\')
+                   os.path.dirname(os.path.realpath(__file__).split(".extension")[0] + ".extension\\packages\\"))
         Config.set('SysDir', 'SecondaryPackage',
-                   r'\\Uspadgv1dcl01\BIM - B&F\00 - BIM Resources\06_BIM Tools\04-pyRevit\STVTools\CustomExtension.extension\packages\\')
+                   os.path.dirname(os.path.realpath(__file__).split(".extension")[0] + ".extension\\packages\\"))
     except:
         pass
-    cfgfile = open(home + "\\STVTools.ini", 'w')
+    cfgfile = open(home + "\\MintTools.ini", 'w')
     Config.write(cfgfile)
-    sys.path.append(r'\\Uspadgv1dcl01\NY BIM GROUP\Tools\Repo\pyRevit_custom_STV\CustomExtension.extension\packages\\')
 
-    modelsDic = dict(Config.items('Cloud'))
-
-    pyCfgFile = open(home + "\\STVTools.ini", 'w')
-    Config.write(cfgfile)
-    if Config.get('General', 'clouddownload') == "1":
-        n = 1
-        for i in modelsDic.values():
-            list = i.split(";")
-            modelGUID = Guid(list[0])
-            projectGUID = Guid(list[1])
-            modelFilePath = list[2]
-            appVersion = str(list[3])
-            name = str(list[4])
-            if str(__rvt__.Application.VersionName) == appVersion:
-                openedDoc = OpenCloudFiles(modelGUID, projectGUID, __rvt__.Application, audit=False)
-                SaveCloudModelandChangeName(openedDoc, modelFilePath, name)
-                print("Cloud Download Complete")
-            else:
-                print("Model {} was not downloaded due to version mismatch".format(str(n)))
-            n += 1
-
+    try:
+        modelsDic = dict(Config.items('Cloud'))
+        pyCfgFile = open(home + "\\MintTools.ini", 'w')
+        Config.write(cfgfile)
+        if Config.get('General', 'clouddownload') == "1":
+            n = 1
+            for i in modelsDic.values():
+                list = i.split(";")
+                modelGUID = Guid(list[0])
+                projectGUID = Guid(list[1])
+                modelFilePath = list[2]
+                appVersion = str(list[3])
+                name = str(list[4])
+                if str(__rvt__.Application.VersionName) == appVersion:
+                    openedDoc = OpenCloudFiles(modelGUID, projectGUID, __rvt__.Application, audit=False)
+                    SaveCloudModelandChangeName(openedDoc, modelFilePath, name)
+                    print("Cloud Download Complete")
+                else:
+                    print("Model {} was not downloaded due to version mismatch".format(str(n)))
+                n += 1
+    except:
+        pass
     cfgfile.close()
+
     '''
-    ribbons = __rvt__.GetRibbonPanels("STVTools")
+    ribbons = __rvt__.GetRibbonPanels("MintTools")
     for i in ribbons:
         if i.Name == "Navis Data Import":
             buttons = i.GetItems()

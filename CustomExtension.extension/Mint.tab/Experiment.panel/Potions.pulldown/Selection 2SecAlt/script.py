@@ -21,7 +21,7 @@ __doc__ = 'Keep views synchronized. This means that as you pan and zoom and '\
           'This tool works best when the views are maximized.'
 
 
-logFile = '\\\\Uspadgv1dcl01\\NY BIM GROUP\\Tools\\Repo\\pyRevit_custom_STV\\logs\\' + str(
+logFile = '\\\\Uspadgv1dcl01\\NY BIM GROUP\\Tools\\Repo\\pyRevit_custom_Mint\\logs\\' + str(
     datetime.date.today()) + "_"  + '_General_Applog.log'
 logging.basicConfig(level = logging.DEBUG, filename=logFile, filemode='w', format='%(asctime)s - %(message)s',
                     datefmt='%d-%b-%y %H:%M:%S')

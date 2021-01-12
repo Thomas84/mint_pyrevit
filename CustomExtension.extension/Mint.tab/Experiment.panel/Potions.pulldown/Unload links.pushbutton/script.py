@@ -3,9 +3,9 @@ import ConfigParser
 from os.path import expanduser
 # Set system path
 home = expanduser("~")
-cfgfile = open(home + "\\STVTools.ini", 'r')
+cfgfile = open(home + "\\MintTools.ini", 'r')
 config = ConfigParser.ConfigParser()
-config.read(home + "\\STVTools.ini")
+config.read(home + "\\MintTools.ini")
 # Master Path
 syspath1 = config.get('SysDir','MasterPackage')
 sys.path.append(syspath1)
@@ -13,7 +13,7 @@ sys.path.append(syspath1)
 syspath2 = config.get('SysDir','SecondaryPackage')
 sys.path.append(syspath2)
 
-from pyRevit_custom_STV.CustomExtension.extension.packages import FileUtilities
+from pyRevit_custom_Mint.CustomExtension.extension.packages import FileUtilities
 import FileUtilities, Selection
 from pyrevit.framework import List
 from pyrevit import revit, DB, forms

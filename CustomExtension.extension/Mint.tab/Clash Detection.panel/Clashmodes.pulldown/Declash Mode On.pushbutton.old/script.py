@@ -40,7 +40,7 @@ else:
         systemExtra = '\\\\stvgroup.stvinc.com\\v3\\DGPA\\Vol3\\Projects\\3019262\\3019262_0001\\90_CAD Models and Sheets\\17017000\\_PIM\\PointData\\' + fName[0: 20]
         sys.path.append(systemExtra)
 
-__doc__ = 'Create a red orb on existing Clashes, have to read off a file pre-prepared by STV BIM using the Read Clash Tool'
+__doc__ = 'Create a red orb on existing Clashes, have to read off a file pre-prepared by Mint BIM using the Read Clash Tool'
 
 # clash files
 clashFiles = []

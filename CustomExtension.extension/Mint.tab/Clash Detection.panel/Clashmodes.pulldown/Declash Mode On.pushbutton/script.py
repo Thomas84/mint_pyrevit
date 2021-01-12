@@ -13,7 +13,7 @@ clr.AddReferenceByPartialName('PresentationFramework')
 clr.AddReferenceByPartialName('System.Windows.Forms')
 # Documentation of work
 
-__doc__ = 'Create a red orb on existing Clashes, have to read off a file pre-prepared by STV BIM using the Read Clash Tool'
+__doc__ = 'Create a red orb on existing Clashes, have to read off a file pre-prepared by Mint BIM using the Read Clash Tool'
 
 uidoc = __revit__.ActiveUIDocument
 doc = __revit__.ActiveUIDocument.Document

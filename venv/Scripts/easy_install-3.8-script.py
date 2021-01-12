@@ -1,4 +1,4 @@
-#!Y:\Tools\Repo\pyRevit_custom_STV\venv\Scripts\python.exe
+#!Y:\Tools\Repo\pyRevit_custom_Mint\venv\Scripts\python.exe
 # EASY-INSTALL-ENTRY-SCRIPT: 'setuptools==40.8.0','console_scripts','easy_install-3.8'
 __requires__ = 'setuptools==40.8.0'
 import re

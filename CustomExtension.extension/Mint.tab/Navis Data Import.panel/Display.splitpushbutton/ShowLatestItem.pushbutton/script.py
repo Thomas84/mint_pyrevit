@@ -56,9 +56,9 @@ def PAFileNameProcessor(doc):
 
 # Program Start Process Files
 home = expanduser("~")
-cfgfile = open(home + "\\STVTools.ini")
+cfgfile = open(home + "\\MintTools.ini")
 Config = ConfigParser.ConfigParser()
-Config.read(home + "\\STVTools.ini")
+Config.read(home + "\\MintTools.ini")
 filePath = ConfigSectionMap("NavisFilePath")["datapath"]
 openedFile = open(filePath)
 name = PAFileNameProcessor(doc)
