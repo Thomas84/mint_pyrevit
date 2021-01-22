@@ -34,6 +34,8 @@ from pyrevit import script
 from pyrevit import DB, UI
 import datetime, os
 from pyrevit import HOST_APP, framework
+import Autodesk.Revit.DB.ExtensibleStorage
+import uuid
 '''
 t = Transaction(doc, 'Tag Selected Element')
 t.Start()
@@ -45,6 +47,7 @@ for a in selection:
 t.Commit()
 '''
 print(expanduser("~"))
+
 
 class Logger:
     # File location for logging
@@ -87,3 +90,23 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
         return True
     except Exception:
         return False
+t = Transaction(doc, 'Test')
+t.Start()
+
+schemaBuilder = SchemaBuilder(UUID('5361a11b-615c-42bf-9bdb-e2c3790ada14'))
+chemaBuilder.SetWriteAccessLevel(AccessLevel.Public)
+#schemaBuilder.SetWriteAccessLevel(AccessLevel.Vendor)
+#schemaBuilder.SetVendorId("Mengfan Lou")
+
+fieldBuilder = schemaBuilder.AddSimpleField("WorksetRule",type('string'))
+
+fieldBuilder.SetDocumentation("A stored "+ "location value representing a wiring "+ "splice in a wall.")
+
+schemaBuilder.SetSchemaName("WorksetRule")
+
+schema = schemaBuilder.Finish()
+
+entity = Entity(schema)
+fieldSpliceLocation = schema.GetField("WorksetRule")
+entity.Set<string>(fieldSpliceLocation, dataToStore)
+t.Commit()
