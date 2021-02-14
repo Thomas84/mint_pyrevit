@@ -70,12 +70,12 @@ def DivideCleanString(divider1, divider2, string, keywordstoRemove):
                 pass
         if subList:
             for sub in subList:
-                if not RepresentsInt(sub):
-                    reconstructString += sub
+                if not RepresentsInt(sub.strip()):
+                    reconstructString += sub.strip()
                     reconstructString += divider2
             reconstructString = reconstructString[0: len(reconstructString) - 1]
         if reconstructString != "":
-            returnString += reconstructString
+            returnString += reconstructString.strip()
             returnString += divider1
     returnString = returnString[0 : len(returnString) - 1]
 
