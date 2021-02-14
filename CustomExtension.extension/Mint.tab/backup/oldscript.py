@@ -1,7 +1,7 @@
 from pyrevit.framework import List
 from pyrevit import revit, DB
 import clr, pprint,os, sys
-sys.path.append('\\\\stvgroup.stvinc.com\\v3\\DGPA\\Vol3\\Projects\\3019262\\3019262_0001\\90_CAD Models and Sheets\\17017000\\_PIM\\PointData')
+sys.path.append('')
 import Pointdata
 clr.AddReference('RevitAPI')
 clr.AddReference('RevitAPIUI')

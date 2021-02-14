@@ -38,7 +38,7 @@ class Logger:
 def log_function(sender, args):
     event_uidoc = sender.ActiveUIDocument
     event_doc = sender.ActiveUIDocument.Document
-    logger = Logger("\\\\stvgroup.stvinc.com\\p\\NYNY\\Practices\\Hazem Kahla\\RevitLogs\\"
+    logger = Logger(""
                     + str(datetime.date.today()) + "_" +
                     str(sender.ActiveUIDocument.Document.Application.Username) + ".txt" )
     separator = ","
@@ -92,7 +92,7 @@ def copyzoomstate1(sender, args):
             pl.dump(p2, f)
             f.close()
 
-        logFile = open("\\\\stvgroup.stvinc.com\\p\\NYNY\\Practices\\Hazem Kahla\\RevitLogs\\"
+        logFile = open(""
                 + str(datetime.date.today()) + "_" +
                 str(sender.ActiveUIDocument.Document.Application.Username) + ".txt", "w")
         logFile.write(str(datetime.datetime) + "_" + "LouM" + "_" + "Log Start")
@@ -120,7 +120,7 @@ def applyzoomstate1(sender, args):
             vc1 = DB.XYZ(p1.x, p1.y, 0)
             vc2 = DB.XYZ(p2.x, p2.y, 0)
             current_ui_view.ZoomAndCenterRectangle(vc1, vc2)
-        logFile = open("\\\\stvgroup.stvinc.com\\p\\NYNY\\Practices\\Hazem Kahla\\RevitLogs\\"
+        logFile = open(""
                        + str(datetime.date.today()) + "_" +
                        str(sender.ActiveUIDocument.Document.Application.Username) + ".txt", "w")
         logFile.write(str(datetime.datetime) + "_" + "LouM" + "_" + "Log Start")

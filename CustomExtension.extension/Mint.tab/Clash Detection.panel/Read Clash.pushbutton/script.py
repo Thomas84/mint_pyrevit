@@ -5,8 +5,7 @@ from pyrevit import forms
 __doc__ = 'Mint BIM button to read clash data off html and generate data files'
 
 # Set the path with all the clash html files and the path of the output file that you want py revit to pick up
-clashpath = '\\\\stvgroup.stvinc.com\\v3\\DGPA\\Vol3\\Projects\\3019262\\3019262_0001\\90_CAD Models and Sheets\\' \
-            '17017000\\_PIM\\' # ClashReportData\\'
+clashpath = ''
 
 
 approvedTail = ['ENC', 'FFE', 'GEN', 'INT', 'SSM', 'C', 'CP', 'PBB', ]
@@ -40,8 +39,7 @@ folderName = str(forms.GetValueWindow.show(None,
         default=pickedFolder,
         prompt='Please Enter the Clash Report Name after the date.',
         title='Clash Report Name')) + '\\'
-programPath = '\\\\stvgroup.stvinc.com\\v3\\DGPA\\Vol3\\Projects\\3019262\\3019262_0001\\' \
-              '90_CAD Models and Sheets\\17017000\\_PIM\\PointData\\' + folderName
+programPath = ''
 
 modelNameRegex = re.compile(r'\w\d\d\d\d\d\d\d\d-\S\S_CENTRAL\S{4}?')
 modelRegex = re.compile(r'\w\d\d\d\d\d\d\d\d-\S\S_CENTRAL')

@@ -26,7 +26,8 @@ doc = __revit__.ActiveUIDocument.Document
 
 __title__ = 'Declash screen'
 __author__ = 'Martin Lou'
-__contact__ = 'mengfan.lou@stvinc.com'
+__contact__ = 'mlou@kpf.com'
+__contact__ = 'mlou@kpf.com'
 
 
 __doc__ = 'Print Existing Clash  '\

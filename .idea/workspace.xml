@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3ff88f0c-6970-49b2-8ac2-e286445fca0d" name="Default Changelist" comment="Fixed bug 1">
-      <change afterPath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Items.panel/Sheets.pulldown/Fill Reference Sheet.pushbutton/script.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Report.panel/Parameters.pulldown/Load Shared Parameters.pushbutton/__inti__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Report.panel/Parameters.pulldown/Load Shared Parameters.pushbutton/icon.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Report.panel/Parameters.pulldown/Load Shared Parameters.pushbutton/script.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Experiment.panel/Potions.pulldown/ATest.pushbutton/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Experiment.panel/Potions.pulldown/ATest.pushbutton/script.py" afterDir="false" />
-    </list>
+    <list default="true" id="3ff88f0c-6970-49b2-8ac2-e286445fca0d" name="Default Changelist" comment="Fixed bug 1" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -30,6 +22,14 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
   <component name="JupyterTrust" id="6bb6034c-95d4-44e2-84f8-411b1a16d3ff" />
   <component name="ProjectId" id="1X2GqiYb6Mre3lzidUVfI37zUXd" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -38,24 +38,26 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Report.panel/Parameters.pulldown" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Modify.panel/Modify1.stack3/Rename.pulldown" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\loum\Documents\Repo\python-sharepoint\nerv_pyrevit\CustomExtension.extension\Nerv.tab\Experiment.panel\Potions.pulldown\Get parameter from models.pushbutton" />
-      <recent name="W:\Tools\Repo\pyRevit_custom_STV\docs\nerv\General" />
-      <recent name="W:\Tools\Repo\pyRevit_custom_STV\CustomExtension.extension\Nerv.tab\General Utilities.panel\Selection.pulldown" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Repo\mint_pyrevit\CustomExtension.extension\Mint.tab\Modify.panel\Modify1.stack3\Rename.pulldown" />
+      <recent name="C:\Repo\mint_pyrevit\CustomExtension.extension\Mint.tab\Experiment.panel\Test.pulldown" />
       <recent name="C:\Users\loum\Documents\Repo\python-sharepoint\mint_pyrevit\CustomExtension.extension\Mint.tab\Report.panel\Parameters.pulldown" />
       <recent name="C:\Users\loum\Documents\Repo\python-sharepoint\mint_pyrevit\CustomExtension.extension\Mint.tab\Items.panel\Sheets.pulldown" />
       <recent name="C:\Users\loum\Documents\Repo\python-sharepoint\nerv_pyrevit\CustomExtension.extension\Nerv.tab\Reset.panel" />
-      <recent name="C:\Users\loum\Documents\Repo\python-sharepoint\nerv_pyrevit\CustomExtension.extension\Nerv.tab\Report.panel\Parameters.pulldown" />
-      <recent name="C:\Users\loum\Documents\Repo\python-sharepoint\nerv_pyrevit\CustomExtension.extension\Nerv.tab\Experiment.panel\Potions.pulldown\Get parameters of elements.pushbutton" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Repo\mint_pyrevit\CustomExtension.extension\Mint.tab\Items.panel\Views.pulldown" />
+      <recent name="C:\Users\loum\Documents\Repo\python-sharepoint\nerv_pyrevit\CustomExtension.extension\Nerv.tab\Experiment.panel\Potions.pulldown\Get parameter from models.pushbutton" />
+      <recent name="W:\Tools\Repo\pyRevit_custom_STV\docs\nerv\General" />
+      <recent name="W:\Tools\Repo\pyRevit_custom_STV\CustomExtension.extension\Nerv.tab\General Utilities.panel\Selection.pulldown" />
     </key>
   </component>
   <component name="RunManager">
@@ -131,7 +133,7 @@
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -303,6 +305,11 @@
       <workItem from="1610476619544" duration="3878000" />
       <workItem from="1611148605041" duration="4267000" />
       <workItem from="1611322170530" duration="1421000" />
+      <workItem from="1612990267074" duration="3345000" />
+      <workItem from="1613061934741" duration="6430000" />
+      <workItem from="1613074568894" duration="32000" />
+      <workItem from="1613074704474" duration="16319000" />
+      <workItem from="1613241509220" duration="15301000" />
     </task>
     <task id="LOCAL-00001" summary="Fix workspace bug">
       <created>1580332278272</created>
@@ -315,47 +322,11 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fix workspace bug" />
     <option name="LAST_COMMIT_MESSAGE" value="Fix workspace bug" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="712" y="323" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1602604931684">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="712" y="323" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1602604931684" />
-    <state x="458" y="114" key="CommitChangelistDialog2" timestamp="1608044785791">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="458" y="114" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1608044785791" />
-    <state x="594" y="219" key="FileChooserDialogImpl" timestamp="1602685425936">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state x="594" y="219" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1602685425936" />
-    <state x="462" y="162" key="SettingsEditor" timestamp="1602603663934">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="462" y="162" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1602603663934" />
-    <state x="205" y="318" key="com.intellij.ide.util.TipDialog" timestamp="1611155314333">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="465" y="235" key="com.intellij.ide.util.TipDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1602681038731" />
-    <state x="205" y="318" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1611155314333" />
-    <state x="690" y="136" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1602602291009">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="690" y="136" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1602602291009" />
-    <state x="653" y="251" width="805" height="536" key="find.popup" timestamp="1611079303336">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="653" y="251" width="805" height="536" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1611079303336" />
-    <state x="2573" y="152" width="777" height="888" key="find.popup/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1610484565330" />
-    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1610484527368">
-      <screen x="1920" y="0" width="1920" height="1040" />
-    </state>
-    <state x="2543" y="225" width="672" height="678" key="search.everywhere.popup/1920.0.1920.1040/0.0.1920.1040@1920.0.1920.1040" timestamp="1610484527368" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

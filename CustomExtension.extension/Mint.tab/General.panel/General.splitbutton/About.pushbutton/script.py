@@ -11,8 +11,7 @@ __doc__ = 'Info about this panel,'\
 
 info = ['These tools are developed by Mengfan Lou using pyRevit which is Created by eirannejad or Ehsan Iran-Nejad.'
         'For internal use only.',
-        'Panel Developed by: Martin Lou', 'Contact Info:', 'mengfan.lou@stvinc.com',
-        '(p)(212)505-4978 (c)(646)556-5711', 'Mint INC. 225 PARK AVENUE SOUTH, NEW YORK, NY 10003']
+        'Contact Info:', 'mlou@kpf.com', '(p)(734)709-0971']
 
 pp = pprint.PrettyPrinter(indent = 4)
 pp.pprint(info)

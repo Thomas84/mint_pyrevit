@@ -27,17 +27,17 @@ approvedTail = ['ENC', 'FFE', 'GEN', 'INT', 'SSM', 'C', 'CP', 'PBB', ]
 noTail = modelRegex.findall(fName)
 tail = modelRegex2.findall(fName)
 if len(tail) == 0:
-    systemExtra = '\\\\stvgroup.stvinc.com\\v3\\DGPA\\Vol3\\Projects\\3019262\\3019262_0001\\90_CAD Models and Sheets\\17017000\\_PIM\\PointData\\' + fName[0: 20]
+    systemExtra = '' + fName[0: 20]
     sys.path.append(systemExtra)
     print(systemExtra)
 else:
     nameLst = re.split('_', fName)
     if nameLst[2] in approvedTail:
-        systemExtra = '\\\\stvgroup.stvinc.com\\v3\\DGPA\\Vol3\\Projects\\3019262\\3019262_0001\\90_CAD Models and Sheets\\17017000\\_PIM\\PointData\\' + tail[0]
+        systemExtra = '' + tail[0]
         sys.path.append(systemExtra)
         print(systemExtra)
     else:
-        systemExtra = '\\\\stvgroup.stvinc.com\\v3\\DGPA\\Vol3\\Projects\\3019262\\3019262_0001\\90_CAD Models and Sheets\\17017000\\_PIM\\PointData\\' + fName[0: 20]
+        systemExtra = '' + fName[0: 20]
         sys.path.append(systemExtra)
 
 __doc__ = 'Create a red orb on existing Clashes, have to read off a file pre-prepared by Mint BIM using the Read Clash Tool'

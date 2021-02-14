@@ -85,8 +85,8 @@ def SaveCloudModelandChangeName(document, filePath, Name):
     document.SaveAs(filePath + Name + ".rvt", saveOpt)
     document.Close()
 
-filePath1 = "\\\\stvgroup.stvinc.com\\v3\\DGPA\\Vol3\\Projects\\4020310\\4020310_0001\\90_CAD Models and Sheets\\07_A_Architectural\\"
-filePath2 = "\\\\stvgroup.stvinc.com\\v3\\DGPA\\Vol3\\Projects\\4020310\\4020310_0001\\90_CAD Models and Sheets\\07_A_Architectural\\VE\\"
+filePath1 = ""
+filePath2 = ""
 modelGUID = Guid("e77aa560-8776-4a0e-8192-3044c5e240df")
 projectGUID = Guid("20ac335a-5ba8-4520-b948-296e529c3306")
 model2GUID = Guid("172edfec-1f93-4385-85eb-a4db3b96d5d1")

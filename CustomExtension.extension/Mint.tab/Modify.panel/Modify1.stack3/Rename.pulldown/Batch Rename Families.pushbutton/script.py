@@ -39,7 +39,8 @@ import Autodesk.Revit.DB.ExtensibleStorage
 import uuid
 import shutil
 
-__doc__ = 'To be run in a Revit Model.'\
+__doc__ = 'To be run in a Revit Model. ' \
+          'Rename families to SpecNumber-Revit Category-Description.'\
           'Step 1: Please select the folder that contains Revit families.'\
           'Step 2: Please select the destination folder to save new families.'\
           'Note: Please check the log after running this. ' \
@@ -223,7 +224,7 @@ for root, directories, files in os.walk(folderPath, topdown=False):
 		if isfile(join(root, name)) and name[-3: ] == "rfa":
 			onlyfiles[name[0: -4]] = (str(os.path.join(root, name)))
 
-print(onlyfiles)
+#print(onlyfiles)
 
 uidoc = __revit__.ActiveUIDocument
 doc = __revit__.ActiveUIDocument.Document
@@ -242,7 +243,7 @@ familySymbols = FilteredElementCollector(doc).OfClass(FamilySymbol).ToElements()
 for s in familySymbols:
     if s.FamilyName in onlyfiles.keys():
         families[s.FamilyName] = s.Family
-print(families)
+#print(families)
 
 
 for familyName in families.keys():

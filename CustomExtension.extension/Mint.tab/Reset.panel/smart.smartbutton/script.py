@@ -95,9 +95,7 @@ class Logger(logFile):
 def log_function(sender, args):
     event_uidoc = sender.ActiveUIDocument
     event_doc = sender.ActiveUIDocument.Document
-    logger = Logger("\\\\stvgroup.stvinc.com\\p\\NYNY\\Practices\\Hazem Kahla\\RevitLogs\\"
-                    + str(datetime.date.today()) + "_" +
-                    str(sender.ActiveUIDocument.Document.Application.Username) + ".txt" )
+    logger = Logger("" )
     separator = ","
     docTitle = args.GetDocument().Title
     message = str(datetime.datetime) + \

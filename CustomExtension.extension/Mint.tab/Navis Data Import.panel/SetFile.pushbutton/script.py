@@ -22,7 +22,7 @@ doc = __revit__.ActiveUIDocument.Document
 __doc__ = 'Show All recorded items in Navisworks'
 
 outprint = script.get_output()
-path = r'\\stvgroup.stvinc.com\v3\DGPA\Vol3\Projects\3019262\3019262_0001\90_CAD Models and Sheets\17017000\_PIM\Data\NavisData'
+path = r''
 filePath = forms.pick_file(file_ext='txt', multi_file=False, init_dir=path, unc_paths=False)
 # print(script.get_all_buttons())
 openedFile = open(filePath)
