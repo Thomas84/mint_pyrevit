@@ -42,16 +42,16 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Modify.panel/Modify1.stack3/Rename.pulldown" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Modify.panel/Modify1.stack3/Edit.pulldown" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Repo\mint_pyrevit\CustomExtension.extension\Mint.tab\Modify.panel\Modify1.stack3\Edit.pulldown" />
       <recent name="C:\Repo\mint_pyrevit\CustomExtension.extension\Mint.tab\Modify.panel\Modify1.stack3\Rename.pulldown" />
       <recent name="C:\Repo\mint_pyrevit\CustomExtension.extension\Mint.tab\Experiment.panel\Test.pulldown" />
       <recent name="C:\Users\loum\Documents\Repo\python-sharepoint\mint_pyrevit\CustomExtension.extension\Mint.tab\Report.panel\Parameters.pulldown" />
       <recent name="C:\Users\loum\Documents\Repo\python-sharepoint\mint_pyrevit\CustomExtension.extension\Mint.tab\Items.panel\Sheets.pulldown" />
-      <recent name="C:\Users\loum\Documents\Repo\python-sharepoint\nerv_pyrevit\CustomExtension.extension\Nerv.tab\Reset.panel" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Repo\mint_pyrevit\CustomExtension.extension\Mint.tab\Items.panel\Views.pulldown" />
@@ -310,6 +310,7 @@
       <workItem from="1613074568894" duration="32000" />
       <workItem from="1613074704474" duration="16319000" />
       <workItem from="1613241509220" duration="17681000" />
+      <workItem from="1613406632996" duration="12854000" />
     </task>
     <task id="LOCAL-00001" summary="Fix workspace bug">
       <created>1580332278272</created>

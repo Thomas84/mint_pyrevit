@@ -20,7 +20,7 @@ from Autodesk.Revit.DB import Document, FilteredElementCollector, GraphicsStyle,
     RevitLinkInstance, UV, XYZ, SpatialElementBoundaryOptions, CurveArray, ElementId, View, RevitLinkType, WorksetTable,\
     Workset, FilteredWorksetCollector, WorksetKind, RevitLinkType, RevitLinkInstance, View3D, ViewType,ElementClassFilter,\
     ViewFamilyType, ViewFamily, BuiltInParameter, IndependentTag, Reference, TagMode, TagOrientation, IFamilyLoadOptions,\
-    FamilySymbol, FilterElement
+    FamilySymbol, FilterElement, WorksharingUtils
 from System import EventHandler, Uri
 from Autodesk.Revit.UI.Events import ViewActivatedEventArgs, ViewActivatingEventArgs
 from pyrevit import revit, DB, forms
@@ -38,8 +38,17 @@ from pyrevit import HOST_APP, framework
 import Autodesk.Revit.DB.ExtensibleStorage
 import uuid
 
+def GetOwner(doc, ElementIds):
+
+    for ele in ElementIds:
+        status = WorksharingUtils.GetCheckoutStatus(doc, ele).Owner
+        if status:
+            print(ele.IntegerValue.ToString() + " owned by " + status + " and may not be available for editing")
+
 processes = ["Copy from existing view templates", "Add filters"]
 selProcess = forms.SelectFromList.show(processes, multiselect=False,  button_name='Select processes')
+
+
 
 if selProcess == "Add filters":
     ff = {}
@@ -58,14 +67,18 @@ if selProcess == "Add filters":
 
     t = Transaction(doc, 'Add Filter to Templates')
     t.Start()
-    for selectedView in selViews:
-        view = vv[selectedView]
-        for selectedFilter in selFilters:
-            filter = ff[selectedFilter].Id
-            try:
-                view.AddFilter(filter)
-            except:
-                pass
+    count = 0
+    with forms.ProgressBar(title='Copying Filters') as pb:
+        for selectedView in selViews:
+            view = vv[selectedView]
+            for selectedFilter in selFilters:
+                filter = ff[selectedFilter].Id
+                try:
+                    view.AddFilter(filter)
+                except:
+                    pass
+            pb.update_progress(count, selViews.length)
+            count += 1
     t.Commit()
 
 elif selProcess == "Copy from existing view templates":
@@ -88,14 +101,18 @@ elif selProcess == "Copy from existing view templates":
         filterData.append([filter, overrides, vis])
     t = Transaction(doc, 'Add Filter to Templates')
     t.Start()
-    for targetView in targetViews:
-        target = vv[targetView]
-        for fd in filterData:
-            try:
-                target.AddFilter(fd[0])
-                target.SetFilterOverrides(fd[0], fd[1])
-                target.SetFilterVisibility(fd[0], fd[2])
-            except:
-                pass
+    count = 0
+    with forms.ProgressBar(title='Copying Filters') as pb:
+        for targetView in targetViews:
+            target = vv[targetView]
+            for fd in filterData:
+                try:
+                    target.AddFilter(fd[0])
+                    target.SetFilterOverrides(fd[0], fd[1])
+                    target.SetFilterVisibility(fd[0], fd[2])
+                except:
+                    pass
+            pb.update_progress(count, targetViews.length)
+            count += 1
 
     t.Commit()
