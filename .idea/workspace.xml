@@ -42,14 +42,14 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Modify.panel/Modify1.stack3/Edit.pulldown" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Experiment.panel/Test.pulldown" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Repo\mint_pyrevit\CustomExtension.extension\Mint.tab\Experiment.panel\Test.pulldown" />
       <recent name="C:\Repo\mint_pyrevit\CustomExtension.extension\Mint.tab\Modify.panel\Modify1.stack3\Edit.pulldown" />
       <recent name="C:\Repo\mint_pyrevit\CustomExtension.extension\Mint.tab\Modify.panel\Modify1.stack3\Rename.pulldown" />
-      <recent name="C:\Repo\mint_pyrevit\CustomExtension.extension\Mint.tab\Experiment.panel\Test.pulldown" />
       <recent name="C:\Users\loum\Documents\Repo\python-sharepoint\mint_pyrevit\CustomExtension.extension\Mint.tab\Report.panel\Parameters.pulldown" />
       <recent name="C:\Users\loum\Documents\Repo\python-sharepoint\mint_pyrevit\CustomExtension.extension\Mint.tab\Items.panel\Sheets.pulldown" />
     </key>
@@ -311,6 +311,13 @@
       <workItem from="1613074704474" duration="16319000" />
       <workItem from="1613241509220" duration="17681000" />
       <workItem from="1613406632996" duration="12854000" />
+      <workItem from="1613486024551" duration="470000" />
+      <workItem from="1613487460954" duration="9145000" />
+      <workItem from="1613597245139" duration="2263000" />
+      <workItem from="1613657148668" duration="625000" />
+      <workItem from="1614002543277" duration="20246000" />
+      <workItem from="1614090074979" duration="9873000" />
+      <workItem from="1614183169507" duration="6265000" />
     </task>
     <task id="LOCAL-00001" summary="Fix workspace bug">
       <created>1580332278272</created>
