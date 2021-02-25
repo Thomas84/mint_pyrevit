@@ -1,5 +1,5 @@
 
-import sys, clr, os, re
+import sys, clr
 import ConfigParser
 from os.path import expanduser
 # Set system path
@@ -14,46 +14,34 @@ sys.path.append(syspath1)
 # Built Path
 syspath2 = config.get('SysDir','SecondaryPackage')
 sys.path.append(syspath2)
-import Selection
-clr.AddReference('System')
-from Autodesk.Revit.DB import Document, FilteredElementCollector, GraphicsStyle, Transaction, BuiltInCategory,\
-    RevitLinkInstance, UV, XYZ, SpatialElementBoundaryOptions, CurveArray, ElementId, View, RevitLinkType, WorksetTable,\
-    Workset, FilteredWorksetCollector, WorksetKind, RevitLinkType, RevitLinkInstance, View3D, ViewType,ElementClassFilter,\
-    ViewFamilyType, ViewFamily, BuiltInParameter, IndependentTag, Reference, TagMode, TagOrientation, IFamilyLoadOptions,\
-    FamilySymbol, FilterElement, WorksharingUtils
-from System import EventHandler, Uri
-from Autodesk.Revit.UI.Events import ViewActivatedEventArgs, ViewActivatingEventArgs
+
+
+
+from Autodesk.Revit.DB import Document, FilteredElementCollector, Transaction, FilterElement, WorksharingUtils, View
 from pyrevit import revit, DB, forms
+clr.AddReference('System')
 clr. AddReferenceByPartialName('PresentationCore')
 clr.AddReferenceByPartialName('PresentationFramework')
 clr.AddReferenceByPartialName('System.Windows.Forms')
-import System.Windows.Forms
 uidoc = __revit__.ActiveUIDocument
 doc = __revit__.ActiveUIDocument.Document
-from pyrevit import framework
-from pyrevit import script
-from pyrevit import DB, UI
-import datetime, os
-from pyrevit import HOST_APP, framework
-import Autodesk.Revit.DB.ExtensibleStorage
-import uuid
 
 def GetOwner(doc, ElementIds):
-
+    result = {}
     for ele in ElementIds:
-        status = WorksharingUtils.GetCheckoutStatus(doc, ele).Owner
-        if status:
-            print(ele.IntegerValue.ToString() + " owned by " + status + " and may not be available for editing")
+        owner = WorksharingUtils.GetWorksharingTooltipInfo(doc, ele).Owner.ToString()
+        if owner and owner != doc.Application.Username:
+            result[ele.IntegerValue.ToString()] = owner
+    return result
 
+# Pick Copying Process
 processes = ["Copy from existing view templates", "Add filters"]
-selProcess = forms.SelectFromList.show(processes, multiselect=False,  button_name='Select processes')
+selProcess = forms.CommandSwitchWindow.show(processes, message='Select Copy Option')
 
-
-
+# Only add filters
 if selProcess == "Add filters":
     ff = {}
     filters = FilteredElementCollector(doc).OfClass(FilterElement).ToElements()
-
     for filter in filters:
         ff[filter.Name] = filter
     selFilters = forms.SelectFromList.show(ff.keys(), multiselect=True,  button_name='Select Filters')
@@ -68,26 +56,47 @@ if selProcess == "Add filters":
     t = Transaction(doc, 'Add Filter to Templates')
     t.Start()
     count = 0
-    with forms.ProgressBar(title='Copying Filters') as pb:
-        for selectedView in selViews:
-            view = vv[selectedView]
-            for selectedFilter in selFilters:
-                filter = ff[selectedFilter].Id
-                try:
-                    view.AddFilter(filter)
-                except:
-                    pass
-            pb.update_progress(count, selViews.length)
-            count += 1
-    t.Commit()
 
+
+    # Check Ownership of the elements that is about to change
+    checkResult = True
+    selectedViewId = []
+    for checkedView in selViews:
+        view = vv[checkedView]
+        selectedViewId.append(view.Id)
+    ownerCheck = GetOwner(doc, selectedViewId)
+    message = ""
+    if ownerCheck:
+        for id in ownerCheck.keys():
+            message += ("ID: " + id + " owned by " + ownerCheck[id] + "\n")
+        checkResult = forms.alert("You may have to request ownership if you proceed", title = "Ownership Check",
+                                  sub_msg= message,
+                                  ok = True,
+                                  cancel =True)
+    if checkResult:
+        with forms.ProgressBar(title='Copying Filters') as pb:
+            for selectedView in selViews:
+                view = vv[selectedView]
+                for selectedFilter in selFilters:
+                    filter = ff[selectedFilter].Id
+                    try:
+                        view.AddFilter(filter)
+                    except:
+                        pass
+                pb.update_progress(count, len(selViews))
+                count += 1
+        t.Commit()
+    else:
+        t.RollBack()
+
+# Copy Filters from a View Template
 elif selProcess == "Copy from existing view templates":
-
     vv= {}
     views = FilteredElementCollector(doc).OfClass(View).ToElements()
     for view in views:
         if view.IsTemplate:
             vv[view.Title] = view
+    # get source view template and target view template
     selView = forms. SelectFromList.show(vv.keys(), multiselect=False, button_name='Select Source Template')
     targetViews = forms. SelectFromList.show(vv.keys(), multiselect=True, button_name='Select Target Template')
 
@@ -99,20 +108,40 @@ elif selProcess == "Copy from existing view templates":
         overrides = source.GetFilterOverrides(filter)
         vis = source.GetFilterVisibility(filter)
         filterData.append([filter, overrides, vis])
+
+    # Copy Data to
     t = Transaction(doc, 'Add Filter to Templates')
     t.Start()
     count = 0
-    with forms.ProgressBar(title='Copying Filters') as pb:
-        for targetView in targetViews:
-            target = vv[targetView]
-            for fd in filterData:
-                try:
-                    target.AddFilter(fd[0])
-                    target.SetFilterOverrides(fd[0], fd[1])
-                    target.SetFilterVisibility(fd[0], fd[2])
-                except:
-                    pass
-            pb.update_progress(count, targetViews.length)
-            count += 1
-
-    t.Commit()
+    # Check Ownership of the elements that is about to change
+    checkResult = True
+    selectedViewId = []
+    for checkedView in targetViews:
+        view = vv[checkedView]
+        selectedViewId.append(view.Id)
+    ownerCheck = GetOwner(doc, selectedViewId)
+    #print(ownerCheck)
+    message = ""
+    if ownerCheck:
+        for id in ownerCheck.keys():
+            message += ("ID: " + id + " owned by " + ownerCheck[id] + "\n")
+        checkResult = forms.alert("You may have to request ownership if you proceed", title = "Ownership Check",
+                                  sub_msg= message,
+                                  ok = True,
+                                  cancel =True)
+    if checkResult:
+        with forms.ProgressBar(title='Copying Filters') as pb:
+            for targetView in targetViews:
+                target = vv[targetView]
+                for fd in filterData:
+                    try:
+                        target.AddFilter(fd[0])
+                        target.SetFilterOverrides(fd[0], fd[1])
+                        target.SetFilterVisibility(fd[0], fd[2])
+                    except:
+                        pass
+                pb.update_progress(count, len(targetViews))
+                count += 1
+        t.Commit()
+    else:
+        t.RollBack()
