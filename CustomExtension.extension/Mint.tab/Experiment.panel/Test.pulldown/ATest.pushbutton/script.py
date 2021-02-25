@@ -16,6 +16,7 @@ syspath2 = config.get('SysDir','SecondaryPackage')
 sys.path.append(syspath2)
 import Selection
 clr.AddReference('System')
+from rpw import revit, db, ui
 from Autodesk.Revit.DB import Document, FilteredElementCollector, GraphicsStyle, Transaction, BuiltInCategory,\
     RevitLinkInstance, UV, XYZ, SpatialElementBoundaryOptions, CurveArray, ElementId, View, RevitLinkType, WorksetTable,\
     Workset, FilteredWorksetCollector, WorksetKind, RevitLinkType, RevitLinkInstance, View3D, ViewType,ElementClassFilter,\
@@ -23,7 +24,7 @@ from Autodesk.Revit.DB import Document, FilteredElementCollector, GraphicsStyle,
     FamilySymbol
 from System import EventHandler, Uri
 from Autodesk.Revit.UI.Events import ViewActivatedEventArgs, ViewActivatingEventArgs
-from pyrevit import revit, DB, forms
+from pyrevit import forms
 clr. AddReferenceByPartialName('PresentationCore')
 clr.AddReferenceByPartialName('PresentationFramework')
 clr.AddReferenceByPartialName('System.Windows.Forms')
