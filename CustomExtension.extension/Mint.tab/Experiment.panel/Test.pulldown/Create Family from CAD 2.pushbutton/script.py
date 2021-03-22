@@ -215,6 +215,10 @@ class FamilyOption(IFamilyLoadOptions):
 
 from os.path import isfile, join
 
+processes = ["Create Geometry Families", "Create Annotation Families"]
+selProcess = forms.CommandSwitchWindow.show(processes, message='Select Copy Option')
+
+
 famTemplatePath = app.FamilyTemplatePath
 folderPath = forms.pick_folder()
 destinationFolderPath = forms.pick_folder()
@@ -270,44 +274,73 @@ for cadImport in onlyfiles.keys():
     for obj in list:
         allGeom = []
         geo = obj.SymbolGeometry
-        for m in geo:
-            print(m)
+    if selProcess == "Create Geometry Families":
+        try:
+            famDoc = app.NewFamilyDocument(templateFullName)
+            view = FilteredElementCollector(famDoc).OfClass(View).FirstElement()
+            t = Transaction(famDoc, 'Create new Family')
+            t.Start()
+            source = onlyfiles[cadImport]
+            fileNameToSave = cadImport
+            familyManager = famDoc.FamilyManager
+            familyManager.NewType(cadImport)
+            famId = famDoc.Import(source, importOptions, view)
+            ele = famDoc.GetElement(famId[1])
+            lines = ele.get_Geometry(Options())
+            #lines = ele.GetGeometryObjectFromReference(Reference(ele))
+            list = lines.GetEnumerator()
+            for obj in list:
+                allGeom = []
+                geo = obj.SymbolGeometry
+                for m in geo:
+                    allGeom.append(m)
+                curves = ProcessGeometry(allGeom)
+                #print(len(curves))
+                for m in curves:
+                    try:
+                        famDoc.FamilyCreate.NewSymbolicCurve(m, view.SketchPlane)
+                    except Exception as e:
+                        print(cadImport + " "+ str(e))
+            famDoc.Delete(famId[1])
+            t.Commit()
+            famDoc.SaveAs(destinationFolderPath + "\\" + fileNameToSave + ".rfa", saveOp)
+            famDoc.Close()
+        except Exception as e:
+            print("Fatal Error: " + cadImport + " " + str(e))
 
+    elif selProcess == "Create Annotation Families":
+        try:
+            famDoc = app.NewFamilyDocument(templateFullName)
+            view = FilteredElementCollector(famDoc).OfClass(View).FirstElement()
+            t = Transaction(famDoc, 'Create new Family')
+            t.Start()
+            source = onlyfiles[cadImport]
+            fileNameToSave = cadImport
+            familyManager = famDoc.FamilyManager
+            familyManager.NewType(cadImport)
+            famId = famDoc.Import(source, importOptions, view)
+            ele = famDoc.GetElement(famId[1])
+            lines = ele.get_Geometry(Options())
+            # lines = ele.GetGeometryObjectFromReference(Reference(ele))
+            list = lines.GetEnumerator()
+            for obj in list:
+                allGeom = []
+                geo = obj.SymbolGeometry
+                for m in geo:
+                    allGeom.append(m)
+                curves = ProcessGeometry(allGeom)
+                # print(len(curves))
+                for m in curves:
+                    try:
+                        famDoc.FamilyCreate.NewDetailCurve(view, m)
+                    except Exception as e:
+                        print(cadImport + " " + str(e))
+            famDoc.Delete(famId[1])
+            t.Commit()
+            famDoc.SaveAs(destinationFolderPath + "\\" + fileNameToSave + ".rfa", saveOp)
+            famDoc.Close()
+        except Exception as e:
+            print("Fatal Error: " + cadImport + " " + str(e))
 
-
-    '''
-    try:
-        famDoc = app.NewFamilyDocument(templateFullName)
-        view = FilteredElementCollector(famDoc).OfClass(View).FirstElement()
-        t = Transaction(famDoc, 'Create new Family')
-        t.Start()
-        source = onlyfiles[cadImport]
-        fileNameToSave = cadImport
-        familyManager = famDoc.FamilyManager
-        familyManager.NewType(cadImport)
-        famId = famDoc.Import(source, importOptions, view)
-        ele = famDoc.GetElement(famId[1])
-        lines = ele.get_Geometry(Options())
-        #lines = ele.GetGeometryObjectFromReference(Reference(ele))
-        list = lines.GetEnumerator()
-        for obj in list:
-            allGeom = []
-            geo = obj.SymbolGeometry
-            for m in geo:
-                allGeom.append(m)
-            curves = ProcessGeometry(allGeom)
-            #print(len(curves))
-            for m in curves:
-                try:
-                    famDoc.FamilyCreate.NewSymbolicCurve(m, view.SketchPlane)
-                except Exception as e:
-                    print(cadImport + " "+ str(e))
-        famDoc.Delete(famId[1])
-        t.Commit()
-        famDoc.SaveAs(destinationFolderPath + "\\" + fileNameToSave + ".rfa", saveOp)
-        famDoc.Close()
-    except Exception as e:
-        print("Fatal Error: " + cadImport + " " + str(e))
-        '''
 
 
