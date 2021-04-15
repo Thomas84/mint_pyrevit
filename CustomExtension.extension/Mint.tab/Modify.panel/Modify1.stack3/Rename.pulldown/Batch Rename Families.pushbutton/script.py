@@ -49,7 +49,7 @@ def StringinStrings(strings, source):
 
 def ConvertToTitleString(string):
     title = ""
-    title = string.title().replace("_", "")
+    title = string.title().replace("_", " ")
     return title
 
 
@@ -68,20 +68,30 @@ def DivideCleanString(divider1, divider2, string, keywordstoRemove):
                 pass
         if subList:
             for sub in subList:
-                if not RepresentsInt(sub.strip()) and len(sub) > 2:
-                    ConvertToTitleString(sub)
-                    reconstructString += ConvertToTitleString(sub).strip()
+                if not RepresentsInt(sub.title().strip()) and len(sub) > 2:
+                    ConvertToTitleString(sub.title().strip())
+                    reconstructString += ConvertToTitleString(sub.title().strip())
             if reconstructString:
-                returnString.append(reconstructString)
+                returnString.append(reconstructString.title().strip())
         if len(returnString) > 2:
             des = ""
             for rString in returnString[1:]:
                 des += rString
-            subStrings = returnString[0] + "-" + des
+            subStrings = (returnString[0] + "-" + des).title().strip()
         elif len(returnString) == 2:
-            subStrings = returnString[0] + "-" + returnString[1]
+            subStrings = (returnString[0] + "-" + returnString[1]).title().strip()
         elif len(returnString) == 1:
-            subStrings = returnString[0]
+            subStringsList = returnString[0].split(" ")
+            if len(subStringsList) > 1:
+                names = subStringsList[:len(subStringsList) // 2]
+                descriptions = subStringsList[len(subStringsList) // 2:]
+                for name in names:
+                    subStrings += name.title().strip()
+                subStrings += "-"
+                for d in descriptions:
+                    subStrings += d.title().strip()
+            else:
+                subStrings = subStringsList[0]
         else:
             subStrings = ""
 
@@ -209,7 +219,15 @@ Abbr = {
     "Sprinklers": "Sprinklers",
     "Telephone Devices": "TelephoneDevices",
     "Topography": "Topography",
-    "Windows": "Wdw"}
+    "Windows": "Wdw",
+    "Railings": "Railings",
+    "Structural": "Structural",
+    "Supports": "Supports",
+    "Terminations": "Terminations",
+    "Detail Items": "Detail Items",
+    "Profiles": "Profiles",
+    "Balusters": "Balusters"
+}
 
 specSections = {"Air Terminals": "23",
                 "Cable Tray Fittings": "26",
@@ -371,17 +389,17 @@ with forms.ProgressBar(title='Processing Families(Step 2 of 2)') as pb:
             else:
                 specNumber = "00"
 
-            keywordstoRemove = ["KPF", "_", "-", "Family", family.FamilyCategory.Name.ToString()]
+            keywordstoRemove = ["KPF", "_", "-", "Family", "With", ".0001", family.FamilyCategory.Name.ToString()]
             keywordstoRemove.extend(Abbr.keys())
             keywordstoRemove.extend(Abbr.values())
             keywordstoRemove.extend(specSections.keys())
 
             famHost = hosts[familyName]
             if famHost:
-                cleanName = (specNumber + "-" + Abbr[family.FamilyCategory.Name.ToString()].title() + "-" +
+                cleanName = (specNumber + "-" + Abbr[family.FamilyCategory.Name.ToString()].title().strip() + "-" +
                              DivideCleanString("-", '_', familyName, keywordstoRemove)).replace(" ", "") + "-" + famHost
             else:
-                cleanName = (specNumber + "-" + Abbr[family.FamilyCategory.Name.ToString()].title() + "-" +
+                cleanName = (specNumber + "-" + Abbr[family.FamilyCategory.Name.ToString()].title().strip() + "-" +
                              DivideCleanString("-", '_', familyName, keywordstoRemove)).replace(" ", "")
             print(familyName + ": " + cleanName)
 

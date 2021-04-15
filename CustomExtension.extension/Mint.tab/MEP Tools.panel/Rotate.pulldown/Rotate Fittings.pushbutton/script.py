@@ -111,7 +111,7 @@ for connector in rPipes:
 
 for connector in rConnectors:
     primary = ()
-    inn = [connector,pipe]
+    inn = [connector, pipe]
     connectors = inn[0].MEPModel.ConnectorManager.Connectors
     for c in connectors:
         if c.GetMEPConnectorInfo().IsPrimary:

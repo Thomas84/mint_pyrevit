@@ -127,93 +127,96 @@ if revit.doc.IsWorkshared:
             # TODO: Identify the vectors
             line1 = lines[0]
             line2 = lines[1]
-            line1_start = line1.GeometryCurve.GetEndPoint(0)
-            line1_end = line1.GeometryCurve.GetEndPoint(1)
-            print(line1_start, line1_end)
-            vector_Check = VectorCheck(line1, line2)
-            print(vector_Check)
-            if vector_Check == True:
-                line2_start = line2.GeometryCurve.GetEndPoint(0)
-                line2_end = line2.GeometryCurve.GetEndPoint(1)
-            else:
-                line2_end = line2.GeometryCurve.GetEndPoint(0)
-                line2_start = line2.GeometryCurve.GetEndPoint(1)
-            print(line2_start, line2_end)
+            try:
+                line1_start = line1.GeometryCurve.GetEndPoint(0)
+                line1_end = line1.GeometryCurve.GetEndPoint(1)
+                print(line1_start, line1_end)
+                vector_Check = VectorCheck(line1, line2)
+                print(vector_Check)
+                if vector_Check == True:
+                    line2_start = line2.GeometryCurve.GetEndPoint(0)
+                    line2_end = line2.GeometryCurve.GetEndPoint(1)
+                else:
+                    line2_end = line2.GeometryCurve.GetEndPoint(0)
+                    line2_start = line2.GeometryCurve.GetEndPoint(1)
+                print(line2_start, line2_end)
 
-            # Try to do the projection
-            proj_start = line1.GeometryCurve.Project(line1_start).XYZPoint
-            proj_end = line1.GeometryCurve.Project(line1_end).XYZPoint
-            print(proj_start, proj_end)
-# Scenario 1
-            if CloseNumber(proj_start.X, line2_start.X) \
-                    and CloseNumber(proj_start.Y, line2_start.Y)\
-                    and CloseNumber(proj_end.X, line2_end.X)\
-                    and CloseNumber(proj_end.Y, line2_end.Y):
-                print('1')
-                t = Transaction(doc, 'Correct Lines 1')
-                t.Start()
-                doc.Delete(line2.Id)
-                print('Deletion of excess successful')
-                t.Commit()
-# Scenario 2
-            elif (CloseNumber(proj_start.X, line2_start.X) \
-                    and CloseNumber(proj_start.Y, line2_start.Y))\
-                    and (not CloseNumber(proj_end.X, line2_end.X) \
-                    or not CloseNumber(proj_end.Y, line2_end.Y)):
-                print('2')
-                t = Transaction(doc, 'Correct Lines 2')
-                t.Start()
-                try:
-                    newLine = Line.CreateBound(proj_end, line2_end)
-                    line2.SetGeometryCurve(newLine, True)
-                    print('Correction Successful')
-                except:
-                    print("Line1" + format(outprint.linkify(line1.Id)))
-                    print("Line2" + format(outprint.linkify(line2.Id)))
-                t.Commit()
-# Scenario 4
-            elif (CloseNumber(proj_end.X, line2_end.X) \
-                 and CloseNumber(proj_end.Y, line2_end.Y)) \
-                 and (not CloseNumber(proj_start.X, line2_start.X) \
-                 or not CloseNumber(proj_start.Y, line2_start.Y)):
-                print('3')
-                t = Transaction(doc, 'Correct Lines 3')
-                t.Start()
-                try:
-                    newLine = Line.CreateBound(proj_start, line2_start)
-                    line2.SetGeometryCurve(newLine, True)
-                    print('Correction Successful')
-                except:
-                    print("Line1" + format(outprint.linkify(line1.Id)))
-                    print("Line2" + format(outprint.linkify(line2.Id)))
-                t.Commit()
-# Scenario 4
-            elif (not CloseNumber(proj_start.X, line2_start.X) \
-                 or not CloseNumber(proj_start.Y, line2_start.Y)) \
-                 and (not CloseNumber(proj_end.X, line2_end.X) \
-                 or not CloseNumber(proj_end.Y, line2_end.Y)):
-                print('4')
-                t = Transaction(doc, 'Correct Lines 4')
-                t.Start()
-                try:
-                    newLine1 = Line.CreateBound(proj_start, line2_start)
-                    line2.SetGeometryCurve(newLine1, True)
-                except:
-                    print('Fail 411')
+                # Try to do the projection
+                proj_start = line1.GeometryCurve.Project(line1_start).XYZPoint
+                proj_end = line1.GeometryCurve.Project(line1_end).XYZPoint
+                print(proj_start, proj_end)
+    # Scenario 1
+                if CloseNumber(proj_start.X, line2_start.X) \
+                        and CloseNumber(proj_start.Y, line2_start.Y)\
+                        and CloseNumber(proj_end.X, line2_end.X)\
+                        and CloseNumber(proj_end.Y, line2_end.Y):
+                    print('1')
+                    t = Transaction(doc, 'Correct Lines 1')
+                    t.Start()
+                    doc.Delete(line2.Id)
+                    print('Deletion of excess successful')
+                    t.Commit()
+    # Scenario 2
+                elif (CloseNumber(proj_start.X, line2_start.X) \
+                        and CloseNumber(proj_start.Y, line2_start.Y))\
+                        and (not CloseNumber(proj_end.X, line2_end.X) \
+                        or not CloseNumber(proj_end.Y, line2_end.Y)):
+                    print('2')
+                    t = Transaction(doc, 'Correct Lines 2')
+                    t.Start()
+                    try:
+                        newLine = Line.CreateBound(proj_end, line2_end)
+                        line2.SetGeometryCurve(newLine, True)
+                        print('Correction Successful')
+                    except:
+                        print("Line1" + format(outprint.linkify(line1.Id)))
+                        print("Line2" + format(outprint.linkify(line2.Id)))
+                    t.Commit()
+    # Scenario 4
+                elif (CloseNumber(proj_end.X, line2_end.X) \
+                     and CloseNumber(proj_end.Y, line2_end.Y)) \
+                     and (not CloseNumber(proj_start.X, line2_start.X) \
+                     or not CloseNumber(proj_start.Y, line2_start.Y)):
+                    print('3')
+                    t = Transaction(doc, 'Correct Lines 3')
+                    t.Start()
+                    try:
+                        newLine = Line.CreateBound(proj_start, line2_start)
+                        line2.SetGeometryCurve(newLine, True)
+                        print('Correction Successful')
+                    except:
+                        print("Line1" + format(outprint.linkify(line1.Id)))
+                        print("Line2" + format(outprint.linkify(line2.Id)))
+                    t.Commit()
+    # Scenario 4
+                elif (not CloseNumber(proj_start.X, line2_start.X) \
+                     or not CloseNumber(proj_start.Y, line2_start.Y)) \
+                     and (not CloseNumber(proj_end.X, line2_end.X) \
+                     or not CloseNumber(proj_end.Y, line2_end.Y)):
+                    print('4')
+                    t = Transaction(doc, 'Correct Lines 4')
+                    t.Start()
+                    try:
+                        newLine1 = Line.CreateBound(proj_start, line2_start)
+                        line2.SetGeometryCurve(newLine1, True)
+                    except:
+                        print('Fail 411')
 
-                newLine2 = Line.CreateBound(proj_end, line2_end)
-                line2 = ElementTransformUtils.CopyElement(doc, line2.Id, XYZ(0.1, 0.1, 0.1))
-                doc.GetElement(line2[0]).SetGeometryCurve(newLine2, True)
-                print('Correction Successful')
-                '''
-                except:
-                    print('Fail 412')
-                    # print("Wall" + format(outprint.linkify(wall.Id)))
-                    # print("Line" + format(outprint.linkify(line.Id)))
-                '''
-                t.Commit()
-            else:
-                print('Error 5')
+                    newLine2 = Line.CreateBound(proj_end, line2_end)
+                    line2 = ElementTransformUtils.CopyElement(doc, line2.Id, XYZ(0.1, 0.1, 0.1))
+                    doc.GetElement(line2[0]).SetGeometryCurve(newLine2, True)
+                    print('Correction Successful')
+                    '''
+                    except:
+                        print('Fail 412')
+                        # print("Wall" + format(outprint.linkify(wall.Id)))
+                        # print("Line" + format(outprint.linkify(line.Id)))
+                    '''
+                    t.Commit()
+                else:
+                    print('Error 5')
+            except:
+                print("Pass")
             print("---------------")
             # except:
                 # print('Error 6')
