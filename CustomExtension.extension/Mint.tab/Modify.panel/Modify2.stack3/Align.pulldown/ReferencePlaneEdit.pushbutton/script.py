@@ -91,7 +91,7 @@ if sectionType != None:
     levelData = {}
     levelDic = {}
     for i in levels:
-        levelData[i.Name] = i.Elevation
+        levelData[i.Name] = i.ProjectElevation
 
     bottom = forms.SelectFromList.show(levelData.keys(), button_name='Select Bottom Level for the Reference Plane',
                                            multiselect=False)

@@ -68,7 +68,7 @@ def DivideCleanString(divider1, divider2, string, keywordstoRemove):
                 pass
         if subList:
             for sub in subList:
-                if not RepresentsInt(sub.title().strip()) and len(sub) > 2:
+                if not RepresentsInt(sub.title().strip()) and len(sub.title().strip()) > 2:
                     ConvertToTitleString(sub.title().strip())
                     reconstructString += ConvertToTitleString(sub.title().strip())
             if reconstructString:
