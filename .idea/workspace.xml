@@ -45,7 +45,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../RevitPyscripts" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Experiment.panel/Test.pulldown" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
@@ -326,6 +326,7 @@
       <workItem from="1620231805957" duration="1814000" />
       <workItem from="1620670343873" duration="621000" />
       <workItem from="1620937847075" duration="959000" />
+      <workItem from="1622035744921" duration="4623000" />
     </task>
     <task id="LOCAL-00001" summary="Fix workspace bug">
       <created>1580332278272</created>

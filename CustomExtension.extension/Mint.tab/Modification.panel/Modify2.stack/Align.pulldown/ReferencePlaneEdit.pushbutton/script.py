@@ -159,21 +159,48 @@ if sectionType != None:
                 sections.append(view3)
             except:
                 pass
-
-
-
+            try:
+                bb4 = BoundingBoxXYZ()
+                t4 = Transform.Identity
+                t4.Origin = XYZ(0, 0, 0)
+                t4.BasisX = sel.GetPlane().XVec
+                t4.BasisY = sel.GetPlane().YVec
+                t4.BasisZ = sel.GetPlane().Normal
+                bb4.Transform = t4
+                view4 = ViewSection.CreateSection(doc, sectionType.Id, bb4)
+                sections.append(view4)
+            except:
+                pass
+            try:
+                bb5 = BoundingBoxXYZ()
+                t5 = Transform.Identity
+                t5.Origin = XYZ(0, 0, 0)
+                t5.BasisX = sel.GetPlane().YVec
+                t5.BasisY = sel.GetPlane().XVec
+                t5.BasisZ = sel.GetPlane().Normal
+                bb5.Transform = t5
+                view5 = ViewSection.CreateSection(doc, sectionType.Id, bb5)
+                sections.append(view5)
+            except:
+                pass
             #try:
+            print(str(len(sections)))
             for s in sections:
+
                 try:
                     endPt1 = sel.GetCurvesInView(DatumExtentType.Model, s)[0].GetEndPoint(0)
+                    print(endPt1)
                     endPt2 = sel.GetCurvesInView(DatumExtentType.Model, s)[0].GetEndPoint(1)
-
+                    print(endPt2)
                     newEndPt1 = XYZ(endPt1.X, endPt1.Y, bottomHeight + float(offsetInput))
+                    print(newEndPt1)
                     newEndPt2 = XYZ(endPt2.X, endPt2.Y, topHeight - float(offsetInput))
+                    print(newEndPt2)
                     newLine = Line.CreateBound(newEndPt1, newEndPt2)
                     sel.SetCurveInView(DatumExtentType.Model, s, newLine)
+                    print("Completed")
                 except:
-                    pass
+                    print("Edit Failed")
                 doc.Delete(s.Id)
     t.Commit()
 else:
