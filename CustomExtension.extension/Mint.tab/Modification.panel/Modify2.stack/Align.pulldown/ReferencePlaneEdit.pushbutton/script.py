@@ -120,6 +120,7 @@ if sectionType != None:
                 t1.BasisZ = sel.GetPlane().YVec
                 bb1.Transform = t1
                 view1 = ViewSection.CreateSection(doc, sectionType.Id, bb1)
+                view1.CropBoxActive = False
                 sections.append(view1)
             except:
                 pass
@@ -132,6 +133,7 @@ if sectionType != None:
                 t2.BasisZ = sel.GetPlane().YVec
                 bb2.Transform = t2
                 view2 = ViewSection.CreateSection(doc, sectionType.Id, bb2)
+                view2.CropBoxActive = False
                 sections.append(view2)
             except:
                 pass
@@ -144,6 +146,7 @@ if sectionType != None:
                 t22.BasisZ = sel.GetPlane().YVec
                 bb22.Transform = t22
                 view22 = ViewSection.CreateSection(doc, sectionType.Id, bb22)
+                view22.CropBoxActive = False
                 sections.append(view22)
             except:
                 pass
@@ -156,6 +159,7 @@ if sectionType != None:
                 t3.BasisZ = sel.GetPlane().XVec
                 bb3.Transform = t3
                 view3 = ViewSection.CreateSection(doc, sectionType.Id, bb3)
+                view3.CropBoxActive = False
                 sections.append(view3)
             except:
                 pass
@@ -168,6 +172,7 @@ if sectionType != None:
                 t4.BasisZ = sel.GetPlane().Normal
                 bb4.Transform = t4
                 view4 = ViewSection.CreateSection(doc, sectionType.Id, bb4)
+                view4.CropBoxActive = False
                 sections.append(view4)
             except:
                 pass
@@ -180,27 +185,28 @@ if sectionType != None:
                 t5.BasisZ = sel.GetPlane().Normal
                 bb5.Transform = t5
                 view5 = ViewSection.CreateSection(doc, sectionType.Id, bb5)
+                view5.CropBoxActive = False
                 sections.append(view5)
             except:
                 pass
             #try:
-            print(str(len(sections)))
+            #print(str(len(sections)))
             for s in sections:
-
                 try:
                     endPt1 = sel.GetCurvesInView(DatumExtentType.Model, s)[0].GetEndPoint(0)
-                    print(endPt1)
+                    #print(endPt1)
                     endPt2 = sel.GetCurvesInView(DatumExtentType.Model, s)[0].GetEndPoint(1)
-                    print(endPt2)
+                    #print(endPt2)
                     newEndPt1 = XYZ(endPt1.X, endPt1.Y, bottomHeight + float(offsetInput))
-                    print(newEndPt1)
+                    #print(newEndPt1)
                     newEndPt2 = XYZ(endPt2.X, endPt2.Y, topHeight - float(offsetInput))
-                    print(newEndPt2)
+                    #print(newEndPt2)
                     newLine = Line.CreateBound(newEndPt1, newEndPt2)
                     sel.SetCurveInView(DatumExtentType.Model, s, newLine)
-                    print("Completed")
+                    #print("Completed")
                 except:
-                    print("Edit Failed")
+                    #print("Edit Failed")
+                    pass
                 doc.Delete(s.Id)
     t.Commit()
 else:
