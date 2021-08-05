@@ -29,6 +29,8 @@ from collections import defaultdict
 from pyrevit import script
 from pyrevit import forms
 
+
+
 def Views_name_Id_Collector(doc):
     modelDic = {}
     viewports = FilteredElementCollector(doc).OfClass(ViewDrafting).ToElements()
@@ -77,6 +79,8 @@ for i in recoverViewName:
                 trans = None
                 op = CopyPasteOptions()
                 ElementTransformUtils.CopyElements(recoverview, elements, desview, trans, op)
+
+
                 print("copied " + i.ToString())
             else:
                 print("failed State no Elements" + i.ToString())

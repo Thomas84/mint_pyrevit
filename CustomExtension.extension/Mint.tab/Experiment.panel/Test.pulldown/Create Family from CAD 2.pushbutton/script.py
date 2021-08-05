@@ -268,9 +268,12 @@ for cadImport in onlyfiles.keys():
     famId = hostFamDoc.Import(source, importOptions, view)
     t.Commit()
     ele = hostFamDoc.GetElement(famId[1])
-    geometries = ele.get_Geometry(Options())
-    # lines = ele.GetGeometryObjectFromReference(Reference(ele))
-    list = geometries.GetEnumerator()
+    try:
+        geometries = ele.get_Geometry(Options())
+        # lines = ele.GetGeometryObjectFromReference(Reference(ele))
+        list = geometries.GetEnumerator()
+    except:
+        list = []
     for obj in list:
         allGeom = []
         geo = obj.SymbolGeometry

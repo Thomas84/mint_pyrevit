@@ -53,7 +53,19 @@ def ConvertToTitleString(string):
     return title
 
 
+def RemoveLastUnderdash(s):
+    list = s.split("_")
+    c = 1
+    result = ""
+    while c < len(list):
+        result += list[c-1]
+        c += 1
+    result = result + list[len(list)-1]
+    return result
+
 def DivideCleanString(divider1, divider2, string, keywordstoRemove):
+    #string = RemoveLastUnderdash(string)
+    print(string)
     stringList = string.split(divider1)
 
     subStrings = ""
@@ -68,9 +80,11 @@ def DivideCleanString(divider1, divider2, string, keywordstoRemove):
                 pass
         if subList:
             for sub in subList:
-                if not RepresentsInt(sub.title().strip()) and len(sub.title().strip()) > 2:
-                    ConvertToTitleString(sub.title().strip())
-                    reconstructString += ConvertToTitleString(sub.title().strip())
+                #if len(sub.title().strip()) > 2:
+                reconstructString += ConvertToTitleString(sub.title().strip())
+                    #if not RepresentsInt(sub.title().strip()) and len(sub.title().strip()) > 2:
+                    #ConvertToTitleString(sub.title().strip())
+                    
             if reconstructString:
                 returnString.append(reconstructString.title().strip())
         if len(returnString) > 2:
@@ -142,7 +156,8 @@ def CleanUpString(string, keywords, splitters):
     for splitter in splitters:
         words = string.split(splitter)
         for word in words:
-            if word == "KPF" or RepresentsInt(word):
+            #if word == "KPF" or RepresentsInt(word):
+            if word == "KPF":
                 words.remove(word)
         for w in words:
             w.split()
@@ -193,6 +208,7 @@ Abbr = {
     "Furniture": "Furn",
     "Furniture Systems": "Furn",
     "Generic Models": "Gm",
+    "Generic Annotations": "Ga",
     "HVAC Zones": "HVACZones",
     "Lighting Devices": "LightingDevices",
     "Lighting Fixtures": "Light",
@@ -351,7 +367,7 @@ for s in familySymbols:
         else:
             hosts[s.FamilyName] = ""
 
-
+famNames = []
 # print(families)
 count = 0
 with forms.ProgressBar(title='Processing Families(Step 2 of 2)') as pb:
@@ -395,12 +411,16 @@ with forms.ProgressBar(title='Processing Families(Step 2 of 2)') as pb:
             keywordstoRemove.extend(specSections.keys())
 
             famHost = hosts[familyName]
+            finalName = ""
             if famHost:
                 cleanName = (specNumber + "-" + Abbr[family.FamilyCategory.Name.ToString()].title().strip() + "-" +
                              DivideCleanString("-", '_', familyName, keywordstoRemove)).replace(" ", "") + "-" + famHost
+
             else:
                 cleanName = (specNumber + "-" + Abbr[family.FamilyCategory.Name.ToString()].title().strip() + "-" +
                              DivideCleanString("-", '_', familyName, keywordstoRemove)).replace(" ", "")
+
+
             print(familyName + ": " + cleanName)
 
             src_fpath = onlyfiles[familyName]

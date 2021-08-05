@@ -27,8 +27,7 @@ uidoc = __revit__.ActiveUIDocument
 doc = __revit__.ActiveUIDocument.Document
 
 
-__doc__ = 'Pick the files you want to sync and close.' \
-          'Cannot .'
+__doc__ = 'Pick the files you want to sync and close.'
 
 activeDocuments = doc.Application.Documents
 syncOption = SynchronizeWithCentralOptions()
@@ -38,16 +37,15 @@ syncOption.SetRelinquishOptions(relinquishOption)
 
 nameLst = []
 for document in activeDocuments:
-    if document.IsLinked != True and document != doc:
-        nameLst.append(document.Title)
-if len(nameLst) > 0:
-    selDocs = forms.SelectFromList.show(nameLst, multiselect=True, button_name='Select Documents')
-    for document in activeDocuments:
-        if document.Title in selDocs:
-            document.SynchronizeWithCentral(transOption, syncOption)
-            if document.Title == uidoc.Document.Title:
-                pass
-            else:
-                document.Close()
-else:
-    print("Did not detect active document")
+    nameLst.append(document.Title)
+
+selDocs = forms.SelectFromList.show(nameLst, multiselect=True, button_name='Select Documents')
+for document in activeDocuments:
+    if document.Title in selDocs:
+
+        document.SynchronizeWithCentral(transOption, syncOption)
+        if document.Title == uidoc.Document.Title:
+            pass
+        else:
+            document.Close()
+

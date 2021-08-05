@@ -15,10 +15,11 @@ from os import path
 from pyrevit import HOST_APP, framework
 from pyrevit import script
 from pyrevit import DB, UI
+from Autodesk.Revit.UI import TaskDialog
 from pyrevit import framework
 from System import EventHandler, Uri
-from Autodesk.Revit.UI.Events import ViewActivatedEventArgs, ViewActivatingEventArgs
-from Autodesk.Revit.DB.Events import DocumentChangedEventArgs
+from Autodesk.Revit.UI.Events import ViewActivatedEventArgs, ViewActivatingEventArgs, DialogBoxShowingEventArgs 
+from Autodesk.Revit.DB.Events import DocumentChangedEventArgs, DocumentOpenedEventArgs
 __title__ = 'Reset'
 __context__ = 'zero'
 
@@ -110,6 +111,27 @@ def test_function(sender, args):
     print("test")
 
 # do the even stuff here
+def event_handler_function(sender, args):
+    TaskDialog.Show("Test", args.DialogId.ToString())
+    # do the even stuff here
+    # I'm using ViewActivating event here as example.
+    # The handler function will be executed every time a Revit view is activated:
+
+def transaction_handler_function(sender, args):
+    '''
+    transNames = args.GetTransactionNames()
+    for name in transNames:
+        if name == "Family":
+            #args.Dispose()
+            TaskDialog.Show("Warning", "Please do not use model in place!")
+    '''
+    f = open("C:\\Users\\mlou\\OneDrive - Kohn Pedersen Fox Associates 1\\Desktop\\testdemofile2.txt", "w")
+    f.write("Now the file has more content!")
+    f.close()
+    #TaskDialog.Show("Warning", "Please do not use model in place!")
+    # do the even stuff here
+    # I'm using ViewActivating event here as example.
+    # The handler function will be executed every time a Revit view is activated:
 
 
 # FIXME: need to figure out a way to fix the icon sizing of toggle buttons
@@ -122,7 +144,9 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
     #except:
         #print("Logging Disabled.")
     #message =
-
+    #__rvt__.ViewActivating += EventHandler[ViewActivatingEventArgs](event_handler_function)
+    __rvt__.Application.DocumentChanged += EventHandler[DocumentChangedEventArgs](transaction_handler_function)
+    #__rvt__.DialogBoxShowing  += EventHandler[DialogBoxShowingEventArgs](event_handler_function)
     filePath = "C:\\Users\\loum\\Desktop\\acad\\"
     modelGUID = Guid("e77aa560-8776-4a0e-8192-3044c5e240df")
     projectGUID = Guid("20ac335a-5ba8-4520-b948-296e529c3306")
