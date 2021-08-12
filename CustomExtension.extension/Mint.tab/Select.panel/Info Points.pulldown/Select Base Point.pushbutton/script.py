@@ -7,8 +7,8 @@ from Autodesk.Revit.DB import BuiltInCategory, ElementId
 
 doc = __revit__.ActiveUIDocument.Document
 
-__doc__ = 'Select the base point of the model. '\
-          'This is helpful check project info'
+__doc__ = 'Selects the base point of the model. '\
+          'This is helpful check project coordinates.'
 
 elements = DB.FilteredElementCollector(doc)\
               .OfCategory(BuiltInCategory.OST_ProjectBasePoint)\

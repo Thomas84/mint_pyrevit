@@ -23,7 +23,7 @@ def get_all_parameters_as_dic(element):
             name = param.Definition.Name
             if 'String' in str(param.StorageType):
                 try:
-                    _param[name + ': ' + str(param.AsString())] = param
+                    _param[name + ': ' +     str(param.AsString())] = param
                 except:
                     _param[name + ': '+ str(param.AsValueString())] = param
             elif 'Interger' in str(param.StorageType):

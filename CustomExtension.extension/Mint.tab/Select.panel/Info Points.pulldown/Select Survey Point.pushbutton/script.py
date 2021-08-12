@@ -6,8 +6,8 @@ clr.AddReference("System")
 from Autodesk.Revit.DB import BasePoint
 doc = __revit__.ActiveUIDocument.Document
 
-__doc__ = 'Select the survey point of the model '\
-          ' This is helpful check project info'
+__doc__ = 'Selects the survey point of the model.'\
+          'This is helpful check project coordinates.'
 
 
 elements = DB.FilteredElementCollector(doc)\

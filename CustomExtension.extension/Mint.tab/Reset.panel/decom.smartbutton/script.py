@@ -27,16 +27,26 @@ import os
 
 
 def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
+
     prConfig = os.getenv('APPDATA') + "\\pyRevit\\pyRevit_config.ini"
     Config = ConfigParser.ConfigParser()
     Config.read(prConfig)
     # add the settings to the structure of the file, and lets write it out...
-
+    path = Config.get('core', 'userextensions')
+    #print(path)
+    oldPath = r"\\\\kpfny-nas01.kpf.com\\Deployment\\Autodesk\\KPFTools"
+    newPath = r"\\\\kpf.com\\corporate\\Zdrive\\0002_03_BIM\\03_Workflows\\KPFTools"
+    setting = path
+    if oldPath in path and not newPath in path:
+        setting = path.replace(oldPath, newPath)
+        #print("Old path: " + oldPath + "replaced by: " + newPath)
+    elif oldPath in path:
+        setting = path.replace(oldPath, "")
+        #print("Old path removed " + oldPath)
     #TODO: Add change path
-    Config.set('core', 'userextensions',
-                   [''])
-
+    Config.set('core', 'userextensions', setting)
     cfgfile = open(prConfig, "w")
     Config.write(cfgfile)
+
 if __name__ == '__main__':
     print('Please do not click this button again.')

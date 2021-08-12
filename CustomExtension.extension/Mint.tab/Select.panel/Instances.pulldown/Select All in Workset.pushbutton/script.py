@@ -27,7 +27,7 @@ from Autodesk.Revit.UI.Selection import ObjectType
 uidoc = __revit__.ActiveUIDocument
 doc = __revit__.ActiveUIDocument.Document
 
-__doc__ = 'Select all the elements in the same workset as the workset of the selected element.'\
+__doc__ = 'Selects all the elements in the same workset as the selected element.'\
 
 # import user packages
 def get_selected_elements(doc):
