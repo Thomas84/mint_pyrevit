@@ -5,6 +5,7 @@ from Autodesk.Revit.DB import Document, \
         OpenOptions, WorksetConfiguration, WorksetConfigurationOption, DetachFromCentralOption, \
         ModelPathUtils, SaveAsOptions, WorksharingSaveAsOptions
 import System
+import CommandUtils
 from Autodesk.Revit.UI.Events import DialogBoxShowingEventArgs
 from System import Guid
 from os.path import expanduser
@@ -145,12 +146,12 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
         #print("Logging Disabled.")
     #message =
     #__rvt__.ViewActivating += EventHandler[ViewActivatingEventArgs](event_handler_function)
-    __rvt__.Application.DocumentChanged += EventHandler[DocumentChangedEventArgs](transaction_handler_function)
+    #__rvt__.Application.DocumentChanged += EventHandler[DocumentChangedEventArgs](transaction_handler_function)
     #__rvt__.DialogBoxShowing  += EventHandler[DialogBoxShowingEventArgs](event_handler_function)
     filePath = "C:\\Users\\loum\\Desktop\\acad\\"
     modelGUID = Guid("e77aa560-8776-4a0e-8192-3044c5e240df")
     projectGUID = Guid("20ac335a-5ba8-4520-b948-296e529c3306")
-
+    impUtil = CommandUtils.ImportUtil(__rvt__)
     # lets create that config file for next time...
     home = expanduser("~")
     '''
@@ -200,7 +201,7 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
         pass
     cfgfile.close()
 
-    '''
+    '''`
     ribbons = __rvt__.GetRibbonPanels("MintTools")
     for i in ribbons:
         if i.Name == "Navis Data Import":
