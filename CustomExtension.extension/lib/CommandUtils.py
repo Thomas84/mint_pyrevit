@@ -21,11 +21,15 @@ class ImportUtil:
             commandId = RevitCommandId.LookupCommandId("ID_FILE_IMPORT")
             try:
                 self.importBinding = self.uiControlApp.CreateAddInCommandBinding(commandId)
-                self.handler = System.EventHandler[Events.ExecutedEventArgs](importReplacement)
+                self.handler = System.EventHandler[Events.ExecutedEventArgs](self.importReplacement)
                 self.importBinding.Executed += self.handler
             except:
                 TaskDialog.Show("Error", "Fail!")
 
 
-def importReplacement(sender, args):
-    TaskDialog.Show("Stop!", "Do not import!")
+    def importReplacement(sender, args):
+        TaskDialog.Show("Stop!", "Do not import!")
+
+    def ViewActivatedHandler(self):
+        pass
+        #__rvt__.ViewActivating += EventHandler[ViewActivatingEventArgs](event_handler_function)

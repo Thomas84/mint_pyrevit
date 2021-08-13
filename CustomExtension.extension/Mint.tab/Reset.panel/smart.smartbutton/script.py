@@ -1,4 +1,4 @@
-#pylint: disable=C0103,E0401
+
 from pyrevit import script
 from pyrevit.coreutils.ribbon import ICON_MEDIUM
 from Autodesk.Revit.DB import Document, \
@@ -72,48 +72,14 @@ def SaveCloudModelandChangeName(document, filePath, Name):
     saveOpt.Compact = True
     document.SaveAs(filePath + Name + ".rvt", saveOpt)
     document.Close()
-'''
-class Logger(logFile):
-    # File location for logging
-    fileLocation = ""
-    # Constructor
-    def __init__(self, address):
-        self.fileLocation = address
-    #Logger
-    def Log(self, content, user):
-        date = datetime.datetime
-        if not path.exists(self.fileLocation):
-            logFile = open(self.fileLocation, "w")
-            logFile.write(str(datetime.datetime) + "_" + user + "_" + "Log Start")
-            logFile.close()
 
-        try:
-            writeFile = open(self.fileLocation, "a+")
-            writeFile.write(content)
-            writeFile.close()
-        except:
-            print("Failed")
-
-def log_function(sender, args):
-    event_uidoc = sender.ActiveUIDocument
-    event_doc = sender.ActiveUIDocument.Document
-    logger = Logger("" )
-    separator = ","
-    docTitle = args.GetDocument().Title
-    message = str(datetime.datetime) + \
-              " ;_Title:" + docTitle + \
-              " ;_Transactions:" + separator.join(args.GetTransactionNames()) + \
-              " ;_Added:" + separator.join(args.GetAddedElementIds()) + \
-              " ;_Deleted:" + separator.join(args.GetDeletedElementIds()) + \
-              " ;_Modified:" + separator.join(args.GetModifiedElementIds())
-    logger.Log(message, sender.ActiveUIDocument.Document.Application.Username)
-'''
 def test_function(sender, args):
     print("test")
 
 # do the even stuff here
 def event_handler_function(sender, args):
-    TaskDialog.Show("Test", args.DialogId.ToString())
+    pass
+    # TaskDialog.Show("Test", args.DialogId.ToString())
     # do the even stuff here
     # I'm using ViewActivating event here as example.
     # The handler function will be executed every time a Revit view is activated:
@@ -148,9 +114,7 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
     #__rvt__.ViewActivating += EventHandler[ViewActivatingEventArgs](event_handler_function)
     #__rvt__.Application.DocumentChanged += EventHandler[DocumentChangedEventArgs](transaction_handler_function)
     #__rvt__.DialogBoxShowing  += EventHandler[DialogBoxShowingEventArgs](event_handler_function)
-    filePath = "C:\\Users\\loum\\Desktop\\acad\\"
-    modelGUID = Guid("e77aa560-8776-4a0e-8192-3044c5e240df")
-    projectGUID = Guid("20ac335a-5ba8-4520-b948-296e529c3306")
+
     impUtil = CommandUtils.ImportUtil(__rvt__)
     # lets create that config file for next time...
     home = expanduser("~")

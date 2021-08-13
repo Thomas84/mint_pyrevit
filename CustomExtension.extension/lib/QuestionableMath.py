@@ -1,8 +1,6 @@
-<<<<<<< Updated upstream
+
 def FeettoInch(number):
-=======
-odef FeettoInch(number):
->>>>>>> Stashed changes
+
     feet = int(number)
     inch = int((number - feet) * 12)
 
