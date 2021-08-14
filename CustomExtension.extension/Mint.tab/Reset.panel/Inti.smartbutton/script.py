@@ -1,4 +1,9 @@
 import clr,sys
+# import datetime
+clr. AddReferenceByPartialName('PresentationCore')
+clr.AddReferenceByPartialName('PresentationFramework')
+clr.AddReferenceByPartialName('System.Windows.Forms')
+
 clr.AddReference('RevitAPI')
 clr.AddReference('RevitAPIUI')
 clr.AddReference("System")
@@ -10,10 +15,6 @@ import pyrevit
 from pyrevit import framework
 import ConfigParser
 from os.path import expanduser
-# import datetime
-clr. AddReferenceByPartialName('PresentationCore')
-clr.AddReferenceByPartialName('PresentationFramework')
-clr.AddReferenceByPartialName('System.Windows.Forms')
 
 __doc__ = 'Auto Button by BIM Group to attach auto scripts.'
 
@@ -27,43 +28,7 @@ from System import Guid
 
 
 # print(script.get_all_buttons())
-def OpenCloudFiles(modelGUID, projectGUID, app, audit):
-    openOpt = OpenOptions()
-    if audit == True:
-        openOpt.Audit = True
-    else:
-        openOpt.Audit = False
-    # openOpt.DetachFromCentralOption = DetachFromCentralOption.DetachAndPreserveWorksets
-    wsopt = WorksetConfiguration(WorksetConfigurationOption.CloseAllWorksets)
-    # wsopt.Open(worksetList)
-    openOpt.SetOpenWorksetsConfiguration(wsopt)
-    modelPath = ModelPathUtils.ConvertCloudGUIDsToCloudPath(projectGUID, modelGUID)
-    currentdoc = app.OpenDocumentFile(modelPath, openOpt)
-    try:
-        DialogBoxShowingEventArgs.OverrideResult(1)
-    except:
-        pass
-    return currentdoc
 
-def SaveCloudModel(document, filePath):
-    worksharingOptions = WorksharingSaveAsOptions()
-    worksharingOptions.SaveAsCentral = True
-    saveOpt = SaveAsOptions()
-    saveOpt.SetWorksharingOptions(worksharingOptions)
-    saveOpt.OverwriteExistingFile = True
-    saveOpt.Compact = True
-    document.SaveAs(filePath + document.Title + ".rvt", saveOpt)
-    document.Close()
-
-def SaveCloudModelandChangeName(document, filePath, Name):
-    worksharingOptions = WorksharingSaveAsOptions()
-    worksharingOptions.SaveAsCentral = True
-    saveOpt = SaveAsOptions()
-    saveOpt.SetWorksharingOptions(worksharingOptions)
-    saveOpt.OverwriteExistingFile = True
-    saveOpt.Compact = True
-    document.SaveAs(filePath + Name + ".rvt", saveOpt)
-    document.Close()
 
 def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
     filePath = "C:\\Users\\loum\\Desktop\\acad\\"

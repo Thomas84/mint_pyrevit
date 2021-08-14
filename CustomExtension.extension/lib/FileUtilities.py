@@ -59,3 +59,41 @@ def GetViewByName(Document, ViewName):
     for i in viewCollector:
         if ViewName in i.Title:
             return i
+
+def OpenCloudFiles(modelGUID, projectGUID, app, audit):
+    openOpt = OpenOptions()
+    if audit == True:
+        openOpt.Audit = True
+    else:
+        openOpt.Audit = False
+    # openOpt.DetachFromCentralOption = DetachFromCentralOption.DetachAndPreserveWorksets
+    wsopt = WorksetConfiguration(WorksetConfigurationOption.CloseAllWorksets)
+    # wsopt.Open(worksetList)
+    openOpt.SetOpenWorksetsConfiguration(wsopt)
+    modelPath = ModelPathUtils.ConvertCloudGUIDsToCloudPath(projectGUID, modelGUID)
+    currentdoc = app.OpenDocumentFile(modelPath, openOpt)
+    try:
+        DialogBoxShowingEventArgs.OverrideResult(1)
+    except:
+        pass
+    return currentdoc
+
+def SaveCloudModel(document, filePath):
+    worksharingOptions = WorksharingSaveAsOptions()
+    worksharingOptions.SaveAsCentral = True
+    saveOpt = SaveAsOptions()
+    saveOpt.SetWorksharingOptions(worksharingOptions)
+    saveOpt.OverwriteExistingFile = True
+    saveOpt.Compact = True
+    document.SaveAs(filePath + document.Title + ".rvt", saveOpt)
+    document.Close()
+
+def SaveCloudModelandChangeName(document, filePath, Name):
+    worksharingOptions = WorksharingSaveAsOptions()
+    worksharingOptions.SaveAsCentral = True
+    saveOpt = SaveAsOptions()
+    saveOpt.SetWorksharingOptions(worksharingOptions)
+    saveOpt.OverwriteExistingFile = True
+    saveOpt.Compact = True
+    document.SaveAs(filePath + Name + ".rvt", saveOpt)
+    document.Close()
