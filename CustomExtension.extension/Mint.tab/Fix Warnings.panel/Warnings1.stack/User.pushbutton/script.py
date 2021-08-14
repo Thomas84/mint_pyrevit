@@ -17,7 +17,7 @@ uidoc = __revit__.ActiveUIDocument
 doc = __revit__.ActiveUIDocument.Document
 
 
-__doc__ = 'Print user names in model and Warnings based on the selection of username.'
+__doc__ = 'Prints user names in model and Warnings based on the selection of username.'
 
 outprint = script.get_output()
 output = pyrevit.output.get_output()

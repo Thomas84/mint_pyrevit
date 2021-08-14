@@ -15,7 +15,7 @@ uidoc = __revit__.ActiveUIDocument
 doc = __revit__.ActiveUIDocument.Document
 
 
-__doc__ = 'Print a warning summary including warning types and counts.'\
+__doc__ = 'Prints a warning summary including warning types and counts.'\
           ' This is helpful check model health'
 
 outprint = script.get_output()

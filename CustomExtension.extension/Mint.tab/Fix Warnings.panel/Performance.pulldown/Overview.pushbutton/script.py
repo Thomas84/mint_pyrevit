@@ -15,7 +15,7 @@ from collections import defaultdict
 from pyrevit import script
 from pyrevit import forms
 
-__doc__ = 'Print performance issues, advices and instances counts.'
+__doc__ = 'Prints performance issues, advices and instances counts.'
 
 text = []
 def PerformanceCollector(doc):

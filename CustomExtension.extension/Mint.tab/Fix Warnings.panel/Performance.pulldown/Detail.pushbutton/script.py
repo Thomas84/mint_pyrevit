@@ -16,7 +16,7 @@ from pyrevit import script
 from pyrevit import forms
 import pyrevit
 
-__doc__ = 'Print the Element Id of selected performance issues category.'
+__doc__ = 'Prints the Element Id of selected performance issues category.'
 
 text = []
 

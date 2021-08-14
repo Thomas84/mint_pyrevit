@@ -82,7 +82,6 @@ elements = []
 # convenience variable for first element in selection
 for i in selection:
     loops = i.GetBoundarySegments(SpatialElementBoundaryOptions())
-
     for l in loops:
         for s in l:
             element = s.ElementId
