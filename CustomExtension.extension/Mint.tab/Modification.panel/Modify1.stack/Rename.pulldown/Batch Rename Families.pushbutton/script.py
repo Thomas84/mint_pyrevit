@@ -6,19 +6,7 @@ from os.path import expanduser
 
 import ConfigParser
 
-# Set system path
-home = expanduser("~")
-# print(os.path.dirname(os.path.realpath(__file__).split(".extension")[0] + ".extension\\packages\\"))
-cfgfile = open(home + "\\MintTools.ini", 'r')
-config = ConfigParser.ConfigParser()
-config.read(home + "\\MintTools.ini")
-# Master Path
-syspath1 = config.get('SysDir', 'MasterPackage')
-sys.path.append(syspath1)
-# Built Path
-syspath2 = config.get('SysDir', 'SecondaryPackage')
-sys.path.append(syspath2)
-clr.AddReference('System')
+
 from Autodesk.Revit.DB import FilteredElementCollector, Transaction, IFamilyLoadOptions, \
     FamilySymbol, BuiltInParameter
 from pyrevit import forms

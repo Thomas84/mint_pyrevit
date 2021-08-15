@@ -2,17 +2,7 @@ import sys
 import ConfigParser
 from os.path import expanduser
 import csv
-# Set system path
-home = expanduser("~")
-cfgfile = open(home + "\\MintTools.ini", 'r')
-config = ConfigParser.ConfigParser()
-config.read(home + "\\MintTools.ini")
-# Master Path
-syspath1 = config.get('SysDir','MasterPackage')
-sys.path.append(syspath1)
-# Built Path
-syspath2 = config.get('SysDir','SecondaryPackage')
-sys.path.append(syspath2)
+
 from pyrevit.framework import List
 from pyrevit import revit, DB, forms
 import re, clr, os, threading

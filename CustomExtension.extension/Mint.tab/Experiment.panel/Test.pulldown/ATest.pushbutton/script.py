@@ -8,7 +8,7 @@ home = expanduser("~")
 cfgfile = open(home + "\\MintTools.ini", 'r')
 config = ConfigParser.ConfigParser()
 config.read(home + "\\MintTools.ini")
-# Master Path 
+# Master Path
 syspath1 = config.get('SysDir','MasterPackage')
 sys.path.append(syspath1)
 # Built Path

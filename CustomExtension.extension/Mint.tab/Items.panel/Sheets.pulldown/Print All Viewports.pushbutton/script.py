@@ -2,17 +2,7 @@
 import sys, clr, re, bs4
 import ConfigParser
 from os.path import expanduser
-# Set system path
-home = expanduser("~")
-cfgfile = open(home + "\\MintTools.ini", 'r')
-config = ConfigParser.ConfigParser()
-config.read(home + "\\MintTools.ini")
-# Master Path
-syspath1 = config.get('SysDir','MasterPackage')
-sys.path.append(syspath1)
-# Built Path
-syspath2 = config.get('SysDir','SecondaryPackage')
-sys.path.append(syspath2)
+
 
 # body
 uidoc = __revit__.ActiveUIDocument
