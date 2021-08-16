@@ -79,7 +79,7 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
     #except:
         #print("Logging Disabled.")
     #message =
-    impUtil = CommandUtils.ImportUtil(__rvt__)
+    impUtil = CommandUtils.CommandReplacement(__rvt__, "ID_FILE_IMPORT", CommandUtils.ImportReplacement)
 
     #__rvt__.ViewActivated += EventHandler[UI.Events.ViewActivatedEventArgs](viewActivated_handler_function)
     __rvt__.Application.DocumentChanged += EventHandler[DB.Events.DocumentChangedEventArgs](log_function)

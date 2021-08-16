@@ -5,15 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ff88f0c-6970-49b2-8ac2-e286445fca0d" name="Default Changelist" comment="Fixed bug 1">
-      <change afterPath="$PROJECT_DIR$/CustomExtension.extension/lib/Config.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CustomExtension.extension/lib/EventHandler.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Experiment.panel/Test.pulldown/LibTest.pushbutton/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Experiment.panel/Test.pulldown/LibTest.pushbutton/script.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Reset.panel/Inti.smartbutton/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Reset.panel/Inti.smartbutton/script.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Reset.panel/smart.smartbutton/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Reset.panel/smart.smartbutton/script.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CustomExtension.extension/hooks/doc-changed.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/hooks/doc-changed.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CustomExtension.extension/lib/CommandUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/lib/CommandUtils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CustomExtension.extension/lib/Logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/lib/Logger.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -354,7 +348,7 @@
       <workItem from="1628974842226" duration="7000" />
       <workItem from="1628978958573" duration="10621000" />
       <workItem from="1629039106610" duration="5883000" />
-      <workItem from="1629048223670" duration="17903000" />
+      <workItem from="1629048223670" duration="20287000" />
     </task>
     <task id="LOCAL-00001" summary="Fix workspace bug">
       <created>1580332278272</created>
