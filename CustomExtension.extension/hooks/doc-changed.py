@@ -1,3 +1,4 @@
+'''
 from Autodesk.Revit.UI import RevitCommandId, Events, TaskDialog
 from pyrevit import forms
 from pyrevit import EXEC_PARAMS
@@ -42,3 +43,4 @@ else:
         localLogger.Log(message, user)
     except:
         pass
+'''
