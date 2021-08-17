@@ -1,6 +1,7 @@
 '''
 from Autodesk.Revit.UI import RevitCommandId, Events, TaskDialog
 from pyrevit import forms
+
 from pyrevit import EXEC_PARAMS
 import Logger
 import datetime
@@ -10,7 +11,7 @@ from os.path import expanduser
 home = expanduser("~")
 
 user = __revit__.Username
-cloudLogLocation = "C:\\Users\\mengf\\Desktop\\Log\\"
+cloudLogLocation = "\\\\kpf.com\\corporate\\Zdrive\\0002_03_BIM\\05_Research\\Log-Files\\Mint\\"
 d = datetime.datetime.now()
 localPath = home + "\\" + str(d.year) + "_" +\
             str(d.month) + "_" + str(d.day) + "_" + user + "_RevitLlog.txt"

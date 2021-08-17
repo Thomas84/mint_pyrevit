@@ -5,9 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ff88f0c-6970-49b2-8ac2-e286445fca0d" name="Default Changelist" comment="Fixed bug 1">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/pyRevit_custom_STV.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/pyRevit_custom_STV.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Experiment.panel/Test.pulldown/LibTest.pushbutton/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Experiment.panel/Test.pulldown/LibTest.pushbutton/script.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Reset.panel/smart.smartbutton/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Reset.panel/smart.smartbutton/script.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomExtension.extension/hooks/doc-changed.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/doc-changed.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CustomExtension.extension/lib/CommandUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/lib/CommandUtils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomExtension.extension/lib/Logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/lib/Logger.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,19 +58,19 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Repo\mint_pyrevit\CustomExtension.extension\hooks" />
-      <recent name="D:\Repo\mint_pyrevit\CustomExtension.extension" />
-      <recent name="C:\Repo\mint_pyrevit\CustomExtension.extension\Mint.tab\Items.panel\Views.pulldown" />
-      <recent name="C:\Users\loum\Documents\Repo\python-sharepoint\nerv_pyrevit\CustomExtension.extension\Nerv.tab\Experiment.panel\Potions.pulldown\Get parameter from models.pushbutton" />
-      <recent name="W:\Tools\Repo\pyRevit_custom_STV\docs\nerv\General" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Repo\mint_pyrevit\CustomExtension.extension\hooks" />
       <recent name="D:\Repo\mint_pyrevit\CustomExtension.extension\Mint.tab\Experiment.panel\Test.pulldown" />
       <recent name="D:\Repo\mint_pyrevit\CustomExtension.extension\lib" />
       <recent name="C:\Repo\mint_pyrevit\CustomExtension.extension\Mint.tab\Experiment.panel\Test.pulldown" />
       <recent name="C:\Repo\mint_pyrevit\CustomExtension.extension\Mint.tab\Modify.panel\Modify1.stack3\Edit.pulldown" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Repo\mint_pyrevit\CustomExtension.extension" />
+      <recent name="D:\Repo\mint_pyrevit\CustomExtension.extension\hooks" />
+      <recent name="D:\Repo\mint_pyrevit\CustomExtension.extension" />
+      <recent name="C:\Repo\mint_pyrevit\CustomExtension.extension\Mint.tab\Items.panel\Views.pulldown" />
+      <recent name="C:\Users\loum\Documents\Repo\python-sharepoint\nerv_pyrevit\CustomExtension.extension\Nerv.tab\Experiment.panel\Potions.pulldown\Get parameter from models.pushbutton" />
     </key>
   </component>
   <component name="RunManager">
@@ -349,6 +354,8 @@
       <workItem from="1628978958573" duration="10621000" />
       <workItem from="1629039106610" duration="5883000" />
       <workItem from="1629048223670" duration="20287000" />
+      <workItem from="1629116683663" duration="18480000" />
+      <workItem from="1629210334183" duration="2001000" />
     </task>
     <task id="LOCAL-00001" summary="Fix workspace bug">
       <created>1580332278272</created>
@@ -363,37 +370,21 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fix workspace bug" />
     <option name="LAST_COMMIT_MESSAGE" value="Fix workspace bug" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1629049099720">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/8.-1080.1920.1040/-1920.9.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1629049099720" />
-    <state x="482" y="268" key="FileChooserDialogImpl" timestamp="1628979361501">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="482" y="268" key="FileChooserDialogImpl/8.-1080.1920.1040/-1920.9.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1628979361501" />
-    <state x="461" y="165" key="SettingsEditor" timestamp="1628980555226">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="461" y="165" key="SettingsEditor/8.-1080.1920.1040/-1920.9.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1628980555226" />
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1628045655928">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="552" y="253" key="Vcs.Push.Dialog.v2/8.-1080.1920.1040/0.0.1920.1040/-1920.9.1920.1040@0.0.1920.1040" timestamp="1628045655928" />
-    <state x="635" y="193" width="765" height="654" key="find.popup" timestamp="1628993541524">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="635" y="193" width="765" height="654" key="find.popup/8.-1080.1920.1040/-1920.9.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1628993541524" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1628996405553">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/-4.-1080.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1628197152924" />
-    <state x="-1297" y="234" width="672" height="678" key="search.everywhere.popup/8.-1080.1920.1040/-1920.9.1920.1040/0.0.1920.1040@-1920.9.1920.1040" timestamp="1628473089660" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/8.-1080.1920.1040/-1920.9.1920.1040/0.0.1920.1040@0.0.1920.1040" timestamp="1628996405553" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

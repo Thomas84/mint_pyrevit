@@ -1,4 +1,5 @@
 import Logger, CommandUtils
+import getpass
 from pyrevit import script
 from pyrevit.coreutils.ribbon import ICON_MEDIUM
 from System import Guid
@@ -22,7 +23,7 @@ __context__ = 'zero'
 # Set system path
 
 import os
-print(os.getenv('APPDATA') + "\\pyRevit\\pyRevit_config.ini")
+#print(os.getenv('APPDATA') + "\\pyRevit\\pyRevit_config.ini")
 
 
 config = script.get_config()
@@ -36,11 +37,11 @@ def test_function(sender, args):
 def log_function(sender, args):
     home = os.getenv('USERPROFILE')
 
-    user = __revit__.Application.Username
-    cloudLogLocation = "C:\\Users\\mengf\\Desktop\\Log\\"
+    user = getpass.getuser()
+    cloudLogLocation = "\\\\kpf.com\\corporate\\Zdrive\\0002_03_BIM\\05_Research\\Log-Files\\Mint\\"
     d = datetime.datetime.now()
     localPath = home + "\\" + str(d.year) + "_" + \
-                str(d.month) + "_" + str(d.day) + "_" + user + "_RevitLlog.txt"
+                str(d.month) + "_" + str(d.day) + "_" + user + "_RevitLog.txt"
 
     serverPath = cloudLogLocation + user + "\\" + str(d.year) + "_" + \
                  str(d.month) + "_" + str(d.day) + "_" + user + "_RevitLog.txt"
@@ -51,11 +52,11 @@ def log_function(sender, args):
     separator = ","
     docTitle = args.GetDocument().Title
     message = str(datetime.datetime.now()) + \
-              " ;_Title:" + docTitle + \
-              " ;_Transactions:" + separator.join(args.GetTransactionNames()) + \
-              " ;_Added:" + separator.join(str(ele.IntegerValue) for ele in args.GetAddedElementIds()) + \
-              " ;_Deleted:" + separator.join(str(ele.IntegerValue) for ele in args.GetDeletedElementIds()) + \
-              " ;_Modified:" + separator.join(str(ele.IntegerValue) for ele in args.GetModifiedElementIds()) + \
+              ";_Title:" + docTitle + \
+              ";_Transactions:" + separator.join(args.GetTransactionNames()) + \
+              ";_Added:" + separator.join(str(ele.IntegerValue) for ele in args.GetAddedElementIds()) + \
+              ";_Deleted:" + separator.join(str(ele.IntegerValue) for ele in args.GetDeletedElementIds()) + \
+              ";_Modified:" + separator.join(str(ele.IntegerValue) for ele in args.GetModifiedElementIds()) + \
               "\n"
 
     if os.path.exists(cloudLogLocation):
@@ -71,20 +72,11 @@ def log_function(sender, args):
 
 # FIXME: need to figure out a way to fix the icon sizing of toggle buttons
 def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
-    #try:
-    #__rvt__.Application.DocumentChanged += (Logger.test_function)
-    #__rvt__.ViewActivating += EventHandler[ViewActivatingEventArgs](event_handler_function)
-    #__rvt__.Application.DocumentChanged += framework.EventHandler[DB.Events.DocumentChangedEventArgs](log_function)
-    #HOST_APP.app.DocumentChanged += framework.EventHandler[DB.Events.DocumentChangedEventArgs](log_function)
-    #except:
-        #print("Logging Disabled.")
-    #message =
-    impUtil = CommandUtils.CommandReplacement(__rvt__, "ID_FILE_IMPORT", CommandUtils.ImportReplacement)
-
-    #__rvt__.ViewActivated += EventHandler[UI.Events.ViewActivatedEventArgs](viewActivated_handler_function)
+    wallOpeningUtil = CommandUtils.CommandReplacement(__rvt__, UI.PostableCommand.WallOpening, CommandUtils.WallOpeningReplacement)
+    importCADUtil = CommandUtils.CommandReplacement(__rvt__, UI.PostableCommand.ImportCAD, CommandUtils.ImportReplacement)
+    modelInPlaceUtil = CommandUtils.CommandReplacement(__rvt__, UI.PostableCommand.ModelInPlace,
+                                                    CommandUtils.ModelInPlaceReplacement)
     __rvt__.Application.DocumentChanged += EventHandler[DB.Events.DocumentChangedEventArgs](log_function)
-    #__rvt__.DialogBoxShowing  += EventHandler[DialogBoxShowingEventArgs](event_handler_function)
-
     return True
 
 if __name__ == '__main__':

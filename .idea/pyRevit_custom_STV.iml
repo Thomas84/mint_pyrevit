@@ -12,7 +12,7 @@
       <sourceFolder url="file://$MODULE_DIR$/../revitpythonwrapper/rpw/ui" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/../revitpythonwrapper/rpw/utils" isTestSource="false" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.9 (mint_pyRevit)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.8 (mint_pyrevit)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="R Skeletons" level="application" />
     <orderEntry type="library" name="R User Library" level="project" />

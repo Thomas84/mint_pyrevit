@@ -13,7 +13,6 @@ class MintLogger():
             os.mkdir(os.path.dirname(self.fileLocation))
         if not os.path.exists(self.fileLocation):
             logFile = open(self.fileLocation, "w")
-            logFile.write(str(date) + "_" + user + "_" + "Log Start\n")
             logFile.close()
         try:
             writeFile = open(self.fileLocation, "a+")
