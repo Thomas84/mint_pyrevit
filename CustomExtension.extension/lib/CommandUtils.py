@@ -1,4 +1,4 @@
-import clr,sys
+import clr,sys, os
 clr.AddReference('RevitAPI')
 clr.AddReference('RevitAPIUI')
 clr.AddReference("System")
@@ -119,9 +119,8 @@ def WallOpeningWindow():
     #ImportCadWarning.ExpandedContent = "This is 'ExpandedContent'.\nLine1: blar blar...\nLine2: blar blar...\nLine3: blar blar...";
 
     #ImportCadWarning.VerificationText = "This is 'VerificationText'."
-
-    ImportCadWarning.AddCommandLink(UI.TaskDialogCommandLinkId.CommandLink1,
-                                    "Yes, I want to use wall opening family instead.")
+    if os.path.isfile('\\\\kpf.com\\corporate\\Zdrive\\0002_03_BIM\\03_Workflows\\KPFTools\\Family\\00-Gm-WallOpening-WI.rfa'):
+        ImportCadWarning.AddCommandLink(UI.TaskDialogCommandLinkId.CommandLink1, "Yes, I want to use wall opening family instead.")
     ImportCadWarning.AddCommandLink(UI.TaskDialogCommandLinkId.CommandLink2, "Ok, Cancel this for me.")
     ImportCadWarning.AddCommandLink(UI.TaskDialogCommandLinkId.CommandLink3, "No, I still want to proceed.")
 
@@ -168,8 +167,8 @@ class PlaceWallOpeningEventHandler(UI.IExternalEventHandler):
     name = 'MyCustomExternalEventHandler'
 
     def Execute(self, uiapp):
-        wallOpeningFam = GetFamily(uiapp.ActiveUIDocument.Document, 'Wall Opening_DD',
-                    '\\\\kpf.com\\corporate\\Zdrive\\0002_03_BIM\\03_Workflows\\KPFTools\\Family\\Wall Opening_DD.rfa')
+        wallOpeningFam = GetFamily(uiapp.ActiveUIDocument.Document, '00-Gm-WallOpening-WI',
+                    '\\\\kpf.com\\corporate\\Zdrive\\0002_03_BIM\\03_Workflows\\KPFTools\\Family\\00-Gm-WallOpening-WI.rfa')
         uiapp.ActiveUIDocument.PostRequestForElementTypePlacement(wallOpeningFam)
 
     def GetName(self):

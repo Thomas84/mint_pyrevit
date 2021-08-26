@@ -41,11 +41,10 @@ import Autodesk.Revit.DB.ExtensibleStorage
 import uuid
 import shutil
 
-__doc__ = 'To be run in a Revit Model.'\
-          'Step 1: Please select the folder that contains Revit families.'\
-          'Step 2: Please select the destination folder to save new families.'\
-          'Note: Please check the log after running this. ' \
-          'Program will not modify or upgrade families despite it saying so in revit.'
+__doc__ = 'To be run in a Revit Model.\n'\
+          'Step 1: Select the reference plane you need to edit the height of.\n'\
+          'Step 2: Select the top & bottom level to align to.\n'\
+          'Step 3: Enter an offset level in feet to prevent it showing it up in level above.\n'\
 
 
 def get_selected_elements(doc):

@@ -4,6 +4,38 @@ from pyrevit.coreutils import envvars
 from pyrevit import DB, UI
 import getpass
 import CommandUtils
+import Autodesk.Windows
+import System.Windows.Media
+import System.Windows.Media.Imaging
+ribbon = Autodesk.Windows.ComponentManager.Ribbon
+import System.Drawing
+import ConfigParser
+from os.path import expanduser
+
+creamColor = System.Windows.Media.Color.FromRgb(255, 253, 208)
+roseColor = System.Windows.Media.Color.FromRgb(247, 202, 201)
+fuchsiaColor = System.Windows.Media.Color.FromRgb(255, 0, 255)
+redColor = System.Windows.Media.Color.FromRgb(255, 0, 0)
+
+uidoc = __revit__.ActiveUIDocument
+doc = __revit__.ActiveUIDocument.Document
+
+# print(ribbon)
+# colorBrush = System.Drawing.SolidBrush(System.Drawing.Color.Red)
+for tab in ribbon.Tabs:
+    for panel in tab.Panels:
+        panel.CustomPanelBackground = System.Windows.Media.SolidColorBrush(creamColor)
+
+import datetime
+
+x = datetime.datetime.now().strftime("%m/%d/%y %H:%M:%S")
+
+
+home = expanduser("~")
+Config = ConfigParser.ConfigParser()
+Config.read(home + "\\MintTools.ini")
+timeText = datetime.datetime.strptime(Config.get('OpenModels', "-99372032_wall container"), "%m/%d/%y %H:%M:%S")
+print(timeText)
 '''
 print("\n".join(sys.path))
 
@@ -20,12 +52,11 @@ print(getpass.getuser())
 #wallOpeningFam = __revit__.ActiveUIDocument.Document.LoadFamily('Z:\\0002_03_BIM\\03_Workflows\\KPFTools\\Family\\Wall Opening_DD.rfa', CommandUtils.FamilyOption())
 #print(wallOpeningFam)
 #t.Commit()
-'''
-uidoc = __revit__.ActiveUIDocument
-doc = __revit__.ActiveUIDocument.Document
+
+
 
 #print(wallOpeningFam)
-'''
+
 class MyCustomExternalEventHandler(UI.IExternalEventHandler):
     name = 'MyCustomExternalEventHandler'
 
@@ -41,8 +72,9 @@ class MyCustomExternalEventHandler(UI.IExternalEventHandler):
 extevent_hndlr = MyCustomExternalEventHandler()
 extevent = UI.ExternalEvent.Create(extevent_hndlr)
 extevent.Raise()
-'''
+
 t = DB.Transaction(doc, 'Test')
 t.Start()
 doc.Regenerate()
 t.Commit()
+'''
