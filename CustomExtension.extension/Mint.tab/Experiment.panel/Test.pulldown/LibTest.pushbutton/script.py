@@ -20,22 +20,7 @@ redColor = System.Windows.Media.Color.FromRgb(255, 0, 0)
 uidoc = __revit__.ActiveUIDocument
 doc = __revit__.ActiveUIDocument.Document
 
-# print(ribbon)
-# colorBrush = System.Drawing.SolidBrush(System.Drawing.Color.Red)
-for tab in ribbon.Tabs:
-    for panel in tab.Panels:
-        panel.CustomPanelBackground = System.Windows.Media.SolidColorBrush(creamColor)
 
-import datetime
-
-x = datetime.datetime.now().strftime("%m/%d/%y %H:%M:%S")
-
-
-home = expanduser("~")
-Config = ConfigParser.ConfigParser()
-Config.read(home + "\\MintTools.ini")
-timeText = datetime.datetime.strptime(Config.get('OpenModels', "-99372032_wall container"), "%m/%d/%y %H:%M:%S")
-print(timeText)
 '''
 print("\n".join(sys.path))
 

@@ -5,17 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3ff88f0c-6970-49b2-8ac2-e286445fca0d" name="Default Changelist" comment="Fixed bug 1">
-      <change afterPath="$PROJECT_DIR$/CustomExtension.extension/lib/ConfigUtils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CustomExtension.extension/lib/EventHandlers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CustomExtension.extension/lib/Ribbon.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CustomExtension.extension/lib/SyncReminder.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Experiment.panel/Test.pulldown/LibTest.pushbutton/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Experiment.panel/Test.pulldown/LibTest.pushbutton/script.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Modification.panel/Modify2.stack/Align.pulldown/ReferencePlaneEdit.pushbutton/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Modification.panel/Modify2.stack/Align.pulldown/ReferencePlaneEdit.pushbutton/script.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Reset.panel/smart.smartbutton/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Reset.panel/smart.smartbutton/script.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CustomExtension.extension/lib/CommandUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/lib/CommandUtils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CustomExtension.extension/lib/Config.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CustomExtension.extension/lib/EventHandler.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomExtension.extension/lib/ConfigUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/lib/ConfigUtils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CustomExtension.extension/lib/Logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/lib/Logger.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -362,6 +356,8 @@
       <workItem from="1629290578790" duration="4215000" />
       <workItem from="1629810460807" duration="8070000" />
       <workItem from="1629895944453" duration="23362000" />
+      <workItem from="1629982024525" duration="3900000" />
+      <workItem from="1630066986809" duration="18859000" />
     </task>
     <task id="LOCAL-00001" summary="Fix workspace bug">
       <created>1580332278272</created>
@@ -391,6 +387,12 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Fix workspace bug" />
     <option name="LAST_COMMIT_MESSAGE" value="Fix workspace bug" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="-1205" y="331" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1630094220642">
+      <screen x="-1920" y="9" width="1920" height="1040" />
+    </state>
+    <state x="-1205" y="331" key="#com.intellij.fileTypes.FileTypeChooser/8.-1080.1920.1040/0.0.1920.1040/-1920.9.1920.1040@-1920.9.1920.1040" timestamp="1630094220641" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
