@@ -5,7 +5,7 @@ import pyrevit
 
 
 # TODO: INFORM USER HOW MANY INSTANCES WILL BE SHOWN AND ASK HOW MANY WANT TO BE SHOWN NEXT
-def PerformanceCollector(doc):
+def PerformanceCollectorByItem(doc):
     out = []
     text = []
     pTypes = DB.PerformanceAdviser.GetPerformanceAdviser().GetAllRuleIds()
