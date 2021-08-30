@@ -66,6 +66,8 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
     SetUpConfigFile()
     global navigationLock
     navigationLock = False
+    global syncTimer
+    syncTimer = [120, 90, 60, 30]
     global monitorModels
     monitorModels = {}
     global collaborateTab
@@ -107,12 +109,13 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
 
     def document_changed_sync_function(sender, args):
         global navigationLock
+        global syncTimer
         time = datetime.datetime.now()
         documentTitle = args.GetDocument().Title
         documentCode = str(args.GetDocument().GetHashCode())
 
         #lock = CheckSyncTimeConfig(documentTitle, documentCode, time, [4, 3, 2, 1])
-        lock = CheckSyncTime(documentTitle, documentCode, time, [4, 3, 2, 1])
+        lock = CheckSyncTime(documentTitle, documentCode, time, syncTimer)
         if lock:
             navigationLock = True
         else:
@@ -125,21 +128,45 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
         documentTitle = args.Document.Title
         documentCode = str(args.Document.GetHashCode())
         #WriteModelOpenTimeConfig(documentTitle, documentCode, time)
-        WriteModelOpenTime(documentTitle, documentCode, time)
+        if args.Document.IsWorkshared and not args.Document.IsLinked:
+            WriteModelOpenTime(documentTitle, documentCode, time)
 
 
     def document_synced_sync_function(sender, args):
+        global navigationLock
+        global syncTimer
         time = datetime.datetime.now()
         documentTitle = args.Document.Title
         documentCode = str(args.Document.GetHashCode())
         #WriteModelOpenTimeConfig(documentTitle, documentCode, time)
-        WriteModelOpenTime(documentTitle, documentCode, time)
+        if args.Document.IsWorkshared and not args.Document.IsLinked:
+            WriteModelOpenTime(documentTitle, documentCode, time)
+            lock = CheckSyncTime(documentTitle, documentCode, time, syncTimer)
+            if lock:
+                navigationLock = True
+            else:
+                navigationLock = False
+
+
+    def view_activated_sync_function(sender, args):
+        global navigationLock
+        global syncTimer
+        time = datetime.datetime.now()
+        documentTitle = args.Document.Title
+        documentCode = str(args.Document.GetHashCode())
+        #TaskDialog.Show(documentTitle, args.Document.GetWorksharingCentralModelPath())
+        lock = CheckSyncTime(documentTitle, documentCode, time, syncTimer)
+        if lock:
+            navigationLock = True
+        else:
+            navigationLock = False
 
 
     def document_closed_sync_function(sender, args):
         documentTitle = args.GetDocument().Title
         documentCode = str(args.GetDocument().GetHashCode())
         WipeTimeConfig(documentTitle, documentCode)
+
 
     def WriteModelOpenTime(model, hashcode, time):
         global monitorModels
@@ -172,32 +199,36 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
     def CheckSyncTime(model, hashcode, time, deltas):
         global monitorModels
         global collaborateTab
-        lastSyncedTime = monitorModels[hashcode + "_" + model]
-        if lastSyncedTime is not None:
-            if time > lastSyncedTime + datetime.timedelta(minutes=deltas[0]):
-                # TaskDialog.Show(model, "1")
-                ChangeRibbonColor(0)
-                collaborateTab.IsActive = True
-                return True
-            elif time > lastSyncedTime + datetime.timedelta(minutes=deltas[1]):
-                # TaskDialog.Show(model, "2")
-                ChangeRibbonColor(1)
-                return False
-            elif time > lastSyncedTime + datetime.timedelta(minutes=deltas[2]):
-                # TaskDialog.Show(model, "3")
-                ChangeRibbonColor(2)
-                return False
-            elif time > lastSyncedTime + datetime.timedelta(minutes=deltas[3]):
-                # TaskDialog.Show(model, "4")
-                ChangeRibbonColor(3)
-                return False
+        if hashcode + "_" + model in monitorModels.keys():
+            lastSyncedTime = monitorModels[hashcode + "_" + model]
+            if lastSyncedTime is not None:
+                if time > lastSyncedTime + datetime.timedelta(minutes=deltas[0]):
+                    # TaskDialog.Show(model, "1")
+                    ChangeRibbonColor(0)
+                    collaborateTab.IsActive = True
+                    return True
+                elif time > lastSyncedTime + datetime.timedelta(minutes=deltas[1]):
+                    # TaskDialog.Show(model, "2")
+                    ChangeRibbonColor(1)
+                    return False
+                elif time > lastSyncedTime + datetime.timedelta(minutes=deltas[2]):
+                    # TaskDialog.Show(model, "3")
+                    ChangeRibbonColor(2)
+                    return False
+                elif time > lastSyncedTime + datetime.timedelta(minutes=deltas[3]):
+                    # TaskDialog.Show(model, "4")
+                    ChangeRibbonColor(3)
+                    return False
+                else:
+                    # TaskDialog.Show(model, "5")
+                    ChangeRibbonColor(4)
+                    return False
             else:
-                # TaskDialog.Show(model, "5")
                 ChangeRibbonColor(4)
                 return False
         else:
+            ChangeRibbonColor(4)
             return False
-
 
 
     def ChangeRibbonColor(int):
@@ -230,6 +261,7 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
     #__rvt__.Application.DocumentClosed += EventHandler[DB.Events.DocumentClosedEventArgs](document_closed_sync_function)
     Autodesk.Windows.ComponentManager.UIElementActivated += EventHandler[Autodesk.Windows.UIElementActivatedEventArgs](LocktoCollabToolBar)
     __rvt__.Application.DocumentChanged += EventHandler[DB.Events.DocumentChangedEventArgs](document_changed_sync_function)
+    __rvt__.ViewActivated += EventHandler[UI.Events.ViewActivatedEventArgs](view_activated_sync_function)
     return True
 
 if __name__ == '__main__':
