@@ -1,5 +1,5 @@
 import Selection, FileUtilities, Warnings, QuestionableMath, FileUtilities, MEPUtilities
-import sys
+import sys, os
 from pyrevit.coreutils import envvars
 from pyrevit import DB, UI
 import getpass
@@ -20,7 +20,15 @@ redColor = System.Windows.Media.Color.FromRgb(255, 0, 0)
 uidoc = __revit__.ActiveUIDocument
 doc = __revit__.ActiveUIDocument.Document
 
+print(__revit__.ActiveUIDocument.Document.IsModified)
+version = __revit__.Application.VersionNumber
+prlxAppAddin = os.getenv('APPDATA') + "\\Autodesk\\Revit\\Addins\\" + \
+               str(__revit__.Application.VersionNumber) + "\\Prlx.SyncWithCentralTimer.addin"
+prlxProgramAddin = os.getenv('PROGRAMDATA') + "\\Autodesk\\Revit\\Addins\\" + \
+                   str(__revit__.Application.VersionNumber) + "\\Prlx.SyncWithCentralTimer.addin"
 
+print(os.path.isfile(prlxAppAddin))
+print(os.path.isfile(prlxProgramAddin))
 '''
 print("\n".join(sys.path))
 

@@ -8,8 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Experiment.panel/Test.pulldown/LibTest.pushbutton/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Experiment.panel/Test.pulldown/LibTest.pushbutton/script.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Reset.panel/smart.smartbutton/script.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/Mint.tab/Reset.panel/smart.smartbutton/script.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CustomExtension.extension/lib/ConfigUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/lib/ConfigUtils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CustomExtension.extension/lib/Logger.py" beforeDir="false" afterPath="$PROJECT_DIR$/CustomExtension.extension/lib/Logger.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -358,6 +356,7 @@
       <workItem from="1629895944453" duration="23362000" />
       <workItem from="1629982024525" duration="3900000" />
       <workItem from="1630066986809" duration="18859000" />
+      <workItem from="1630413853970" duration="9106000" />
     </task>
     <task id="LOCAL-00001" summary="Fix workspace bug">
       <created>1580332278272</created>

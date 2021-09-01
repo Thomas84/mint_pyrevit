@@ -68,10 +68,17 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
     navigationLock = False
     global syncTimer
     syncTimer = [120, 90, 60, 30]
+    #syncTimer = [4, 3, 2, 1]
     global monitorModels
     monitorModels = {}
     global collaborateTab
     collaborateTab = GetRibbonbyId("Collaborate")
+
+    prlxAppAddin = os.getenv('APPDATA') + "\\Autodesk\\Revit\\Addins\\" + \
+        str(__rvt__.Application.VersionNumber) + "\\Prlx.SyncWithCentralTimer.addin"
+    prlxProgramAddin = os.getenv('PROGRAMDATA') + "\\Autodesk\\Revit\\Addins\\" + \
+        str(__rvt__.Application.VersionNumber) + "\\Prlx.SyncWithCentralTimer.addin"
+
 
     # Logger Setting when start up
     global logger
@@ -128,7 +135,7 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
         documentTitle = args.Document.Title
         documentCode = str(args.Document.GetHashCode())
         #WriteModelOpenTimeConfig(documentTitle, documentCode, time)
-        if args.Document.IsWorkshared and not args.Document.IsLinked:
+        if args.Document.IsWorkshared and not args.Document.IsLinked and not args.Document.IsFamilyDocument:
             WriteModelOpenTime(documentTitle, documentCode, time)
 
 
@@ -139,7 +146,7 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
         documentTitle = args.Document.Title
         documentCode = str(args.Document.GetHashCode())
         #WriteModelOpenTimeConfig(documentTitle, documentCode, time)
-        if args.Document.IsWorkshared and not args.Document.IsLinked:
+        if args.Document.IsWorkshared and not args.Document.IsLinked and not args.Document.IsFamilyDocument:
             WriteModelOpenTime(documentTitle, documentCode, time)
             lock = CheckSyncTime(documentTitle, documentCode, time, syncTimer)
             if lock:
@@ -155,11 +162,12 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
         documentTitle = args.Document.Title
         documentCode = str(args.Document.GetHashCode())
         #TaskDialog.Show(documentTitle, args.Document.GetWorksharingCentralModelPath())
-        lock = CheckSyncTime(documentTitle, documentCode, time, syncTimer)
-        if lock:
-            navigationLock = True
-        else:
-            navigationLock = False
+        if args.Document.IsModified:
+            lock = CheckSyncTime(documentTitle, documentCode, time, syncTimer)
+            if lock:
+                navigationLock = True
+            else:
+                navigationLock = False
 
 
     def document_closed_sync_function(sender, args):
@@ -250,18 +258,18 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
                 panel.CustomPanelBackground = System.Windows.Media.SolidColorBrush(colors[int])
 
 
-
     wallOpeningUtil = CommandUtils.CommandReplacement(__rvt__, UI.PostableCommand.WallOpening, CommandUtils.WallOpeningReplacement)
     importCADUtil = CommandUtils.CommandReplacement(__rvt__, UI.PostableCommand.ImportCAD, CommandUtils.ImportReplacement)
     modelInPlaceUtil = CommandUtils.CommandReplacement(__rvt__, UI.PostableCommand.ModelInPlace,
                                                     CommandUtils.ModelInPlaceReplacement)
     __rvt__.Application.DocumentChanged += EventHandler[DB.Events.DocumentChangedEventArgs](log_function)
-    __rvt__.Application.DocumentOpened += EventHandler[DB.Events.DocumentOpenedEventArgs](document_opened_sync_function)
-    __rvt__.Application.DocumentSynchronizedWithCentral += EventHandler[DB.Events.DocumentSynchronizedWithCentralEventArgs](document_synced_sync_function)
-    #__rvt__.Application.DocumentClosed += EventHandler[DB.Events.DocumentClosedEventArgs](document_closed_sync_function)
-    Autodesk.Windows.ComponentManager.UIElementActivated += EventHandler[Autodesk.Windows.UIElementActivatedEventArgs](LocktoCollabToolBar)
-    __rvt__.Application.DocumentChanged += EventHandler[DB.Events.DocumentChangedEventArgs](document_changed_sync_function)
-    __rvt__.ViewActivated += EventHandler[UI.Events.ViewActivatedEventArgs](view_activated_sync_function)
+    if not os.path.isfile(prlxAppAddin) and not os.path.isfile(prlxProgramAddin):
+        __rvt__.Application.DocumentOpened += EventHandler[DB.Events.DocumentOpenedEventArgs](document_opened_sync_function)
+        __rvt__.Application.DocumentSynchronizedWithCentral += EventHandler[DB.Events.DocumentSynchronizedWithCentralEventArgs](document_synced_sync_function)
+        #__rvt__.Application.DocumentClosed += EventHandler[DB.Events.DocumentClosedEventArgs](document_closed_sync_function)
+        Autodesk.Windows.ComponentManager.UIElementActivated += EventHandler[Autodesk.Windows.UIElementActivatedEventArgs](LocktoCollabToolBar)
+        __rvt__.Application.DocumentChanged += EventHandler[DB.Events.DocumentChangedEventArgs](document_changed_sync_function)
+        __rvt__.ViewActivated += EventHandler[UI.Events.ViewActivatedEventArgs](view_activated_sync_function)
     return True
 
 if __name__ == '__main__':
