@@ -1,5 +1,6 @@
 from pyrevit import revit, DB
 doc = __revit__.ActiveUIDocument.Document
+__beta__ = True
 
 __doc__ = 'Select the Room not in enclosed region based on model warning.'
 # Find Warnings

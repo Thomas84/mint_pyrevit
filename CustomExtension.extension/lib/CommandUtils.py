@@ -75,6 +75,7 @@ def ImportReplacement(sender, args):
             args.Cancel = True
         elif result == UI.TaskDialogResult.CommandLink3:
             args.Cancel = False
+
 def ModelInPlaceWindow():
     ImportCadWarning = TaskDialog("Model-In-PlaceWarning")
     ImportCadWarning.MainIcon = UI.TaskDialogIcon.TaskDialogIconWarning
@@ -107,6 +108,7 @@ def ModelInPlaceReplacement(sender, args):
             args.Cancel = True
         elif result == UI.TaskDialogResult.CommandLink3:
             args.Cancel = False
+
 def WallOpeningWindow():
     ImportCadWarning = TaskDialog("Wall Opening Warning")
     ImportCadWarning.MainIcon = UI.TaskDialogIcon.TaskDialogIconWarning

@@ -28,7 +28,7 @@ doc = __revit__.ActiveUIDocument.Document
 import Warnings
 
 __doc__ = 'Fix most of the room separation lines overlap warnings.'
-
+__beta__ = True
 def CloseNumber(number1, number2):
     if abs(number1-number2) < 0.005:
         return True

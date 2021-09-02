@@ -1,5 +1,6 @@
 from pyrevit import revit, DB
 doc = __revit__.ActiveUIDocument.Document
+__beta__ = True
 
 __doc__ = 'Select one of the Identical instance '\
           'that belong to the warning'

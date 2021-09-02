@@ -26,8 +26,8 @@ clr.AddReferenceByPartialName('System.Windows.Forms')
 uidoc = __revit__.ActiveUIDocument
 doc = __revit__.ActiveUIDocument.Document
 import Warnings
-
-__doc__ = 'Fix most of the wall and a room separation line overlap warnings.'\
+__beta__ = True
+__doc__ = 'Fix most of the wall and a room separation line overlap warnings.'
 
 def CloseNumber(number1, number2):
     if abs(number1-number2) < 0.005:

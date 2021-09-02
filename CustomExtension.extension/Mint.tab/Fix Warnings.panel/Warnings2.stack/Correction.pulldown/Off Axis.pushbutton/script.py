@@ -27,7 +27,7 @@ doc = __revit__.ActiveUIDocument.Document
 import Warnings
 
 __doc__ = 'Fix most of the ... is slightly off axis warnings.'
-
+__beta__ = True
 def get_selected_elements(doc):
     """API change in Revit 2016 makes old method throw an error"""
     try:

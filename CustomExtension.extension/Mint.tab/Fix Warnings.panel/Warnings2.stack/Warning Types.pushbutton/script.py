@@ -17,6 +17,7 @@ clr.AddReferenceByPartialName('PresentationFramework')
 clr.AddReferenceByPartialName('System.Windows.Forms')
 uidoc = __revit__.ActiveUIDocument
 doc = __revit__.ActiveUIDocument.Document
+__beta__ = True
 
 __doc__ = 'Prints out a warnings by category.'\
           ' This is helpful to resolve warnings'

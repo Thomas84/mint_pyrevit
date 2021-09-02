@@ -168,6 +168,9 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
                 navigationLock = True
             else:
                 navigationLock = False
+        else:
+            ChangeRibbonColor(4)
+            navigationLock = False
 
 
     def document_closed_sync_function(sender, args):
@@ -258,8 +261,10 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
                 panel.CustomPanelBackground = System.Windows.Media.SolidColorBrush(colors[int])
 
 
-    wallOpeningUtil = CommandUtils.CommandReplacement(__rvt__, UI.PostableCommand.WallOpening, CommandUtils.WallOpeningReplacement)
-    importCADUtil = CommandUtils.CommandReplacement(__rvt__, UI.PostableCommand.ImportCAD, CommandUtils.ImportReplacement)
+    wallOpeningUtil = CommandUtils.CommandReplacement(__rvt__, UI.PostableCommand.WallOpening,
+                                                      CommandUtils.WallOpeningReplacement)
+    importCADUtil = CommandUtils.CommandReplacement(__rvt__, UI.PostableCommand.ImportCAD,
+                                                    CommandUtils.ImportReplacement)
     modelInPlaceUtil = CommandUtils.CommandReplacement(__rvt__, UI.PostableCommand.ModelInPlace,
                                                     CommandUtils.ModelInPlaceReplacement)
     __rvt__.Application.DocumentChanged += EventHandler[DB.Events.DocumentChangedEventArgs](log_function)

@@ -29,6 +29,9 @@ prlxProgramAddin = os.getenv('PROGRAMDATA') + "\\Autodesk\\Revit\\Addins\\" + \
 
 print(os.path.isfile(prlxAppAddin))
 print(os.path.isfile(prlxProgramAddin))
+global _familyMonitor
+print(_familyMonitor)
+#UI.UIApplication(__revit__.Application).OpenAndActivateDocument(r"C:\Users\mlou\OneDrive - Kohn Pedersen Fox Associates 1\Desktop\KPF_CW_Door_Double.rfa")
 '''
 print("\n".join(sys.path))
 

@@ -10,7 +10,7 @@ clr.AddReference("System")
 from Autodesk.Revit.DB import BuiltInCategory, ElementId, Transaction, FamilySymbol
 
 doc = __revit__.ActiveUIDocument.Document
-
+__beta__ = True
 __doc__ = 'Reset the Mark Value of Duplicate '\
           'Mark Value Warning Items.'
 # Find Warnings
