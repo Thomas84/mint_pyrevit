@@ -267,6 +267,9 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
                                                     CommandUtils.ImportReplacement)
     modelInPlaceUtil = CommandUtils.CommandReplacement(__rvt__, UI.PostableCommand.ModelInPlace,
                                                     CommandUtils.ModelInPlaceReplacement)
+    hideInViewUtil = CommandUtils.CommandReplacement(__rvt__, UI.PostableCommand.HideElements,
+                                                    CommandUtils.HideElementReplacement)
+
     __rvt__.Application.DocumentChanged += EventHandler[DB.Events.DocumentChangedEventArgs](log_function)
     if not os.path.isfile(prlxAppAddin) and not os.path.isfile(prlxProgramAddin):
         __rvt__.Application.DocumentOpened += EventHandler[DB.Events.DocumentOpenedEventArgs](document_opened_sync_function)

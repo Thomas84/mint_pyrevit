@@ -37,3 +37,6 @@ config = script.get_config()
 def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
     __rvt__.Application.FamilyLoadingIntoDocument += EventHandler[DB.Events.FamilyLoadingIntoDocumentEventArgs](FamilyCheck.FamilySizeControl_function)
     return True
+
+if __name__ == '__main__':
+    print('Please do not click this button again.')

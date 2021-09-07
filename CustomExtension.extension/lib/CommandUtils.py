@@ -109,6 +109,40 @@ def ModelInPlaceReplacement(sender, args):
         elif result == UI.TaskDialogResult.CommandLink3:
             args.Cancel = False
 
+def HideElementWindow():
+    HideElementWarning = TaskDialog("Hide Element in View ")
+    HideElementWarning.MainIcon = UI.TaskDialogIcon.TaskDialogIconWarning
+    HideElementWarning.Title = "Hide Element in View  Warning"
+    HideElementWarning.TitleAutoPrefix = True
+    HideElementWarning.AllowCancellation = False
+
+    HideElementWarning.MainInstruction = "Hide Element in View Command is strongly discouraged by KPF Digital Practice. Please create a Family Instead."
+    HideElementWarning.ExpandedContent = None
+    #ImportCadWarning.ExpandedContent = "This is 'ExpandedContent'.\nLine1: blar blar...\nLine2: blar blar...\nLine3: blar blar...";
+
+    #ImportCadWarning.VerificationText = "This is 'VerificationText'."
+
+    HideElementWarning.AddCommandLink(UI.TaskDialogCommandLinkId.CommandLink1, "Yes, Cancel this for me.")
+    HideElementWarning.AddCommandLink(UI.TaskDialogCommandLinkId.CommandLink2, "Ok, I want to learn about other ways to manage visibility.")
+    HideElementWarning.AddCommandLink(UI.TaskDialogCommandLinkId.CommandLink3, "No, I still want to proceed.")
+
+    HideElementWarning.CommonButtons = UI.TaskDialogCommonButtons.None
+    return HideElementWarning
+
+def HideElementReplacement(sender, args):
+    if args.ActiveDocument.IsFamilyDocument:
+        args.Cancel = False
+    else:
+        result = HideElementWindow().Show()
+        if result == UI.TaskDialogResult.CommandLink1:
+            args.Cancel = True
+        elif result == result == UI.TaskDialogResult.CommandLink2:
+            System.Diagnostics.Process.Start("https://portal.pinnacleseries.com/#/videoviewer?id=9ee5f504-9fcf-49e5-ba43-33ba4b68530f");
+            args.Cancel = True
+        elif result == UI.TaskDialogResult.CommandLink3:
+            args.Cancel = False
+
+
 def WallOpeningWindow():
     ImportCadWarning = TaskDialog("Wall Opening Warning")
     ImportCadWarning.MainIcon = UI.TaskDialogIcon.TaskDialogIconWarning
