@@ -37,6 +37,7 @@ config = script.get_config()
 def test_function(sender, args):
     print("test")
 
+'''
 # do the even stuff here
 def SetUpConfigFile():
 
@@ -54,6 +55,7 @@ def SetUpConfigFile():
         pass
     cfgfile = open(home + "\\MintTools.ini", 'w')
     Config.write(cfgfile)
+'''
 
 def GetRibbonbyId(id):
     for tab in Autodesk.Windows.ComponentManager.Ribbon.Tabs:
@@ -63,7 +65,7 @@ def GetRibbonbyId(id):
 
 # FIXME: need to figure out a way to fix the icon sizing of toggle buttons
 def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
-    SetUpConfigFile()
+    #SetUpConfigFile()
     global navigationLock
     navigationLock = False
     global syncTimer
@@ -173,12 +175,6 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
             navigationLock = False
 
 
-    def document_closed_sync_function(sender, args):
-        documentTitle = args.GetDocument().Title
-        documentCode = str(args.GetDocument().GetHashCode())
-        WipeTimeConfig(documentTitle, documentCode)
-
-
     def WriteModelOpenTime(model, hashcode, time):
         global monitorModels
         monitorModels[hashcode + "_" + model] = time
@@ -192,19 +188,6 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
             collaborateTab.IsActive = True
         else:
             pass
-
-
-    def WipeTimeConfig(model, hashcode):
-        home = expanduser("~")
-        Config = ConfigParser.ConfigParser()
-        Config.read(home + "\\MintTools.ini")
-        # add the settings
-        try:
-            Config.set('OpenModels', hashcode + "_" + model, None)
-        except:
-            pass
-        cfgfile = open(home + "\\MintTools.ini", 'w')
-        Config.write(cfgfile)
 
 
     def CheckSyncTime(model, hashcode, time, deltas):

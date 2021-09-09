@@ -1,7 +1,7 @@
 import Selection, FileUtilities, Warnings, QuestionableMath, FileUtilities, MEPUtilities
 import sys, os
 from pyrevit.coreutils import envvars
-from pyrevit import DB, UI
+from pyrevit import DB, UI, forms
 import getpass
 import CommandUtils
 import Autodesk.Windows
@@ -11,6 +11,7 @@ ribbon = Autodesk.Windows.ComponentManager.Ribbon
 import System.Drawing
 import ConfigParser
 from os.path import expanduser
+import hashlib
 
 creamColor = System.Windows.Media.Color.FromRgb(255, 253, 208)
 roseColor = System.Windows.Media.Color.FromRgb(247, 202, 201)
@@ -29,8 +30,27 @@ prlxProgramAddin = os.getenv('PROGRAMDATA') + "\\Autodesk\\Revit\\Addins\\" + \
 
 print(os.path.isfile(prlxAppAddin))
 print(os.path.isfile(prlxProgramAddin))
-global _familyMonitor
-print(_familyMonitor)
+key = "None"
+class ReValueWindow(forms.WPFWindow):
+    def __init__(self, xaml_file_name):
+        # create pattern maker window and process options
+        forms.WPFWindow.__init__(self, xaml_file_name)
+
+    @property
+    def word_string(self):
+        return self.stringValue_tb.Text
+
+    def select(self, sender, args):
+        global key
+        self.Close()
+        key = self.stringValue_tb.Password
+
+    def string_value_changed(self, sender, args):
+        pass
+
+result = ReValueWindow('PasswordWindow.xaml').show(modal=True)
+
+print(key)
 #UI.UIApplication(__revit__.Application).OpenAndActivateDocument(r"C:\Users\mlou\OneDrive - Kohn Pedersen Fox Associates 1\Desktop\KPF_CW_Door_Double.rfa")
 '''
 print("\n".join(sys.path))

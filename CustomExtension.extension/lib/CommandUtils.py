@@ -116,7 +116,7 @@ def HideElementWindow():
     HideElementWarning.TitleAutoPrefix = True
     HideElementWarning.AllowCancellation = False
 
-    HideElementWarning.MainInstruction = "Hide Element in View Command is strongly discouraged by KPF Digital Practice. Please create a Family Instead."
+    HideElementWarning.MainInstruction = "Hide Element in View Command is strongly discouraged by KPF Digital Practice. Please use Visibility/Graphics or Filter instead."
     HideElementWarning.ExpandedContent = None
     #ImportCadWarning.ExpandedContent = "This is 'ExpandedContent'.\nLine1: blar blar...\nLine2: blar blar...\nLine3: blar blar...";
 
