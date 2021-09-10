@@ -20,7 +20,7 @@ def FamilySizeCheckWindow(block):
         FamilySizeWarning.AddCommandLink(UI.TaskDialogCommandLinkId.CommandLink2,
                                          "No, I still want to Load the Family.")
 
-    FamilySizeWarning.CommonButtons = UI.TaskDialogCommonButtons.NoneS
+    FamilySizeWarning.CommonButtons = UI.TaskDialogCommonButtons.None
     return FamilySizeWarning
 
 

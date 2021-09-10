@@ -47,7 +47,8 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
             # UI.TaskDialog.Show(args.FamilyName, str(size))
             result = None
             if size > 5242880:
-                result = FamilyCheck.FamilySizeCheckWindow(False).Show()
+                result = FamilyCheck.FamilySizeCheckWindow(True).Show()
+
             else:
                 pass
             if result == UI.TaskDialogResult.CommandLink1:
