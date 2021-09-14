@@ -99,6 +99,23 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
     else:
         logger = Logger.MintLogger(localPath)
 
+    # Logger Setting when start up
+    global appLogger
+    home = os.getenv('USERPROFILE')
+    user = getpass.getuser()
+    cloudAppLogLocation = "\\\\kpf.com\\corporate\\Zdrive\\0002_03_BIM\\05_Research\\Log-Files\\App\\"
+    d = datetime.datetime.now()
+    localAppPath = home + "\\" + str(d.year) + "_" + \
+                str(d.month) + "_" + str(d.day) + "_" + user + "_RevitAppLog.txt"
+
+    serverAppPath = cloudAppLogLocation + user + "\\" + str(d.year) + "_" + \
+                 str(d.month) + "_" + str(d.day) + "_" + user + "_RevitAppLog.txt"
+    if os.path.exists(cloudAppLogLocation):
+        appLogger = Logger.MintLogger(serverAppPath)
+
+    else:
+        appLogger = Logger.MintLogger(localAppPath)
+
     def log_function(sender, args):
         global logger
         separator = ","
@@ -115,6 +132,36 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
         except:
             pass
 
+    def app_start_log(sender, args):
+        global appLogger
+        message = str(datetime.datetime.now()) + \
+                  ";_App_Start; _Version:" + __rvt__.Application.VersionName + \
+                  "\n"
+        try:
+            appLogger.Log(message, user)
+        except:
+            pass
+
+    def app_shutdown_log(sender, args):
+        global appLogger
+        message = str(datetime.datetime.now()) + \
+                  ";_App_Start; _Version:" + __rvt__.Application.VersionName + \
+                  "\n"
+        try:
+            appLogger.Log(message, user)
+        except:
+            pass
+
+    def model_open_log(sender, args):
+        global appLogger
+        docTitle = args.Document.Title
+        message = str(datetime.datetime.now()) + \
+                  ";_Opened_Document; Document:" + docTitle + \
+                  "\n"
+        try:
+            appLogger.Log(message, user)
+        except:
+            pass
 
     def document_changed_sync_function(sender, args):
         global navigationLock
@@ -243,7 +290,7 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
             for panel in tab.Panels:
                 panel.CustomPanelBackground = System.Windows.Media.SolidColorBrush(colors[int])
 
-
+    # Command Overwrite
     wallOpeningUtil = CommandUtils.CommandReplacement(__rvt__, UI.PostableCommand.WallOpening,
                                                       CommandUtils.WallOpeningReplacement)
     importCADUtil = CommandUtils.CommandReplacement(__rvt__, UI.PostableCommand.ImportCAD,
@@ -253,7 +300,13 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
     hideInViewUtil = CommandUtils.CommandReplacement(__rvt__, UI.PostableCommand.HideElements,
                                                     CommandUtils.HideElementReplacement)
 
+    # Revit Log
+    __rvt__.Application.ApplicationInitialized += EventHandler[DB.Events.ApplicationInitializedEventArgs](app_start_log)
+    __rvt__.ApplicationClosing += EventHandler[UI.Events.ApplicationClosingEventArgs](app_shutdown_log)
+    __rvt__.Application.DocumentOpened += EventHandler[DB.Events.DocumentOpenedEventArgs](model_open_log)
     __rvt__.Application.DocumentChanged += EventHandler[DB.Events.DocumentChangedEventArgs](log_function)
+
+    # Sync Timer
     if not os.path.isfile(prlxAppAddin) and not os.path.isfile(prlxProgramAddin):
         __rvt__.Application.DocumentOpened += EventHandler[DB.Events.DocumentOpenedEventArgs](document_opened_sync_function)
         __rvt__.Application.DocumentSynchronizedWithCentral += EventHandler[DB.Events.DocumentSynchronizedWithCentralEventArgs](document_synced_sync_function)
