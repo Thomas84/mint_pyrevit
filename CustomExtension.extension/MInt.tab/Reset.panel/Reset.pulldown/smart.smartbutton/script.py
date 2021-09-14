@@ -145,7 +145,7 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
     def app_shutdown_log(sender, args):
         global appLogger
         message = str(datetime.datetime.now()) + \
-                  ";_App_Start; _Version:" + __rvt__.Application.VersionName + \
+                  ";_App_Closed; _Version:" + __rvt__.Application.VersionName + \
                   "\n"
         try:
             appLogger.Log(message, user)
@@ -163,6 +163,17 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
         except:
             pass
 
+    def model_closing_log(sender, args):
+        global appLogger
+        docTitle = args.Document.Title
+        message = str(datetime.datetime.now()) + \
+                  ";_Closed_Document; Document:" + docTitle + \
+                  "\n"
+        try:
+            appLogger.Log(message, user)
+        except:
+            pass
+        
     def document_changed_sync_function(sender, args):
         global navigationLock
         global syncTimer
@@ -304,6 +315,7 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
     __rvt__.Application.ApplicationInitialized += EventHandler[DB.Events.ApplicationInitializedEventArgs](app_start_log)
     __rvt__.ApplicationClosing += EventHandler[UI.Events.ApplicationClosingEventArgs](app_shutdown_log)
     __rvt__.Application.DocumentOpened += EventHandler[DB.Events.DocumentOpenedEventArgs](model_open_log)
+    __rvt__.Application.DocumentClosing += EventHandler[DB.Events.DocumentClosingEventArgs](model_closing_log)
     __rvt__.Application.DocumentChanged += EventHandler[DB.Events.DocumentChangedEventArgs](log_function)
 
     # Sync Timer
