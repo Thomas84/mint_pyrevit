@@ -1,37 +1,73 @@
-## Welcome to GitHub Pages
+# Mint_pyRevit
 
-You can use the [editor on GitHub](https://github.com/lmengfan/nerv_pyrevit/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+This is a repository for Autodesk Revit incorporating various useful tools used in professional work. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+## Getting Started
 
-### Markdown
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Prerequisites
 
-```markdown
-Syntax highlighted code block
+* [Autodesk Revit](https://www.autodesk.com/products/revit/overview) 
+* [pyRevit](https://github.com/eirannejad/pyRevit)
 
-# Header 1
-## Header 2
-### Header 3
+### Installing
 
-- Bulleted
-- List
+1. Please clone or download the repository and unzip to your desired location.
+2. Go to your pyRevit toolbar(must have pyRevit installed) and add the unzipped location to the 'Custom Extension Directories'.
+3. Click the 'Save Settings and Reload' 
+4. A custom toolbar should appear in your Revit, please ignore any warnings because the tool is still under development.
 
-1. Numbered
-2. List
 
-**Bold** and _Italic_ and `Code` text
+## Deployment
 
-[Link](url) and ![Image](src)
+Deployment and update on a large scale is recommended by using a server based read only location for the location to host this repository. Use a .bat file or any other desired methods in the background to modify the ini file located in each user's Revit Plugin Folder:
+
+Autodesk Revit addins are generally loaded from the following locations. 
 ```
+User Addins:
+%appdata%\Autodesk\Revit\Addins\
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Machine Addins (for all users of the machine):
+C:\ProgramData\Autodesk\Revit\Addins\
 
-### Jekyll Themes
+Addins packaged for the Autodesk Exchange store:
+C:\ProgramData\Autodesk\ApplicationPlugins\
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/lmengfan/nerv_pyrevit/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Autodesk servers and services:
+C:\Program Files\Autodesk\Revit 2016\AddIns\
+```
+## Built With
 
-### Support or Contact
+* [Autodesk Revit](https://www.autodesk.com/products/revit/overview) 
+* [pyRevit](https://github.com/eirannejad/pyRevit)
+* [IronPython](https://ironpython.net/)
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+
+## Contributing
+
+Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us. Please contact loumengfan@gmail.com to get permission. 
+
+## Versioning
+
+This project will use [SemVer](http://semver.org/) for versioning after all milestones are complete. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+
+## Authors
+
+* **Mengfan Lou** - *Author* - [lmengfan](https://github.com/lmengfan)
+
+
+## License
+
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](https://github.com/lmengfan/Nerv_pyRevit/blob/master/LICENSE) file for details
+
+## Acknowledgments
+
+* [Ehsan Iran-Nejad](https://github.com/eirannejad) This work is mostly based on his work on pyRevit.
+* [Revit API docs](https://www.revitapidocs.com/) Revit API documentation site is used for reference.
+* [Gui Talarico](https://github.com/gtalarico) Revit Python Wrapper Library.
+* [Daren Thomas](https://github.com/daren-thomas) Revit Python Shell was used for most of the testing work.
+
+## Notes
+
+Melca's button is Melca's!
