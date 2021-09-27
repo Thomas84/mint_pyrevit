@@ -39,7 +39,7 @@ config = script.get_config()
 def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
     # global familyMonitor
     script.set_envvar('FamilyMonitor', True)
-    script.toggle_icon(script.set_envvar('FamilyMonitor', True))
+    #script.toggle_icon(script.set_envvar('FamilyMonitor', True))
     def FamilySizeControl_function(sender, args):
         # global familyMonitor
         if script.get_envvar('FamilyMonitor'):

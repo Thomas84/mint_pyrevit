@@ -1,6 +1,4 @@
 import sys, clr, os, re
-import ConfigParser
-from os.path import expanduser
 from Autodesk.Revit.DB import Document, SynchronizeWithCentralOptions, TransactWithCentralOptions, RelinquishOptions
 from pyrevit import forms
 clr. AddReferenceByPartialName('PresentationCore')
@@ -22,7 +20,7 @@ syncOption.SetRelinquishOptions(relinquishOption)
 
 nameLst = []
 for document in activeDocuments:
-    if not document.IsLinked  and document != doc:
+    if not document.IsLinked and document != doc:
         nameLst.append(document.Title)
 if len(nameLst) > 0:
     selDocs = forms.SelectFromList.show(nameLst, multiselect=True, button_name='Select Documents')

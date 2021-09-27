@@ -7,6 +7,7 @@ import CommandUtils
 import Autodesk.Windows
 import System.Windows.Media
 import System.Windows.Media.Imaging
+import System.Diagnostics
 ribbon = Autodesk.Windows.ComponentManager.Ribbon
 import System.Drawing
 import ConfigParser
@@ -21,36 +22,9 @@ redColor = System.Windows.Media.Color.FromRgb(255, 0, 0)
 uidoc = __revit__.ActiveUIDocument
 doc = __revit__.ActiveUIDocument.Document
 
-print(__revit__.ActiveUIDocument.Document.IsModified)
-version = __revit__.Application.VersionNumber
-prlxAppAddin = os.getenv('APPDATA') + "\\Autodesk\\Revit\\Addins\\" + \
-               str(__revit__.Application.VersionNumber) + "\\Prlx.SyncWithCentralTimer.addin"
-prlxProgramAddin = os.getenv('PROGRAMDATA') + "\\Autodesk\\Revit\\Addins\\" + \
-                   str(__revit__.Application.VersionNumber) + "\\Prlx.SyncWithCentralTimer.addin"
-
-print(os.path.isfile(prlxAppAddin))
-print(os.path.isfile(prlxProgramAddin))
-key = "None"
-class ReValueWindow(forms.WPFWindow):
-    def __init__(self, xaml_file_name):
-        # create pattern maker window and process options
-        forms.WPFWindow.__init__(self, xaml_file_name)
-
-    @property
-    def word_string(self):
-        return self.stringValue_tb.Text
-
-    def select(self, sender, args):
-        global key
-        self.Close()
-        key = self.stringValue_tb.Password
-
-    def string_value_changed(self, sender, args):
-        pass
-
-result = ReValueWindow('PasswordWindow.xaml').show(modal=True)
-
-print(key)
+process = System.Diagnostics.Process.GetCurrentProcess()
+print(process)
+process.Kill()
 #UI.UIApplication(__revit__.Application).OpenAndActivateDocument(r"C:\Users\mlou\OneDrive - Kohn Pedersen Fox Associates 1\Desktop\KPF_CW_Door_Double.rfa")
 '''
 print("\n".join(sys.path))
