@@ -178,7 +178,7 @@
                     <ItemsControl x:Name="reservedValuesList" Padding="5" Background="IndianRed" Foreground="White"/>
                 </ScrollViewer>
             </Border>
-            <PasswordBox x:Name="stringValue_tb"
+            <TextBlock x:Name="stringValue_tb"
                      Height="36"
                      HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
                      FontFamily="Courier New" FontSize="24" FontWeight="Bold"
