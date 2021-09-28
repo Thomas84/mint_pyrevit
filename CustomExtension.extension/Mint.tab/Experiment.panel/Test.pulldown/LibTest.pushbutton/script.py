@@ -1,3 +1,5 @@
+#! python3
+'''
 import Selection, FileUtilities, Warnings, QuestionableMath, FileUtilities, MEPUtilities
 import sys, os
 from pyrevit.coreutils import envvars
@@ -14,17 +16,32 @@ import ConfigParser
 from os.path import expanduser
 import hashlib
 
-creamColor = System.Windows.Media.Color.FromRgb(255, 253, 208)
-roseColor = System.Windows.Media.Color.FromRgb(247, 202, 201)
-fuchsiaColor = System.Windows.Media.Color.FromRgb(255, 0, 255)
-redColor = System.Windows.Media.Color.FromRgb(255, 0, 0)
+from threading import Thread
+from Autodesk.Revit.UI import TaskDialog
+'''
+import asyncio
+import time
 
-uidoc = __revit__.ActiveUIDocument
-doc = __revit__.ActiveUIDocument.Document
+#creamColor = System.Windows.Media.Color.FromRgb(255, 253, 208)
+#roseColor = System.Windows.Media.Color.FromRgb(247, 202, 201)
+#fuchsiaColor = System.Windows.Media.Color.FromRgb(255, 0, 255)
+#redColor = System.Windows.Media.Color.FromRgb(255, 0, 0)
 
-process = System.Diagnostics.Process.GetCurrentProcess()
-print(process)
-process.Kill()
+#uidoc = __revit__.ActiveUIDocument
+#doc = __revit__.ActiveUIDocument.Document
+
+#process = System.Diagnostics.Process.GetCurrentProcess()
+#print(process)
+#process.Kill()
+
+async def main():
+    #print('hello')
+    await asyncio.sleep(5)
+    print('world')
+
+asyncio.run(main())
+
+
 #UI.UIApplication(__revit__.Application).OpenAndActivateDocument(r"C:\Users\mlou\OneDrive - Kohn Pedersen Fox Associates 1\Desktop\KPF_CW_Door_Double.rfa")
 '''
 print("\n".join(sys.path))

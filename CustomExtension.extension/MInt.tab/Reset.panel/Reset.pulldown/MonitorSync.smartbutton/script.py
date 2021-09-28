@@ -4,227 +4,115 @@ from pyrevit import script
 from pyrevit.coreutils.ribbon import ICON_MEDIUM
 from System import Guid
 from os.path import expanduser
-import ConfigParser
+import ConfigParser, FamilyCheck
 import clr, sys, datetime, os
-import os.path
+import os.path, hashlib
 from os import path
 from pyrevit import HOST_APP, framework
 from pyrevit import script
 from pyrevit import DB, UI
-from pyrevit import framework
+from pyrevit import framework, forms
 from System import EventHandler, Uri
 from pyrevit.coreutils import envvars
 import rpw
 import System.Windows.Media
 import System.Windows.Media.Imaging
 import Autodesk.Windows
-
 ribbon = Autodesk.Windows.ComponentManager.Ribbon
 from Autodesk.Revit.UI import TaskDialog
+from pyrevit.revit import tabs
+import time
+from threading import Thread
 
-# from Autodesk.Revit.DB.Events import DocumentChangedEventArgs, DocumentOpenedEventArgs
-__title__ = 'Reset'
-__context__ = 'zero'
+
+#from Autodesk.Revit.DB.Events import DocumentChangedEventArgs, DocumentOpenedEventArgs
+__title__ = 'IdleMonitor'
+__context__ = 'zero-doc'
 
 # Set system path
 
 import os
+#print(os.getenv('APPDATA') + "\\pyRevit\\pyRevit_config.ini")
+
 
 config = script.get_config()
 
-
-def GetRibbonbyId(id):
-    for tab in Autodesk.Windows.ComponentManager.Ribbon.Tabs:
-        if tab.Id == id:
-            return tab
-    return None
-
-
 # FIXME: need to figure out a way to fix the icon sizing of toggle buttons
 def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
-    # SetUpConfigFile()
-    global navigationLock
-    navigationLock = False
-    global autoSync
-    autoSync = False
-    global syncTimer
-    syncTimer = [120, 90, 60, 30]
-    # syncTimer = [4, 3, 2, 1]
-    global monitorModels
-    monitorModels = {}
-    global monitorIdle
-    monitorIdle = {}
-    global collaborateTab
-    collaborateTab = GetRibbonbyId("Collaborate")
-
-    prlxAppAddin = os.getenv('APPDATA') + "\\Autodesk\\Revit\\Addins\\" + \
-                   str(__rvt__.Application.VersionNumber) + "\\Prlx.SyncWithCentralTimer.addin"
-    prlxProgramAddin = os.getenv('PROGRAMDATA') + "\\Autodesk\\Revit\\Addins\\" + \
-                       str(__rvt__.Application.VersionNumber) + "\\Prlx.SyncWithCentralTimer.addin"
-
-    # Logger Setting when start up
-
-    def Check_last_active_time(now):
-        interval = 120
-        for time in monitorModels:
-            if now > time + datetime.timedelta(minutes=interval):
-                return True
-
-        return False
-
-    def Idle_sync_function(sender, args):
-        global autoSync
-        time = datetime.datetime.now()
-        if Check_last_active_time(time):
-            autoSync = True
-        if autoSync:
-            TaskDialog.Show("Auto Sync with Central", "Are you still there?")
-            autoSync = False
-        args.SetRaiseWithoutDelay()
-
-    def document_changed_sync_function(sender, args):
-        global navigationLock
-        global syncTimer
-        time = datetime.datetime.now()
-        documentTitle = args.GetDocument().Title
-        documentCode = str(args.GetDocument().GetHashCode())
-
-        # lock = CheckSyncTimeConfig(documentTitle, documentCode, time, [4, 3, 2, 1])
-        lock = CheckSyncTime(documentTitle, documentCode, time, syncTimer)
-        if lock:
-            navigationLock = True
-        else:
-            navigationLock = False
-        if args.Document.IsWorkshared and not args.Document.IsLinked and not args.Document.IsFamilyDocument:
-            WriteModelChangedTime(documentTitle, documentCode, time)
-        # TaskDialog.Show("Lock", str(navigationLock))
-
-    def document_opened_sync_function(sender, args):
-        time = datetime.datetime.now()
-        documentTitle = args.Document.Title
-        documentCode = str(args.Document.GetHashCode())
-        # WriteModelOpenTimeConfig(documentTitle, documentCode, time)
-        if args.Document.IsWorkshared and not args.Document.IsLinked and not args.Document.IsFamilyDocument:
-            WriteModelOpenTime(documentTitle, documentCode, time)
-
-    def document_synced_sync_function(sender, args):
-        global navigationLock
-        global syncTimer
-        time = datetime.datetime.now()
-        documentTitle = args.Document.Title
-        documentCode = str(args.Document.GetHashCode())
-        # WriteModelOpenTimeConfig(documentTitle, documentCode, time)
-        if args.Document.IsWorkshared and not args.Document.IsLinked and not args.Document.IsFamilyDocument:
-            WriteModelOpenTime(documentTitle, documentCode, time)
-            lock = CheckSyncTime(documentTitle, documentCode, time, syncTimer)
-            if lock:
-                navigationLock = True
+    script.set_envvar('IdleMonitor', 0)
+    script.set_envvar('IdleCount', 0)
+    global window
+    def count(sender, args):
+        global window
+        if script.get_envvar('IdleMonitor') == 1:
+            window.show(modal=False)
+            script.set_envvar('IdleMonitor', 2)
+            args.SetRaiseWithoutDelay()
+        elif script.get_envvar('IdleMonitor') == 2:
+            i = script.get_envvar('IdleCount')
+            if i < 10:
+                time.sleep(1)
+                script.set_envvar('IdleCount', i + 1)
             else:
-                navigationLock = False
+                script.set_envvar('IdleMonitor', 3)
+                script.set_envvar('IdleCount', 0)
+            args.SetRaiseWithoutDelay()
+        elif script.get_envvar('IdleMonitor') == 3:
+            script.set_envvar('IdleMonitor', 0)
+            script.set_envvar('IdleCount', 0)
+            TaskDialog.Show("Trigger Close", "Debug")
 
-    def view_activated_sync_function(sender, args):
-        global navigationLock
-        global syncTimer
-        time = datetime.datetime.now()
-        documentTitle = args.Document.Title
-        documentCode = str(args.Document.GetHashCode())
-        # TaskDialog.Show(documentTitle, args.Document.GetWorksharingCentralModelPath())
-        if args.Document.IsModified:
-            lock = CheckSyncTime(documentTitle, documentCode, time, syncTimer)
-            if lock:
-                navigationLock = True
-            else:
-                navigationLock = False
-        else:
-            ChangeRibbonColor(4)
-            navigationLock = False
-        if args.Document.IsWorkshared and not args.Document.IsLinked and not args.Document.IsFamilyDocument:
-            WriteModelChangedTime(documentTitle, documentCode, time)
+    def app_start_log(sender, args):
+        #global window
+        #window = TimerWindow('TimerBox.xaml')
+        #TaskDialog.Show("Window Closed", 'AppInti')
+        pass
 
-    def WriteModelOpenTime(model, hashcode, time):
-        global monitorModels
-        monitorModels[hashcode + "_" + model] = time
-
-    def WriteModelChangedTime(model, hashcode, time):
-        global monitorIdle
-        monitorIdle[hashcode + "_" + model] = time
-
-    def LocktoCollabToolBar(sender, args):
-        global navigationLock
-        global monitorModels
-        global collaborateTab
-        if navigationLock is True:
-            collaborateTab.IsActive = True
-        else:
-            pass
-
-    def CheckSyncTime(model, hashcode, time, deltas):
-        global monitorModels
-        global collaborateTab
-        if hashcode + "_" + model in monitorModels.keys():
-            lastSyncedTime = monitorModels[hashcode + "_" + model]
-            if lastSyncedTime is not None:
-                if time > lastSyncedTime + datetime.timedelta(minutes=deltas[0]):
-                    # TaskDialog.Show(model, "1")
-                    ChangeRibbonColor(0)
-                    collaborateTab.IsActive = True
-                    return True
-                elif time > lastSyncedTime + datetime.timedelta(minutes=deltas[1]):
-                    # TaskDialog.Show(model, "2")
-                    ChangeRibbonColor(1)
-                    return False
-                elif time > lastSyncedTime + datetime.timedelta(minutes=deltas[2]):
-                    # TaskDialog.Show(model, "3")
-                    ChangeRibbonColor(2)
-                    return False
-                elif time > lastSyncedTime + datetime.timedelta(minutes=deltas[3]):
-                    # TaskDialog.Show(model, "4")
-                    ChangeRibbonColor(3)
-                    return False
-                else:
-                    # TaskDialog.Show(model, "5")
-                    ChangeRibbonColor(4)
-                    return False
-            else:
-                ChangeRibbonColor(4)
-                return False
-        else:
-            ChangeRibbonColor(4)
-            return False
-
-    def ChangeRibbonColor(int):
-        colors = []
-
-        defaultColor = System.Windows.Media.Color.FromRgb(238, 238, 238)
-        creamColor = System.Windows.Media.Color.FromRgb(255, 253, 208)
-        roseColor = System.Windows.Media.Color.FromRgb(247, 202, 201)
-        fuchsiaColor = System.Windows.Media.Color.FromRgb(255, 0, 255)
-        redColor = System.Windows.Media.Color.FromRgb(255, 0, 0)
-
-        colors.append(redColor)
-        colors.append(fuchsiaColor)
-        colors.append(roseColor)
-        colors.append(creamColor)
-        colors.append(defaultColor)
-        for tab in ribbon.Tabs:
-            for panel in tab.Panels:
-                panel.CustomPanelBackground = System.Windows.Media.SolidColorBrush(colors[int])
-
-    # Sync Timer
-    if not os.path.isfile(prlxAppAddin) and not os.path.isfile(prlxProgramAddin):
-        __rvt__.Application.DocumentOpened += EventHandler[DB.Events.DocumentOpenedEventArgs](
-            document_opened_sync_function)
-        __rvt__.Application.DocumentSynchronizedWithCentral += EventHandler[
-            DB.Events.DocumentSynchronizedWithCentralEventArgs](document_synced_sync_function)
-        # __rvt__.Application.DocumentClosed += EventHandler[DB.Events.DocumentClosedEventArgs](document_closed_sync_function)
-        Autodesk.Windows.ComponentManager.UIElementActivated += EventHandler[
-            Autodesk.Windows.UIElementActivatedEventArgs](LocktoCollabToolBar)
-        __rvt__.Application.DocumentChanged += EventHandler[DB.Events.DocumentChangedEventArgs](
-            document_changed_sync_function)
-        __rvt__.ViewActivated += EventHandler[UI.Events.ViewActivatedEventArgs](view_activated_sync_function)
-        # __rvt__.Idling += EventHandler[UI.Events.IdlingEventArgs](Idle_sync_function)
+    __rvt__.Idling += EventHandler[UI.Events.IdlingEventArgs](count)
+    __rvt__.Application.ApplicationInitialized += EventHandler[DB.Events.ApplicationInitializedEventArgs](app_start_log)
     return True
 
 
+
+class TimerWindow(forms.WPFWindow):
+    def __init__(self, xaml_file_name):
+        # create pattern maker window and process options
+        forms.WPFWindow.__init__(self, xaml_file_name)
+        self.stringValue_tb.Text = "Revit will close after 10 seconds"
+
+    def word_string(self):
+        return self.stringValue_tb.Text
+
+    def word_set(self, number):
+        self.stringValue_tb.Text = str(number)
+
+    def select(self, sender, args):
+        script.set_envvar('IdleMonitor', 0)
+        script.set_envvar('IdleCount', 0)
+        self.Hide()
+
+    def string_value_changed(self, sender, args):
+        pass
+
+global window
+window = TimerWindow(r'..\TimerBox.xaml')
+
 if __name__ == '__main__':
-    print('Please do not click this button again.')
+    global window
+
+    #window = TimerWindow('TimerBox.xaml')
+    #window.show(modal=False)
+    script.set_envvar('IdleMonitor', 1)
+
+    '''
+    while i <= 10 and not key:
+        window.word_set(i)
+        time.sleep(1)
+        i += 1
+
+    if key:
+        TaskDialog.Show("Window Closed", str(key))
+        #window.Close()
+    else:
+        window.Close()
+    '''
