@@ -21,6 +21,7 @@ import Autodesk.Windows
 ribbon = Autodesk.Windows.ComponentManager.Ribbon
 from Autodesk.Revit.UI import TaskDialog
 
+
 #from Autodesk.Revit.DB.Events import DocumentChangedEventArgs, DocumentOpenedEventArgs
 __title__ = 'Reset'
 __context__ = 'zero'
@@ -147,7 +148,6 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
                                                     CommandUtils.ModelInPlaceReplacement)
     hideInViewUtil = CommandUtils.CommandReplacement(__rvt__, UI.PostableCommand.HideElements,
                                                     CommandUtils.HideElementReplacement)
-    #TODO: reminder for classification???after view activated pick view_use or pick view template
     #TODO: Uncheck Anlytical
     # Revit Log
     __rvt__.Application.ApplicationInitialized += EventHandler[DB.Events.ApplicationInitializedEventArgs](app_start_log)
