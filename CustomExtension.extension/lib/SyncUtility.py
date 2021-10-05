@@ -22,17 +22,13 @@ relinquishOption = RelinquishOptions(True)
 syncOption.SetRelinquishOptions(relinquishOption)
 
 nameLst = []
-for document in activeDocuments:
-    nameLst.append(document.Title)
 
-selDocs = forms.SelectFromList.show(nameLst, multiselect=True, button_name='Select Documents')
 for document in activeDocuments:
-    if document.Title in selDocs:
-        document.SynchronizeWithCentral(transOption, syncOption)
-        if document.Title == uidoc.Document.Title:
-            pass
-        else:
-            document.Close()
+    if not document.IsFamilyDocument:
+        document.SynchronizeWithCentral()
+        document.Close()
+    else:
+        document.Save()
 
 process = System.Diagnostics.Process.GetCurrentProcess()
 print(process)

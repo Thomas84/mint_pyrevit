@@ -1,3 +1,5 @@
+#! python3
+
 import Selection, FileUtilities, Warnings, QuestionableMath, FileUtilities, MEPUtilities
 import sys, os
 from pyrevit.coreutils import envvars
@@ -10,19 +12,15 @@ import System.Windows.Media.Imaging
 import System.Diagnostics
 ribbon = Autodesk.Windows.ComponentManager.Ribbon
 import System.Drawing
-import clr, sys, datetime, os
+import ConfigParser
 from os.path import expanduser
 import hashlib
-from System import EventHandler, Uri
+
 from threading import Thread
 from Autodesk.Revit.UI import TaskDialog
-from System import TimeSpan
-from System.Windows.Threading import DispatcherTimer
-from System.Windows.Forms import MessageBox
-from Autodesk.Revit.UI import IExternalEventHandler, ExternalEvent
-from Autodesk.Revit.DB import Transaction
-from Autodesk.Revit.Exceptions import InvalidOperationException
-from pyrevit import script
+
+import System.Windows.Threading;
+
 #creamColor = System.Windows.Media.Color.FromRgb(255, 253, 208)
 #roseColor = System.Windows.Media.Color.FromRgb(247, 202, 201)
 #fuchsiaColor = System.Windows.Media.Color.FromRgb(255, 0, 255)
@@ -34,27 +32,6 @@ from pyrevit import script
 #process = System.Diagnostics.Process.GetCurrentProcess()
 #print(process)
 #process.Kill()
-
-script.set_envvar('IdleTest', "Test")
-script.set_envvar('IdleShow', 1)
-#MessageBox.ShowDialog(str(System.DateTime.UtcNow))
-#MessageBox.Show("123")
-'''
-def OnCheckActivityTick(sender, args):
-    #print(str(System.DateTime.UtcNow))
-    #print("123")
-    # ext_event.Raise()
-    MessageBox.Show(str(System.DateTime.UtcNow))
-    #a = System.DateTime.UtcNow
-    #print("123")
-
-
-
-inactivityCheckTimer = DispatcherTimer()
-inactivityCheckTimer.Tick += EventHandler(OnCheckActivityTick)
-inactivityCheckTimer.Interval = TimeSpan(0, 0, 3)
-inactivityCheckTimer.Start()
-'''
 
 
 
