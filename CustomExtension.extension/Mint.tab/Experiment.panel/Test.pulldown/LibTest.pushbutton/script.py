@@ -8,6 +8,7 @@ import Autodesk.Windows
 import System.Windows.Media
 import System.Windows.Media.Imaging
 import System.Diagnostics
+import SyncUtility
 ribbon = Autodesk.Windows.ComponentManager.Ribbon
 import System.Drawing
 import clr, sys, datetime, os
@@ -23,6 +24,10 @@ from Autodesk.Revit.UI import IExternalEventHandler, ExternalEvent
 from Autodesk.Revit.DB import Transaction
 from Autodesk.Revit.Exceptions import InvalidOperationException
 from pyrevit import script
+uidoc = __revit__.ActiveUIDocument
+doc = __revit__.ActiveUIDocument.Document
+
+home = expanduser("~")
 #creamColor = System.Windows.Media.Color.FromRgb(255, 253, 208)
 #roseColor = System.Windows.Media.Color.FromRgb(247, 202, 201)
 #fuchsiaColor = System.Windows.Media.Color.FromRgb(255, 0, 255)
@@ -37,8 +42,8 @@ from pyrevit import script
 
 script.set_envvar('IdleTest', "Test")
 script.set_envvar('IdleShow', 1)
-#MessageBox.ShowDialog(str(System.DateTime.UtcNow))
-#MessageBox.Show("123")
+#script.set_envvar('IdleWindowTimer', 30)
+#SyncUtility.SyncandCloseRevit(__revit__, home)
 '''
 def OnCheckActivityTick(sender, args):
     #print(str(System.DateTime.UtcNow))

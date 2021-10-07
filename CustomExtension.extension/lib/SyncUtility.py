@@ -9,27 +9,29 @@ clr. AddReferenceByPartialName('PresentationCore')
 clr.AddReferenceByPartialName('PresentationFramework')
 clr.AddReferenceByPartialName('System.Windows.Forms')
 
-uidoc = __revit__.ActiveUIDocument
-doc = __revit__.ActiveUIDocument.Document
 
+def SyncandCloseRevit(uiapp, home):
+    activeDocuments = uiapp.Application.Documents
+    syncOption = SynchronizeWithCentralOptions()
+    transOption = TransactWithCentralOptions()
+    relinquishOption = RelinquishOptions(True)
+    syncOption.SetRelinquishOptions(relinquishOption)
+    syncOption.SaveLocalBefore = True
+    syncOption.Comment = "idleAutoSync"
 
-__doc__ = 'Pick the files you want to sync and close.'
-
-activeDocuments = doc.Application.Documents
-syncOption = SynchronizeWithCentralOptions()
-transOption = TransactWithCentralOptions()
-relinquishOption = RelinquishOptions(True)
-syncOption.SetRelinquishOptions(relinquishOption)
-
-nameLst = []
-
-for document in activeDocuments:
-    if not document.IsFamilyDocument:
-        document.SynchronizeWithCentral()
-        document.Close()
-    else:
-        document.Save()
-
-process = System.Diagnostics.Process.GetCurrentProcess()
-print(process)
-process.Kill()
+    for document in activeDocuments:
+        if not document.IsFamilyDocument and not document.IsLinked:
+            document.SynchronizeWithCentral(transOption, syncOption)
+            if not document.Title == uiapp.ActiveUIDocument.Document.Title:
+                document.Close()
+        elif not document.IsLinked:
+            if document.PathName:
+                document.Save()
+            else:
+                document.SaveAs(home + "\\" + document.Title + ".rfa")
+            if not document.Title == uiapp.ActiveUIDocument.Document.Title:
+                document.Close()
+        else:
+            pass
+    process = System.Diagnostics.Process.GetCurrentProcess()
+    process.Kill()
