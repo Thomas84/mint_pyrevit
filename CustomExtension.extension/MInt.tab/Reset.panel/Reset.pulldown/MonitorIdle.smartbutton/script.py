@@ -26,7 +26,7 @@ from System import EventHandler, Uri
 from pyrevit import script
 import SyncUtility
 from os.path import expanduser
-
+import os
 #from Autodesk.Revit.DB.Events import DocumentChangedEventArgs, DocumentOpenedEventArgs
 __title__ = 'IdleMonitor'
 __context__ = 'zero-doc'
@@ -36,13 +36,21 @@ home = expanduser("~")
 __persistentengine__ = True
 
 # Simple function we want to run
+home = expanduser("~")
+
+
 def yes_click():
     # Refresh Time
     script.set_envvar('IdleShow', 0)
+    script.set_envvar('IdleOverwrite', 0)
+    script.set_envvar('LastActiveTime', datetime.datetime.now())
+
 
 def no_click():
     SyncUtility.SyncandCloseRevit(__revit__, home)
     script.set_envvar('IdleShow', 0)
+    script.set_envvar('LastActiveTime', datetime.datetime.now())
+
 
 # Create a subclass of IExternalEventHandler
 class SimpleEventHandler(IExternalEventHandler):
@@ -69,10 +77,6 @@ class SimpleEventHandler(IExternalEventHandler):
 
 # Now we need to make an instance of this handler. Moreover, it shows that the same class could be used to for
 # different functions using different handler class instances
-yes_event_handler = SimpleEventHandler(yes_click)
-yes_ext_event = ExternalEvent.Create(yes_event_handler)
-no_event_handler = SimpleEventHandler(no_click)
-no_ext_event = ExternalEvent.Create(no_event_handler)
 
 # A simple WPF form used to call the ExternalEvent
 class ModelessForm(WPFWindow):
@@ -81,6 +85,7 @@ class ModelessForm(WPFWindow):
     """
     script.set_envvar('Idle', 0)
     windowTimer = DispatcherTimer()
+
     def __init__(self, xaml_file_name):
         WPFWindow.__init__(self, xaml_file_name)
 
@@ -94,21 +99,24 @@ class ModelessForm(WPFWindow):
                 self.Hide()
                 no_ext_event.Raise()
 
-        if script.get_envvar('IdleShow') == 1:
+        # if script.get_envvar('IdleShow') == 1:
+        # if datetime.datetime.now() > script.get_envvar('LastActiveTime') + datetime.timedelta(minutes=2):
+        if True:
             script.set_envvar('IdleWindowTimer', 30)
             self.simple_text.Text = "Are you still there?"
             self.close_text.Text = "This Window will close in 30 seconds"
-            #self.simple_text.Text = script.get_envvar('IdleTest')
+            # self.simple_text.Text = script.get_envvar('IdleTest')
             self.Show()
             self.windowTimer.Tick += EventHandler(OnWindowTimerTick)
             self.windowTimer.Interval = TimeSpan(0, 0, 1)
             self.windowTimer.Start()
 
-            script.set_envvar('IdleShow', 0)
+            # script.set_envvar('IdleShow', 0)
+            script.set_envvar('IdleOverwrite', 7)
 
     def yes_click(self, sender, e):
         # This Raise() method launch a signal to Revit to tell him you want to do something in the API context
-        script.set_envvar('IdleShow', 1)
+        # script.set_envvar('IdleShow', 1)
         self.windowTimer.Stop()
         yes_ext_event.Raise()
         self.Hide()
@@ -119,36 +127,63 @@ class ModelessForm(WPFWindow):
         no_ext_event.Raise()
         self.Hide()
 
+
 # Let's launch our beautiful and useful form !
 
 def OnCheckActivityTick(sender, args):
     modeless_form = ModelessForm("ModelessForm.xaml")
 
+
+def DialogShwoing(sender, args):
+    if script.get_envvar('IdleOverwrite') != 0:
+        args.OverrideResult(script.get_envvar('IdleOverwrite'))
+
+yes_event_handler = SimpleEventHandler(yes_click)
+yes_ext_event = ExternalEvent.Create(yes_event_handler)
+no_event_handler = SimpleEventHandler(no_click)
+no_ext_event = ExternalEvent.Create(no_event_handler)
+
+
 def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
+
+    #cwd = os.getcwd()
+    #print(cwd)
+    #modeless_form = ModelessForm("ModelessForm.xaml")
     inactivityCheckTimer = DispatcherTimer()
+
     inactivityCheckTimer.Tick += EventHandler(OnCheckActivityTick)
-    inactivityCheckTimer.Interval = TimeSpan(0, 0, 1800)
+    inactivityCheckTimer.Interval = TimeSpan(0, 0, 3)
     inactivityCheckTimer.Start()
-
+    script.set_envvar('IdleOverwrite', 0)
+    __rvt__.DialogBoxShowing += EventHandler[UI.Events.DialogBoxShowingEventArgs](DialogShwoing)
+    #modeless = ModelessForm("..\ModelessForm.xaml")
+    script.set_envvar('LastActiveTime', datetime.datetime.now())
     def update_time():
-        global lastActiveTime
-        lastActiveTime = datetime.datetime.now()
-
+        #global lastActiveTime
+        #lastActiveTime = datetime.datetime.now()
+        script.set_envvar('LastActiveTime', datetime.datetime.now())
 
     def app_inti_idle_function(sender, args):
+        #cwd = os.getcwd()
+        #TaskDialog.Show("debug", cwd)
+        #modeless_form = ModelessForm("ModelessForm.xaml")
         update_time()
 
     def document_changed_idle_function(sender, args):
-        update_time()
+        modeless_form = ModelessForm("ModelessForm.xaml")
+        #update_time()
 
     def document_opened_idle_function(sender, args):
-        update_time()
+        modeless_form = ModelessForm("ModelessForm.xaml")
+        #update_time()
 
     def document_synced_idle_function(sender, args):
-        update_time()
+        modeless_form = ModelessForm("ModelessForm.xaml")
+        #update_time()
 
     def view_activated_idle_function(sender, args):
-        update_time()
+        modeless_form = ModelessForm("ModelessForm.xaml")
+        #update_time()
 
     __rvt__.Application.ApplicationInitialized += EventHandler[DB.Events.ApplicationInitializedEventArgs](app_inti_idle_function)
     __rvt__.Application.DocumentChanged += EventHandler[DB.Events.DocumentChangedEventArgs](
@@ -191,6 +226,8 @@ global window
 window = TimerWindow(r'..\TimerBox.xaml')
 '''
 if __name__ == '__main__':
-    global window
-    script.set_envvar('IdleMonitor', 1)
-
+    print(script.get_envvar('LastActiveTime') + datetime.timedelta(minutes=2))
+    print(datetime.datetime.now() > script.get_envvar('LastActiveTime') + datetime.timedelta(minutes=2))
+    modeless_form = ModelessForm("ModelessForm.xaml")
+    cwd = os.getcwd()
+    TaskDialog.Show("debug", cwd)
