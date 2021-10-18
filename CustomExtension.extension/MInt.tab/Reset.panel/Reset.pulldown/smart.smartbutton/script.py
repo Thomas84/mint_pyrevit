@@ -148,6 +148,12 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
                                                     CommandUtils.ModelInPlaceReplacement)
     hideInViewUtil = CommandUtils.CommandReplacement(__rvt__, UI.PostableCommand.HideElements,
                                                     CommandUtils.HideElementReplacement)
+    overrideGraphicsByElement = CommandUtils.CommandReplacement(__rvt__, UI.PostableCommand.OverrideByElement,
+                                                    CommandUtils.OverrideGraphicsReplacement)
+    overrideGraphicsByFilter = CommandUtils.CommandReplacement(__rvt__, UI.PostableCommand.OverrideByFilter,
+                                                    CommandUtils.OverrideGraphicsReplacement)
+    overrideGraphicsByCategory = CommandUtils.CommandReplacement(__rvt__, UI.PostableCommand.OverrideByCategory,
+                                                    CommandUtils.OverrideGraphicsReplacement)
     #TODO: Uncheck Anlytical
     # Revit Log
     __rvt__.Application.ApplicationInitialized += EventHandler[DB.Events.ApplicationInitializedEventArgs](app_start_log)

@@ -9,7 +9,6 @@ from pyrevit import DB, UI
 from pyrevit.coreutils import envvars
 
 class CommandReplacement:
-
     def __init__(self, app, id, replacement):
         #self.uiapp = None
         self.uiControlApp = app
@@ -30,7 +29,6 @@ class CommandReplacement:
                 TaskDialog.Show("Error", "Mint tool initialization Fail!")
 
 class WarningConstructor:
-
     def __init__(self, app):
         #self.uiapp = None
         self.Name = None
@@ -43,6 +41,8 @@ class WarningConstructor:
         self.Link2Text = None
         self.Link3Text = None
 
+
+#<editor-fold desc="Import Warning Replacement">
 def ImportWarningWindow():
     ImportCadWarning = TaskDialog("Import CAD Warning")
     ImportCadWarning.MainIcon = UI.TaskDialogIcon.TaskDialogIconWarning
@@ -75,7 +75,9 @@ def ImportReplacement(sender, args):
             args.Cancel = True
         elif result == UI.TaskDialogResult.CommandLink3:
             args.Cancel = False
+#</editor-fold>
 
+#<editor-fold desc="Model in Place Replacement">
 def ModelInPlaceWindow():
     ImportCadWarning = TaskDialog("Model-In-PlaceWarning")
     ImportCadWarning.MainIcon = UI.TaskDialogIcon.TaskDialogIconWarning
@@ -108,7 +110,9 @@ def ModelInPlaceReplacement(sender, args):
             args.Cancel = True
         elif result == UI.TaskDialogResult.CommandLink3:
             args.Cancel = False
+#</editor-fold>
 
+#<editor-fold desc="Hide in View Replacement">
 def HideElementWindow():
     HideElementWarning = TaskDialog("Hide Element in View ")
     HideElementWarning.MainIcon = UI.TaskDialogIcon.TaskDialogIconWarning
@@ -118,9 +122,6 @@ def HideElementWindow():
 
     HideElementWarning.MainInstruction = "Hide Element in View Command is strongly discouraged by KPF Digital Practice. Please use Visibility/Graphics or Filter instead."
     HideElementWarning.ExpandedContent = None
-    #ImportCadWarning.ExpandedContent = "This is 'ExpandedContent'.\nLine1: blar blar...\nLine2: blar blar...\nLine3: blar blar...";
-
-    #ImportCadWarning.VerificationText = "This is 'VerificationText'."
 
     HideElementWarning.AddCommandLink(UI.TaskDialogCommandLinkId.CommandLink1, "Yes, Cancel this for me.")
     HideElementWarning.AddCommandLink(UI.TaskDialogCommandLinkId.CommandLink2, "Ok, I want to learn about other ways to manage visibility.")
@@ -141,8 +142,43 @@ def HideElementReplacement(sender, args):
             args.Cancel = True
         elif result == UI.TaskDialogResult.CommandLink3:
             args.Cancel = False
+#</editor-fold>
 
+#<editor-fold desc="Override Graphics Replacement">
+def OverrideGraphicsWindow():
+    HideElementWarning = TaskDialog("Override Graphic in View")
+    HideElementWarning.MainIcon = UI.TaskDialogIcon.TaskDialogIconWarning
+    HideElementWarning.Title = "Override Graphic in View Warning"
+    HideElementWarning.TitleAutoPrefix = True
+    HideElementWarning.AllowCancellation = False
 
+    HideElementWarning.MainInstruction = "Override Graphic in View Command is strongly discouraged by KPF Digital Practice. " \
+                                         "It will cause confusion for you colleagues, BIM Specialists and your future self. " \
+                                         "Please use View templates or View Specific Visibility/Graphics or Filter instead."
+    HideElementWarning.ExpandedContent = None
+
+    HideElementWarning.AddCommandLink(UI.TaskDialogCommandLinkId.CommandLink1, "Yes, Cancel this for me.")
+    HideElementWarning.AddCommandLink(UI.TaskDialogCommandLinkId.CommandLink2, "Ok, I want to learn about other ways to manage visibility.")
+    HideElementWarning.AddCommandLink(UI.TaskDialogCommandLinkId.CommandLink3, "No, I still want to proceed.")
+
+    HideElementWarning.CommonButtons = UI.TaskDialogCommonButtons.None
+    return HideElementWarning
+
+def OverrideGraphicsReplacement(sender, args):
+    if args.ActiveDocument.IsFamilyDocument:
+        args.Cancel = False
+    else:
+        result = OverrideGraphicsWindow().Show()
+        if result == UI.TaskDialogResult.CommandLink1:
+            args.Cancel = True
+        elif result == result == UI.TaskDialogResult.CommandLink2:
+            System.Diagnostics.Process.Start("https://portal.pinnacleseries.com/#/videoviewer?id=9ee5f504-9fcf-49e5-ba43-33ba4b68530f");
+            args.Cancel = True
+        elif result == UI.TaskDialogResult.CommandLink3:
+            args.Cancel = False
+#</editor-fold>
+
+#<editor-fold desc="Wall Opening Replacement">
 def WallOpeningWindow():
     ImportCadWarning = TaskDialog("Wall Opening Warning")
     ImportCadWarning.MainIcon = UI.TaskDialogIcon.TaskDialogIconWarning
@@ -232,3 +268,4 @@ def WallOpeningReplacement(sender, args):
             args.Cancel = True
         elif result == UI.TaskDialogResult.CommandLink3:
             args.Cancel = False
+#</editor-fold>

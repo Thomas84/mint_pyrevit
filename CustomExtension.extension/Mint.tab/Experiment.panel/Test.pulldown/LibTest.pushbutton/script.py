@@ -24,9 +24,10 @@ from Autodesk.Revit.UI import IExternalEventHandler, ExternalEvent
 from Autodesk.Revit.DB import Transaction
 from Autodesk.Revit.Exceptions import InvalidOperationException
 from pyrevit import script
+from Autodesk.Revit.UI.Selection import ObjectType
 uidoc = __revit__.ActiveUIDocument
 doc = __revit__.ActiveUIDocument.Document
-
+from System.Windows.Forms import SendKeys
 home = expanduser("~")
 #creamColor = System.Windows.Media.Color.FromRgb(255, 253, 208)
 #roseColor = System.Windows.Media.Color.FromRgb(247, 202, 201)
@@ -40,10 +41,46 @@ home = expanduser("~")
 #print(process)
 #process.Kill()
 
-script.set_envvar('IdleTest', "Test")
-script.set_envvar('IdleShow', 1)
+#script.set_envvar('IdleTest', "Test")
+#script.set_envvar('IdleTrigger', 1)
+#TaskDialog.Show("123", "123")
+#SendKeys.SendWait("{ESC}")
 #script.set_envvar('IdleWindowTimer', 30)
 #SyncUtility.SyncandCloseRevit(__revit__, home)
+
+
+def get_selected_elements(doc):
+    """API change in Revit 2016 makes old method throw an error"""
+    try:
+        # Revit 2016
+        return [doc.GetElement(id)
+                for id in __revit__.ActiveUIDocument.Selection.GetElementIds()]
+    except:
+        # old method
+        return list(__revit__.ActiveUIDocument.Selection.Elements)
+
+currentChoice = []
+for i in get_selected_elements(doc):
+    currentChoice.append(i)
+
+selection = []
+choices = uidoc.Selection
+if not currentChoice:
+    ref = choices.PickObjects(ObjectType.Element, "Pick One Element")
+    selection.append(doc.GetElement(ref.ElementId))
+else:
+    selection = currentChoice
+t = Transaction(doc, 'Disable Analytical')
+t.Start()
+
+for sel in selection:
+    print(sel.Id)
+    try:
+        sel.LookupParameter('Enable Analytical Model').Set(False)
+    except:
+        pass
+
+t.Commit()
 '''
 def OnCheckActivityTick(sender, args):
     #print(str(System.DateTime.UtcNow))

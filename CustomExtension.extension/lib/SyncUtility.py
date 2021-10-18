@@ -3,7 +3,8 @@ import sys, clr, os, re
 import ConfigParser
 from os.path import expanduser
 # Set system path
-from Autodesk.Revit.DB import Document, SynchronizeWithCentralOptions, TransactWithCentralOptions, RelinquishOptions
+from Autodesk.Revit.DB import Document, SynchronizeWithCentralOptions, TransactWithCentralOptions, RelinquishOptions,\
+    SaveAsOptions
 from pyrevit import forms
 clr. AddReferenceByPartialName('PresentationCore')
 clr.AddReferenceByPartialName('PresentationFramework')
@@ -19,18 +20,25 @@ def SyncandCloseRevit(uiapp, home):
     syncOption.SaveLocalBefore = True
     syncOption.Comment = "idleAutoSync"
 
+    saveOp = SaveAsOptions()
+
+    saveOp.OverwriteExistingFile = True
+    saveOp.MaximumBackups = 1
+
     for document in activeDocuments:
-        if not document.IsFamilyDocument and not document.IsLinked:
+        if not document.IsFamilyDocument and not document.IsLinked and document.IsWorkshared:
             document.SynchronizeWithCentral(transOption, syncOption)
             if not document.Title == uiapp.ActiveUIDocument.Document.Title:
                 document.Close()
         elif not document.IsLinked:
-            if document.PathName:
+            #if document.PathName:
+            try:
                 document.Save()
-            else:
-                document.SaveAs(home + "\\" + document.Title + ".rfa")
-            if not document.Title == uiapp.ActiveUIDocument.Document.Title:
-                document.Close()
+            except:
+                document.SaveAs(home + "\\" + document.Title + ".rfa", saveOp)
+            finally:
+                if not document.Title == uiapp.ActiveUIDocument.Document.Title:
+                    document.Close()
         else:
             pass
     process = System.Diagnostics.Process.GetCurrentProcess()

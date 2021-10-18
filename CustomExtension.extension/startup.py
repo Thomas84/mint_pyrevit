@@ -3,19 +3,10 @@ from pyrevit import DB, UI
 from pyrevit import framework, forms
 import Autodesk.Windows
 ribbon = Autodesk.Windows.ComponentManager.Ribbon
-import time
-from Autodesk.Revit.UI import IExternalEventHandler, ExternalEvent
-from Autodesk.Revit.DB import Transaction
-from Autodesk.Revit.Exceptions import InvalidOperationException
-from System import EventHandler, Uri
-from threading import Thread
-from Autodesk.Revit.UI import TaskDialog
-from System import TimeSpan
-from System.Windows.Threading import DispatcherTimer
-from System.Windows.Forms import MessageBox
+import time, clr
+clr.AddReferenceByPartialName('System.Windows.Forms')
+from System.Windows.Forms import SendKeys
 import clr, sys, datetime, os
-from Autodesk.Revit.UI import IExternalEventHandler, ExternalEvent
-from Autodesk.Revit.DB import Transaction
 from Autodesk.Revit.Exceptions import InvalidOperationException
 import rpw
 from pyrevit.forms import WPFWindow
@@ -26,8 +17,7 @@ from System import EventHandler, Uri
 from pyrevit import script
 import SyncUtility
 from os.path import expanduser
-import os
-#from Autodesk.Revit.DB.Events import DocumentChangedEventArgs, DocumentOpenedEventArgs
+
 
 doc = rpw.revit.doc
 uidoc = rpw.revit.uidoc
@@ -35,7 +25,6 @@ home = expanduser("~")
 __persistentengine__ = True
 
 # Simple function we want to run
-home = expanduser("~")
 
 
 def yes_click():
@@ -46,8 +35,9 @@ def yes_click():
 
 
 def no_click():
-    SyncUtility.SyncandCloseRevit(__revit__, home)
     script.set_envvar('IdleShow', 0)
+    script.set_envvar('IdleOverwrite', 7)
+    SyncUtility.SyncandCloseRevit(__revit__, home)
     script.set_envvar('LastActiveTime', datetime.datetime.now())
 
 
@@ -68,7 +58,7 @@ class SimpleEventHandler(IExternalEventHandler):
             self.do_this()
         except InvalidOperationException:
             # If you don't catch this exeption Revit may crash.
-            print("InvalidOperationException catched")
+            print(InvalidOperationException.Message)
 
     def GetName(self):
         return "simple function executed by an IExternalEventHandler in a Form"
@@ -84,7 +74,7 @@ class ModelessForm(WPFWindow):
     """
     script.set_envvar('Idle', 0)
     windowTimer = DispatcherTimer()
-
+    handler = ()
     def __init__(self, xaml_file_name):
         WPFWindow.__init__(self, xaml_file_name)
 
@@ -95,36 +85,57 @@ class ModelessForm(WPFWindow):
                 script.set_envvar('IdleWindowTimer', t - 1)
             else:
                 self.windowTimer.Stop()
-                self.Hide()
+                self.Close()
+                #self.Hide()
                 no_ext_event.Raise()
 
         # if script.get_envvar('IdleShow') == 1:
-        if datetime.datetime.now() > script.get_envvar('LastActiveTime') + datetime.timedelta(minutes=2) and script.get_envvar('IdleShow') == 1:
-        #if True:
-            script.set_envvar('IdleWindowTimer', 30)
+        # if datetime.datetime.now() > script.get_envvar('LastActiveTime') + datetime.timedelta(minutes=1):
+        #and script.get_envvar('IdleShow') == 1
+        if script.get_envvar('IdleShow') == 1 and \
+                (datetime.datetime.now() > script.get_envvar('LastActiveTime') + datetime.timedelta(minutes=150)):
+            SendKeys.SendWait("{ESC}")
+            script.set_envvar('IdleWindowTimer', 900)
             self.simple_text.Text = "Are you still there?"
-            self.close_text.Text = "This Window will close in 30 seconds"
+            self.close_text.Text = "This Window will close in 900 seconds"
             # self.simple_text.Text = script.get_envvar('IdleTest')
             self.Show()
-            self.windowTimer.Tick += EventHandler(OnWindowTimerTick)
+            self.handler = EventHandler(OnWindowTimerTick)
+            self.windowTimer.Tick += self.handler
             self.windowTimer.Interval = TimeSpan(0, 0, 1)
             self.windowTimer.Start()
 
             script.set_envvar('IdleShow', 0)
-            script.set_envvar('IdleOverwrite', 7)
+            #script.set_envvar('IdleOverwrite', 7)
 
     def yes_click(self, sender, e):
         # This Raise() method launch a signal to Revit to tell him you want to do something in the API context
         # script.set_envvar('IdleShow', 1)
         self.windowTimer.Stop()
+        self.windowTimer.Tick -= self.handler
         yes_ext_event.Raise()
+        #self.Close()
         self.Hide()
+        script.set_envvar('IdleWindowTimer', 900)
 
     def no_click(self, sender, e):
         # This Raise() method launch a signal to Revit to tell him you want to do something in the API context
         self.windowTimer.Stop()
+        self.windowTimer.Tick -= self.handler
         no_ext_event.Raise()
+        #self.Close()
         self.Hide()
+        script.set_envvar('IdleWindowTimer', 900)
+
+    def window_close(self, sender, e):
+        # This Raise() method launch a signal to Revit to tell him you want to do something in the API context
+        # script.set_envvar('IdleShow', 1)
+        self.windowTimer.Stop()
+        self.windowTimer.Tick -= self.handler
+        yes_ext_event.Raise()
+        # self.Close()
+        self.Hide()
+        script.set_envvar('IdleWindowTimer', 900)
 
 
 # Let's launch our beautiful and useful form !
@@ -159,9 +170,10 @@ no_ext_event = ExternalEvent.Create(no_event_handler)
 
 inactivityCheckTimer = DispatcherTimer()
 inactivityCheckTimer.Tick += EventHandler(OnCheckActivityTick)
-inactivityCheckTimer.Interval = TimeSpan(0, 0, 3)
+inactivityCheckTimer.Interval = TimeSpan(0, 15, 0)
 inactivityCheckTimer.Start()
-script.set_envvar('IdleOverwrite', 1)
+script.set_envvar('IdleShow', 1)
+
 update_time()
 
 __revit__.DialogBoxShowing += EventHandler[UI.Events.DialogBoxShowingEventArgs](DialogShwoing)

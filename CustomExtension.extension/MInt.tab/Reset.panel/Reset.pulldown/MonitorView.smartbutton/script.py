@@ -11,7 +11,11 @@ def __selfinit__(script_cmp, ui_button_cmp, __rvt__):
         viewUse = args.CurrentActiveView.LookupParameter('view use').AsString()
         if viewUse.ToString() == '' or viewUse is None:
             selSheet = forms.SelectFromList.show(classfication, multiselect=False,
-                                                 button_name='Select View Use')
+                                                 button_name='Please select View Use Parameter',
+                                                 title='Select View Use Parameter',
+                                                 height=240,
+                                                 width=340)
+            #selSheet.description = "This View you created/activated does not have a view use, please select one"
             t = DB.Transaction(args.Document, 'Patch View Use')
             t.Start()
             args.CurrentActiveView.LookupParameter('view use').Set(selSheet)
